@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Odun
   m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_SPEC_TOON TCP2_UV_NORMALS_FULL
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT TCP2_UV_NORMALS_FULL
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -77,14 +77,14 @@ Material:
     - _Offset2: 0
     - _Outline: 10
     - _Parallax: 0.02
-    - _RampSmooth: 0.238
-    - _RampSmoothAdd: 0.497
-    - _RampThreshold: 0.574
+    - _RampSmooth: 0
+    - _RampSmoothAdd: 0.356
+    - _RampThreshold: 0
     - _RimMax: 0.637
     - _RimMin: 0
     - _RimStrength: 0.17
     - _SmoothnessTextureChannel: 0
-    - _SpecBlend: 0.261
+    - _SpecBlend: 0.542
     - _SpecSmooth: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -92,7 +92,7 @@ Material:
     - _TCP2_OUTLINE_CONST_SIZE: 0
     - _TCP2_OUTLINE_TEXTURED: 0
     - _TCP2_RAMPTEXT: 0
-    - _TCP2_SPEC_TOON: 1
+    - _TCP2_SPEC_TOON: 0
     - _TCP2_STYLIZED_FRESNEL: 0
     - _TCP2_ZSMOOTH_ON: 0
     - _TexLod: 5

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PaletMaterial
   m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
-  m_ShaderKeywords: TCP2_SPEC_TOON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -66,15 +66,15 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.571
+    - _Glossiness: 0.379
     - _GlossyReflections: 1
-    - _Metallic: 0.264
+    - _Metallic: 0.129
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RampSmooth: 0.238
-    - _RampSmoothAdd: 0.497
-    - _RampThreshold: 0.574
+    - _RampSmooth: 0.094
+    - _RampSmoothAdd: 0.041
+    - _RampThreshold: 0.739
     - _RimMax: 0.637
     - _RimMin: 0.242
     - _RimStrength: 0.5
@@ -85,7 +85,7 @@ Material:
     - _SrcBlend: 1
     - _TCP2_DISABLE_WRAPPED_LIGHT: 0
     - _TCP2_RAMPTEXT: 0
-    - _TCP2_SPEC_TOON: 1
+    - _TCP2_SPEC_TOON: 0
     - _TCP2_STYLIZED_FRESNEL: 0
     - _UVSec: 0
     - _ZWrite: 1
