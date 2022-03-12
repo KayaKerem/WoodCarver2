@@ -7,8 +7,8 @@ using System.Linq;
 
 public class WoodScript : MonoBehaviour
 {
+    [SerializeField] Transform ChildTransform;
     private List<string> DoorsName;
-    private Transform ChildTransform;
     public int modelindex;
     public int WoodPuan;
     public WoodStack transporter;
@@ -47,6 +47,7 @@ public class WoodScript : MonoBehaviour
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
         modelindex = indexModel;
+        gameObject.tag = Tags.taglar[indexModel];
         WoodPuan = modelindex + 1;
         Model = modeller.Modeller[modelindex];
         if (!GameManager.levelFinish)
@@ -99,6 +100,7 @@ public class WoodScript : MonoBehaviour
             if (modelindex < modeller.Modeller.Length)
             {
                 modelindex++;
+                gameObject.tag = Tags.taglar[modelindex];
                 WoodPuan = modelindex + 1;
                 Model = modeller.Modeller[modelindex];
                 if (transform.childCount != 0) Destroy(ChildTransform.GetChild(0)?.gameObject);
@@ -116,12 +118,9 @@ public class WoodScript : MonoBehaviour
     }
     
 
-    public void ChangeColor()
+    public void ChangeMaterial(Material color)
     {
-        if (gameObject.CompareTag(Tags.paintable))
-        {
-            ChildTransform.GetChild(0).GetComponent<Material>();
-        }
 
+        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = color;
     }
 }

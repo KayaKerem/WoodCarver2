@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wood
   - Paintable
+  - polished
   layers:
   - Default
   - TransparentFX

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371848b74b45fc34cbb93f294af6fa5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChildTransform: {fileID: 6709421090306370467}
   modelindex: 0
   WoodPuan: 0
   transporter: {fileID: 0}

@@ -12,6 +12,5 @@ public static class Layers
 
 public static class Tags
 {
-    public const string wood = "Wood";
-    public const string paintable = "Paintable";
+    public static string[] taglar = new string[] {"Wood","Paintable" ,"polished"};
 }
