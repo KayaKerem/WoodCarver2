@@ -1967,7 +1967,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6bf32fa27e83a174d9713f3271580445, type: 2}
     - target: {fileID: 3754500193043539276, guid: b6cea0943d363874bbaa43e972705363, type: 3}
       propertyPath: m_Name
-      value: "\u015Eekil Kap\u0131s\u0131 (1)"
+      value: "\u015Eekil Kap\u0131s\u01312"
       objectReference: {fileID: 0}
     - target: {fileID: 4097083623190655326, guid: b6cea0943d363874bbaa43e972705363, type: 3}
       propertyPath: doorNumber
