@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4905834152158802431}
   - component: {fileID: 3994583576189545912}
   - component: {fileID: 3994583576189545913}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.007"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8937868598308839393}
   - component: {fileID: 2944840722753056633}
   - component: {fileID: 2944840722753056634}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.002"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 8533549607466078802}
   - component: {fileID: 3586403708528955503}
   - component: {fileID: 3201812469516437608}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 8951704612891701125}
   - component: {fileID: 2122520821433786063}
   - component: {fileID: 2122520821433786064}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.009"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 5706284521762353114}
   - component: {fileID: 2064293678322613156}
   - component: {fileID: 2064293678322613157}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.003"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +560,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3815234643981290912}
-  m_Layer: 0
+  - component: {fileID: 6248092028272903947}
+  m_Layer: 12
   m_Name: "Para\xE7alanan_a\u011Fa\xE7"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4591911427495991066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.398, y: 1.68, z: 6.678}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 0.55279, y: 0.55279, z: 0.55279}
   m_Children:
   - {fileID: 1734923166362031988}
@@ -592,6 +593,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6248092028272903947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591911427495991066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b73ce20d0a91a46971a373f7c8fb25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7965069395631278208
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +618,7 @@ GameObject:
   - component: {fileID: 7745759554263240553}
   - component: {fileID: 6884033098044628322}
   - component: {fileID: 6884033098044628323}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.006"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,7 +731,7 @@ GameObject:
   - component: {fileID: 1045175114917346662}
   - component: {fileID: 4678790795113319756}
   - component: {fileID: 4678790795113319757}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.008"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +844,7 @@ GameObject:
   - component: {fileID: 2040660333888464308}
   - component: {fileID: 4799835340377990491}
   - component: {fileID: 4799835340377990492}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.004"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +957,7 @@ GameObject:
   - component: {fileID: 4522072854361875316}
   - component: {fileID: 5363516834551432944}
   - component: {fileID: 5363516834551432945}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1070,7 @@ GameObject:
   - component: {fileID: 408596452479297917}
   - component: {fileID: 5403886401753235446}
   - component: {fileID: 5403886401753235447}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.005"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,7 +1183,7 @@ GameObject:
   - component: {fileID: 3638860555821516331}
   - component: {fileID: 5532968066642411996}
   - component: {fileID: 5532968066642411997}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "aga\xE7_1.010"
   m_TagString: Untagged
   m_Icon: {fileID: 0}

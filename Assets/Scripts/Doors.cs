@@ -19,32 +19,34 @@ public class Doors : MonoBehaviour
         {
             WoodScript wood = other.GetComponent<WoodScript>();
 
-            if((wood.gameObject.tag == Tags.taglar[0]) && doorNumber == 1)
+            if((wood.gameObject.tag == Tags.taglar[0] || wood.gameObject.tag == Tags.taglar[1]) && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
-                cutParticul.SetActive(true);
-                if (falseParticul == null)
-                {
-                    falseParticul = StartCoroutine(FalseParticul());
-                }
-
-                else if (falseParticul != null)
-                {
-                    StopCoroutine(FalseParticul());
-                    falseParticul = null;
-                }
+                ParticleEffect();
             }
-
-            else if ((wood.gameObject.tag == Tags.taglar[1]) && doorNumber == 2)
+            else if ((wood.gameObject.tag == Tags.taglar[2]) && doorNumber == 2)
             {
                 wood.ChangeMaterial(material);
-                other.gameObject.tag = Tags.taglar[2];
             }
-
-            else if((wood.gameObject.tag == Tags.taglar[2]) && doorNumber == 3)
+            else if((wood.gameObject.tag == Tags.taglar[3]) && doorNumber == 3)
             {
                 wood.Polish(material);
             }
+        }
+    }
+
+    private void ParticleEffect()
+    {
+        cutParticul.SetActive(true);
+        if (falseParticul == null)
+        {
+            falseParticul = StartCoroutine(FalseParticul());
+        }
+
+        else if (falseParticul != null)
+        {
+            StopCoroutine(FalseParticul());
+            falseParticul = null;
         }
     }
 

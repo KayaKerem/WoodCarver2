@@ -9,16 +9,19 @@ public class WoodScript : MonoBehaviour
 {
     [SerializeField] Transform ChildTransform;
     [SerializeField] GameObject destroyableTree;
-    private List<string> DoorsName;
+
+    public ParticleSystem explosionEffect;
     public int modelindex;
     public int WoodPuan;
     public WoodStack transporter;
+
+    private List<string> DoorsName;
     private Collider MyCollider;
     private string scaleAnimName;
     private Models modeller;
     private GameObject Model;
     private Animation Anim;
-    public ParticleSystem explosionEffect;
+
     private void Start()
     {
         WoodPuan = modelindex + 1;
@@ -102,7 +105,8 @@ public class WoodScript : MonoBehaviour
             {
                 if (modelindex == 0)
                 {
-                    Instantiate(destroyableTree, transform.position, Quaternion.identity);
+                    Instantiate(destroyableTree, transform.position + Vector3.down, Quaternion.identity);
+
                 }
                 modelindex++;
                 gameObject.tag = Tags.taglar[modelindex];
@@ -126,6 +130,7 @@ public class WoodScript : MonoBehaviour
     public void ChangeMaterial(Material color)
     {
         WoodPuan++;
+        gameObject.tag = Tags.taglar[3];
         if (modelindex != 0)
         {
             Material[] mats = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;

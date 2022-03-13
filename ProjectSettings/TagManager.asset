@@ -7,6 +7,7 @@ TagManager:
   - Wood
   - Paintable
   - polished
+  - tree
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ground
   - triggerwood
   - Finish
-  - 
+  - Tree
   - 
   - 
   - 

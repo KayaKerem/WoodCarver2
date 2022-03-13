@@ -12,5 +12,5 @@ public static class Layers
 
 public static class Tags
 {
-    public static string[] taglar = new string[] {"Wood","Paintable" ,"polished"};
+    public static string[] taglar = new string[] {"tree","Wood","Paintable" ,"polished"};
 }
