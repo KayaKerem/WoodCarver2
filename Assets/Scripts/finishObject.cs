@@ -10,7 +10,7 @@ public class finishObject : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
             Destroy(other.gameObject);
-            transform.DOScale(transform.localScale * 1.08f,0.1f);
+            transform.DOScale(new Vector3(transform.localScale.x,transform.localScale.y+0.1f, transform.localScale.z) , 0.1f);
         }
     }
 }

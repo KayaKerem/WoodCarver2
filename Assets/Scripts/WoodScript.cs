@@ -121,6 +121,22 @@ public class WoodScript : MonoBehaviour
     public void ChangeMaterial(Material color)
     {
 
-        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = color;
+        Material[] mats= ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+        for (int i = 0; i < mats.Length; i++)
+        {
+            mats[i] = color;
+        }
+        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+        AnimationScaleWood();
+        EventManager.Event_OnIncreaseScore(1);
+    }
+
+    public void Polish(Material toPolish)
+    {
+        toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
+        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
+        ChildTransform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+        AnimationScaleWood();
+        EventManager.Event_OnIncreaseScore(1);
     }
 }

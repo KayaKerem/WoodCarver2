@@ -18,6 +18,7 @@ public class InGameUI : MonoBehaviour
     public GameObject progressIndicator;
     [HideInInspector] public bool levelFinished;
     [HideInInspector] public bool levelStarted;
+    [SerializeField] PlayerSettings settings;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,10 @@ public class InGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (settings.isPlaying)
+        {
+            StartLevel();
+        }
     }
 
     public void PauseGame()
