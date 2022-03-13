@@ -8,6 +8,7 @@ using System.Linq;
 public class WoodScript : MonoBehaviour
 {
     [SerializeField] Transform ChildTransform;
+    [SerializeField] GameObject destroyableTree;
     private List<string> DoorsName;
     public int modelindex;
     public int WoodPuan;
@@ -99,6 +100,10 @@ public class WoodScript : MonoBehaviour
             DoorsName.Add(name);// arda arda etkileþimi engellemek için
             if (modelindex < modeller.Modeller.Length)
             {
+                if (modelindex == 0)
+                {
+                    Instantiate(destroyableTree, transform.position, Quaternion.identity);
+                }
                 modelindex++;
                 gameObject.tag = Tags.taglar[modelindex];
                 WoodPuan = modelindex + 1;
@@ -121,12 +126,15 @@ public class WoodScript : MonoBehaviour
     public void ChangeMaterial(Material color)
     {
         WoodPuan++;
-        Material[] mats= ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
-        for (int i = 0; i < mats.Length; i++)
+        if (modelindex != 0)
         {
-            mats[i] = color;
+            Material[] mats = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+            for (int i = 0; i < mats.Length; i++)
+            {
+                mats[i] = color;
+            }
+            ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
         }
-        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(1);
     }

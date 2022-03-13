@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private int collectscore;
     private int AnimPuan;
 
+    [SerializeField] Animation anim;
+
     private void Awake()
     {
         settings.isPlaying = false;
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         characterT = FindObjectOfType<CharacterMove>().transform;
         EventManager.Event_OnCharacterAnimControl(false);
         levelFinish = false;
+        finishScore.gameObject.GetComponent<Animation>();
     }
 
     public void LevelFinish()
@@ -96,10 +99,11 @@ public class GameManager : MonoBehaviour
 
         score += puan;
         scoreText.text = score.ToString();
+        anim.Stop();
+        anim.Play("Scale"); 
         if (!settings.isPlaying)
         {
             tempScore += puan;
-            finishScore.gameObject.transform.DOPunchScale(finishScore.gameObject.transform.localScale * 2f, 0.1f,1);
             finishScore.text = tempScore.ToString();
         }
     }
