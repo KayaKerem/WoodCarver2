@@ -120,7 +120,7 @@ public class WoodScript : MonoBehaviour
 
     public void ChangeMaterial(Material color)
     {
-
+        WoodPuan++;
         Material[] mats= ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
         for (int i = 0; i < mats.Length; i++)
         {
@@ -133,6 +133,7 @@ public class WoodScript : MonoBehaviour
 
     public void Polish(Material toPolish)
     {
+        WoodPuan++;
         toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
         ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
         ChildTransform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);

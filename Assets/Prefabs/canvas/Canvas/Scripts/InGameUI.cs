@@ -101,7 +101,7 @@ public class InGameUI : MonoBehaviour
         pauseButton.SetActive(false);
         levelIndicator.SetActive(false);
         levelCompletePanel.SetActive(true);
-        confettiRain.SetActive(true);
+        //confettiRain.SetActive(true);
     }
 
     public IEnumerator levelFail()
@@ -114,5 +114,6 @@ public class InGameUI : MonoBehaviour
         levelIndicator.SetActive(false);
         levelFailPanel.SetActive(true);
     }
+
 
 }

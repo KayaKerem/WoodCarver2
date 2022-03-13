@@ -15,12 +15,15 @@ public static class EventManager
     public static event Action<WoodScript> OnWoodAdded;
     public static void Event_OnWoodAdded(WoodScript wood) { OnWoodAdded?.Invoke(wood); }
 
-    public static event Action OnFinishGame;
-    public static void Event_OnFinishGame() { OnFinishGame?.Invoke(); }
+    public static event Action OnLevelFinish;
+    public static void Event_OnLevelFinish() { OnLevelFinish?.Invoke(); }
 
     public static event Action<int> OnLastScore;
     public static void Event_OnLastScore(int puan) { OnLastScore?.Invoke(puan); }
 
     public static event Action<int> OnRestScore;
     public static void Event_OnRestScore(int puan) { OnRestScore?.Invoke(puan); }
+
+    public static event Action<bool> OnCharacterAnimControl;
+    public static void Event_OnCharacterAnimControl(bool value) { OnCharacterAnimControl?.Invoke(value); }
 }

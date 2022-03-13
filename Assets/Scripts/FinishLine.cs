@@ -8,6 +8,6 @@ public class FinishLine : MonoBehaviour
     [SerializeField] LayerMask layers2; 
     private void OnTriggerEnter(Collider other)
     {
-        EventManager.Event_OnFinishGame();
+        EventManager.Event_OnLevelFinish();
     }
 }

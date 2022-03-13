@@ -24,15 +24,13 @@ public class ToplanmaYeri : MonoBehaviour
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
     private WoodStack woodStack;
-    private bool activePortal;
     private bool allowCorutine = false;
-    private int InstantieModelIndex;
-    private Models modeller;
     public GameObject[] ayaklar;
 
+    //private int InstantieModelIndex;
+    //private Models modeller;
     void Start()
     {
-        activePortal = false;
         woodStack = FindObjectOfType<WoodStack>();
         manager = FindObjectOfType<GameManager>();
     }
@@ -56,10 +54,12 @@ public class ToplanmaYeri : MonoBehaviour
         {
 
             WoodScript x = other.gameObject.GetComponent<WoodScript>();
+            EventManager.Event_OnLastScore(x.WoodPuan);
             switch (x.modelindex)
             {
                 case 0:
                     x.transporter.woods.Remove(x);
+                    x.transporter = null;
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
@@ -67,6 +67,7 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
                 case 1:
                     x.transporter.woods.Remove(x);
+                    x.transporter = null;
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(woodM2.position.x, woodM2.position.y + woodsM2.Count / 2f, woodM2.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
@@ -74,14 +75,13 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
                 case 2:
                     other.gameObject.transform.parent = null;
+                    x.transporter = null;
                     other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM2.Count / 2f, woodM3.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                     woodsM3.Add(other.gameObject);
                     break;
             }
-
-            //WoodScript wood = other.GetComponent<WoodScript>();
-            //EventManager.Event_OnLastScore(wood.WoodPuan);
+            
             //woodStack.DropWood(wood);
 
             //return;
@@ -91,7 +91,8 @@ public class ToplanmaYeri : MonoBehaviour
         {
             woodStack.EnableIsPlay(false);
             allowCorutine = true;
-
+            EventManager.Event_OnLevelFinish();
+            EventManager.Event_OnCharacterAnimControl(false);  //Karakter Aniamsyon kapanmasý
         }
 
         //woodStack.EnableIsPlay(false);
@@ -100,26 +101,6 @@ public class ToplanmaYeri : MonoBehaviour
 
 
     }
-
-    public void InstantieteModel()
-    {
-        modeller = FindObjectOfType<Models>();
-
-        if (InstantieModelIndex >= modeller.Modeller.Length)
-        {
-            InstantieModelIndex = modeller.Modeller.Length - 1;
-        }
-        print(InstantieModelIndex);
-        GameObject _wood = Instantiate(spawnwood.gameObject, spawnWoodT.position, Quaternion.identity);
-        _wood.SetActive(false);
-        WoodScript wood = _wood.GetComponent<WoodScript>();
-        wood.SpawnModel(InstantieModelIndex);
-        PortalActive(false);
-        _wood.SetActive(true);
-
-        ChangeAyaklar(_wood);
-    }
-
     private void ChangeAyaklar(GameObject model)
     {
         for (int i = 0; i < 2; i++)
@@ -130,11 +111,25 @@ public class ToplanmaYeri : MonoBehaviour
         }
     }
 
-    private void PortalActive(bool value)
-    {
-        portal.SetActive(value);
-        activePortal = value;
-    }
+    //public void InstantieteModel()
+    //{
+    //    modeller = FindObjectOfType<Models>();
+
+    //    if (InstantieModelIndex >= modeller.Modeller.Length)
+    //    {
+    //        InstantieModelIndex = modeller.Modeller.Length - 1;
+    //    }
+    //    print(InstantieModelIndex);
+    //    GameObject _wood = Instantiate(spawnwood.gameObject, spawnWoodT.position, Quaternion.identity);
+    //    _wood.SetActive(false);
+    //    WoodScript wood = _wood.GetComponent<WoodScript>();
+    //    wood.SpawnModel(InstantieModelIndex);
+    //    _wood.SetActive(true);
+
+    //    ChangeAyaklar(_wood);
+    //}
+
+
 
     IEnumerator ObjectCreate()
     {

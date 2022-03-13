@@ -8,15 +8,17 @@ using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] PlayerSettings settings;
-    private Transform characterT;
-    public static bool levelFinish;
     [SerializeField] Text collectScoreText;
     [SerializeField] Text scoreText;
     [SerializeField] Text animText;
     [SerializeField] GameObject secondCam;
     [SerializeField] WoodStack woodStack;
-    public int score;
 
+    public static bool levelFinish;
+    public int score;
+    public InGameUI UImanager;
+
+    private Transform characterT;
     private int collectscore;
     private int AnimPuan;
 
@@ -26,19 +28,17 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        UImanager = FindObjectOfType<InGameUI>();
         characterT = FindObjectOfType<CharacterMove>().transform;
+        EventManager.Event_OnCharacterAnimControl(false);
         levelFinish = false;
     }
 
-    public void FinishGame()
+    public void LevelFinish()
     {
-        if(!levelFinish)
-        {
-            levelFinish = true;
-            characterT.position = new Vector3(0f, characterT.position.y, characterT.position.z);
-            secondCam.SetActive(true);
-        }
-        
+        levelFinish = true;
+        secondCam.SetActive(true);
+        StartCoroutine(UImanager.levelComplete());   //level complete paneli açýlmasý
     }
     public int InstantieWood()
     {
@@ -48,14 +48,14 @@ public class GameManager : MonoBehaviour
         int tutucu = (int)InstantieModelindex;
         if (InstantieModelindex > (tutucu + 0.3f))
         {
-            return tutucu+1;
+            return tutucu + 1;
         }
         else
         {
             return tutucu;
         }
     }
-    
+
     public void waitAnimPuan() // Increase Skordaki animText animasyon eventi
     {
         AnimPuan = 0;
@@ -86,8 +86,10 @@ public class GameManager : MonoBehaviour
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
     }
+
     public void LastScore(int puan)
     {
+        
         score += puan;
         scoreText.text = score.ToString();
     }
@@ -96,13 +98,13 @@ public class GameManager : MonoBehaviour
     {
         EventManager.OnIncreaseScore += IncreaseScore;
         EventManager.OnLastScore += LastScore;
-        EventManager.OnFinishGame += FinishGame;
+        EventManager.OnLevelFinish += LevelFinish;
         EventManager.OnRestScore += RestScore;
     }
     private void OnDisable()
     {
         EventManager.OnIncreaseScore -= IncreaseScore;
-        EventManager.OnFinishGame -= FinishGame;
+        EventManager.OnLevelFinish -= LevelFinish;
         EventManager.OnLastScore -= LastScore;
         EventManager.OnRestScore -= RestScore;
     }

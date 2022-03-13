@@ -12,14 +12,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] Camera ortho;
     public  Transform myt;
     private bool rundStart;
-    public bool animPlay { set {
 
-            _animPlay = value;
-            animPlayer.SetBool("isRunning", value);
-        } 
-        get { return _animPlay; } }
-
-    private bool _animPlay;
     private void Awake()
     {
         myt = this.transform;
@@ -27,7 +20,6 @@ public class CharacterMove : MonoBehaviour
     private void Start()
     {
         rundStart = settings.isPlaying;
-        animPlay = false;
         //myRB.centerOfMass = Vector3.zero; //Devrilmemesi için
 
     }
@@ -62,7 +54,7 @@ public class CharacterMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !rundStart)
         {
             settings.isPlaying = true;
-            animPlay = true;
+            EventManager.Event_OnCharacterAnimControl(true);
             rundStart = true;
         }
 
@@ -94,6 +86,21 @@ public class CharacterMove : MonoBehaviour
         mousePos = ortho.ScreenToWorldPoint(inputPos);
         mouseDif = mousePos - firstPos;
         mouseDif *= settings.sensitivity * Time.deltaTime;
+    }
+
+    public void AnimControl(bool value)
+    {
+        animPlayer.SetBool("isRunning",value);
+    }
+
+    private void OnEnable()
+    {
+        EventManager.OnCharacterAnimControl += AnimControl;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnCharacterAnimControl -= AnimControl;
     }
 
 }

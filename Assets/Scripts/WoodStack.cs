@@ -135,16 +135,12 @@ public class WoodStack : MonoBehaviour
         EnableIsPlay(false);
         characterT.MousePosRest();
         characterT.mouseDif = Vector3.zero;
-        characterT.transform.DOMoveZ(characterT.transform.position.z - 10f, 2f, false).OnComplete(fonk);
+        characterT.transform.DOMoveZ(characterT.transform.position.z - 10f, 2f, false).OnComplete(() => EnableIsPlay(true));
 
-    }
-    private void fonk()
-    {
-        EnableIsPlay(true);
     }
     public void EnableIsPlay(bool value)
     {
-        characterT.animPlay = value;
+        EventManager.Event_OnCharacterAnimControl(value);
         settings.isPlaying = value;
     }
 
