@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.215
   m_CustomReflection: {fileID: 8900000, guid: b62c0e36ddef98b468b915f48be7c7f3, type: 3}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.2318435, g: 0.45861536, b: 0.5671534, a: 0.215}
+  m_IndirectSpecularColor: {r: 0.2318424, g: 0.45861286, b: 0.5671521, a: 0.215}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -634,7 +634,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5625, y: 1}
+    m_SensorSize: {x: 0.5, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1766,6 +1766,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -241
       objectReference: {fileID: 0}
+    - target: {fileID: 834909596766646999, guid: 1dc7007f3f01d9246a6e12c678a100c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 834909597441595319, guid: 1dc7007f3f01d9246a6e12c678a100c6, type: 3}
       propertyPath: m_Color.b
       value: 0.9811321
@@ -2875,11 +2879,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 40
+  near clip plane: 0.3
+  far clip plane: 120
+  field of view: 60
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2902,8 +2906,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.5664453, y: 0, z: -0, w: 0.82409936}
-  m_LocalPosition: {x: -0.09, y: 125.899445, z: -35.782455}
+  m_LocalRotation: {x: -0.61386406, y: 0, z: -0, w: 0.7894118}
+  m_LocalPosition: {x: 0, y: 2.5628338, z: -0.19591928}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1496378957}
@@ -4875,7 +4879,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 50
 --- !u!222 &1493183091
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5338,6 +5342,7 @@ MonoBehaviour:
   collectScoreText: {fileID: 321750218}
   scoreText: {fileID: 1493183090}
   animText: {fileID: 868792737}
+  finishScore: {fileID: 1493183090}
   secondCam: {fileID: 1858314985}
   woodStack: {fileID: 1816861088}
   score: 0
@@ -5888,7 +5893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1858314986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5918,7 +5923,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5625, y: 1}
+    m_SensorSize: {x: 0.5, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

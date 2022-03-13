@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using DG.Tweening;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -11,11 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text collectScoreText;
     [SerializeField] Text scoreText;
     [SerializeField] Text animText;
+    [SerializeField] Text finishScore;
     [SerializeField] GameObject secondCam;
     [SerializeField] WoodStack woodStack;
 
     public static bool levelFinish;
     public int score;
+    private int tempScore;
     public InGameUI UImanager;
 
     private Transform characterT;
@@ -89,9 +93,15 @@ public class GameManager : MonoBehaviour
 
     public void LastScore(int puan)
     {
-        
+
         score += puan;
         scoreText.text = score.ToString();
+        if (!settings.isPlaying)
+        {
+            tempScore += puan;
+            finishScore.gameObject.transform.DOPunchScale(finishScore.gameObject.transform.localScale * 2f, 0.1f,1);
+            finishScore.text = tempScore.ToString();
+        }
     }
 
     private void OnEnable()
