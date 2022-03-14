@@ -54,17 +54,18 @@ public class ToplanmaYeri : MonoBehaviour
         {
 
             WoodScript x = other.gameObject.GetComponent<WoodScript>();
-            EventManager.Event_OnLastScore(x.WoodPuan);
             switch (x.modelindex)
             {
                 case 0:
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
-                    other.gameObject.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
-                    other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                    woodsM1.Add(other.gameObject);
+                    other.gameObject.transform.DOLocalMove(new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), 0.5f);
+                    Destroy(other.gameObject, 2);
+                    //other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+                    //woodsM1.Add(other.gameObject);
                     break;
                 case 1:
+                    EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(woodM2.position.x, woodM2.position.y + woodsM2.Count / 2f, woodM2.position.z), 0.5f);
@@ -72,6 +73,7 @@ public class ToplanmaYeri : MonoBehaviour
                     woodsM2.Add(other.gameObject);
                     break;
                 case 2:
+                    EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM3.Count / 3.33f, woodM3.position.z), 0.5f);
@@ -79,7 +81,7 @@ public class ToplanmaYeri : MonoBehaviour
                     woodsM3.Add(other.gameObject);
                     break;
             }
-            
+
             //woodStack.DropWood(wood);
 
             //return;
@@ -138,7 +140,7 @@ public class ToplanmaYeri : MonoBehaviour
             if (woodsM1.Count != 0)
             {
                 woodsM1.Last().transform.DOMove(objectsToBuild[0].transform.position, 0.5f);
-                woodsM1.Last().transform.DORotate(new Vector3(0,0,90), 0.5f);
+                woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
                 woodsM1.Remove(woodsM1.Last().gameObject);
             }
 
@@ -158,7 +160,7 @@ public class ToplanmaYeri : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
         }
-        allowCorutine = true;   
+        allowCorutine = true;
     }
-   
+
 }
