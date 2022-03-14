@@ -9,7 +9,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] public PlayerSettings settings;
     [SerializeField] Text collectScoreText;
     [SerializeField] Text scoreText;
     [SerializeField] Text animText;

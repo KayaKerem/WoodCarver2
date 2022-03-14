@@ -47,35 +47,34 @@ public class WoodStack : MonoBehaviour
     /// <param name="obj"> -- Deðdiðimiz odun
     /// <summary>
 
-    private Vector3 lastPos;
     float radius = 1;
 
     void AddWoodList(WoodScript wood)
     {
         wood.transporter = this;
         wood.AnimPlay(false);
-        wood.gameObject.SetActive(false);
+        //wood.gameObject.SetActive(false);
         woods.Add(wood);
         wood.gameObject.layer = LayerMask.NameToLayer(Layers.collectWood);
-        wood.transform.SetParent(TwoodTakip);
+        wood.transform.SetParent(TwoodTakip,true);      //Dünya pozisyonu açýk korunsun
         if (woods.Count == 0)
         {
             wood.transform.localPosition = new Vector3(StartT.position.x, 0, woods.Count * (radius + DistanceObject));
         }
         else
         {
+            Vector3 lastPos = woods.Last().transform.position; //Son odunun pozisyonu
             wood.transform.localPosition = new Vector3(lastPos.x, 0, woods.Count * (radius + DistanceObject));
         }
 
-        lastPos = wood.transform.localPosition; //Son odunun pozisyonu
-        wood.gameObject.SetActive(true);
+        //wood.gameObject.SetActive(true);
         OnWoodAdded.Invoke();
         EventManager.Event_OnIncreaseScore(wood.GetComponent<WoodScript>().WoodPuan);
 
     }
 
-    float sonOynatmaZaman = 0f;
-    float animIgnoreTime = 0.05f;
+    float sonOynatmaZaman = Mathf.NegativeInfinity;
+    [SerializeField] float animIgnoreTime = 0.09f;
     public void ShakeWood()
     {
         if (Time.time - sonOynatmaZaman < animIgnoreTime) return;
@@ -83,19 +82,19 @@ public class WoodStack : MonoBehaviour
         float waitTime = 0f;
         for (int index = woods.Count - 1; index > -1; index--)
         {
-
-            IEnumerator animRoutine = waitSeconds(waitTime, index);
-            StartCoroutine(animRoutine);
+            //IEnumerator animRoutine = waitSeconds(waitTime, index);
+            //StartCoroutine(animRoutine);
+            woods[index].ShakeProcessStart(waitTime);
             waitTime += 0.05f;
         }
         sonOynatmaZaman = Time.time;
     }
 
-    IEnumerator waitSeconds(float time, int index)
-    {
-        yield return new WaitForSeconds(time);
-        woods[index].GetComponent<WoodScript>().AnimationScaleWood();
-    }
+    //IEnumerator waitSeconds(float time, int index)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    woods[index].GetComponent<WoodScript>().AnimationScaleWood();
+    //}
     [SerializeField] float speed;
 
     Vector3 takipT; //Odunlarýn Parentenin takip ettiði nokta

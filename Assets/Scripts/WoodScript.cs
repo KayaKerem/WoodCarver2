@@ -13,7 +13,16 @@ public class WoodScript : MonoBehaviour
     public ParticleSystem explosionEffect;
     public int modelindex;
     public int WoodPuan;
-    public WoodStack transporter;
+    public WoodStack transporter { set {
+            _transporter = value;
+            if(value == null)
+            {
+                StopCoroutine(AnimTrigger(0));
+            }
+        } 
+        get { return _transporter; } }
+
+    private WoodStack _transporter;
 
     private List<string> DoorsName;
     private Collider MyCollider;
@@ -24,6 +33,7 @@ public class WoodScript : MonoBehaviour
 
     private void Start()
     {
+        //waitAnimPlay = AnimTrigger(waitT); //131. satýrda Animreslemek için
         WoodPuan = modelindex + 1;
         ChildTransform = transform.GetChild(0).transform;
         Anim = ChildTransform.GetComponent<Animation>();
@@ -121,11 +131,34 @@ public class WoodScript : MonoBehaviour
         }
     }
 
+    //private bool AnimCalisiyormu;
+    //private float waitT;
+    //IEnumerator waitAnimPlay;
+    public void ShakeProcessStart(float waitTime)
+    {
+        StartCoroutine(AnimTrigger(waitTime));
+        //waitT = waitTime;
+        //if (AnimCalisiyormu != true)
+        //{
+        //    StartCoroutine(waitAnimPlay);
+        //}
+    }
+
+    IEnumerator AnimTrigger(float time)
+    {
+        //AnimCalisiyormu = true;
+
+        yield return new WaitForSeconds(time);
+        AnimationScaleWood();
+
+        //AnimCalisiyormu = false;
+    }
+
     public void AnimationScaleWood()
     {
         Anim.Play(scaleAnimName);
     }
-    
+
 
     public void ChangeMaterial(Material color)
     {
