@@ -74,9 +74,10 @@ public class ToplanmaYeri : MonoBehaviour
                     woodsM2.Add(other.gameObject);
                     break;
                 case 2:
-                    other.gameObject.transform.parent = null;
+                    x.transporter.woods.Remove(x);
                     x.transporter = null;
-                    other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM2.Count / 2f, woodM3.position.z), 0.5f);
+                    other.gameObject.transform.parent = null;
+                    other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM3.Count / 3.33f, woodM3.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                     woodsM3.Add(other.gameObject);
                     break;
