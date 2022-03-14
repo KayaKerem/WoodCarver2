@@ -18,6 +18,9 @@ public static class EventManager
     public static event Action OnLevelFinish;
     public static void Event_OnLevelFinish() { OnLevelFinish?.Invoke(); }
 
+    public static event Action FinishFirstTouch;
+    public static void Event_FinishFirstTouch() { FinishFirstTouch?.Invoke(); }
+
     public static event Action<int> OnLastScore;
     public static void Event_OnLastScore(int puan) { OnLastScore?.Invoke(puan); }
 

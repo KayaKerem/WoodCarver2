@@ -91,7 +91,6 @@ public class ToplanmaYeri : MonoBehaviour
         {
             woodStack.EnableIsPlay(false);
             allowCorutine = true;
-            EventManager.Event_OnLevelFinish();
             EventManager.Event_OnCharacterAnimControl(false);  //Karakter Aniamsyon kapanmasý
         }
 
@@ -160,6 +159,7 @@ public class ToplanmaYeri : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
 
         }
+        EventManager.Event_OnLevelFinish();
         allowCorutine = true;
     }
 

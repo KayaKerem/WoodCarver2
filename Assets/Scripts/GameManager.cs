@@ -41,9 +41,14 @@ public class GameManager : MonoBehaviour
 
     public void LevelFinish()
     {
+       
+        StartCoroutine(UImanager.levelComplete());   //level complete paneli açýlmasý
+    }
+
+    public void FinishFirstTouch()
+    {
         levelFinish = true;
         secondCam.SetActive(true);
-        StartCoroutine(UImanager.levelComplete());   //level complete paneli açýlmasý
     }
     public int InstantieWood()
     {
@@ -112,6 +117,7 @@ public class GameManager : MonoBehaviour
         EventManager.OnLastScore += LastScore;
         EventManager.OnLevelFinish += LevelFinish;
         EventManager.OnRestScore += RestScore;
+        EventManager.FinishFirstTouch += FinishFirstTouch;
     }
     private void OnDisable()
     {
@@ -119,5 +125,7 @@ public class GameManager : MonoBehaviour
         EventManager.OnLevelFinish -= LevelFinish;
         EventManager.OnLastScore -= LastScore;
         EventManager.OnRestScore -= RestScore;
+        EventManager.FinishFirstTouch -= FinishFirstTouch;
+
     }
 }

@@ -176,9 +176,10 @@ public class WoodScript : MonoBehaviour
     public void Polish(Material toPolish)
     {
         WoodPuan++;
-        toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
-        ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
+        //toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
+        //ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
         ChildTransform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+        ChildTransform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(1);
     }
