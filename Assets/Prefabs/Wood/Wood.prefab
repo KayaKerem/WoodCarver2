@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371848b74b45fc34cbb93f294af6fa5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChildTransform: {fileID: 6709421090306370467}
+  ModelContainerT: {fileID: 6709421090306370467}
   destroyableTree: {fileID: 4591911427495991066, guid: 1ce0a7bd49b7d864199233489c49e2bf, type: 3}
+  Animator: {fileID: 7712089813442894834}
   explosionEffect: {fileID: 4718176511497291565, guid: 929b501f732c5f248a2223eccb4007c5, type: 3}
   modelindex: 0
   WoodPuan: 0
@@ -89,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6709421090306370467}
-  - component: {fileID: 8421500891725265916}
+  - component: {fileID: 7712089813442894834}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -112,23 +113,25 @@ Transform:
   m_Father: {fileID: 4974230530682191446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &8421500891725265916
-Animation:
+--- !u!95 &7712089813442894834
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5815544765423883787}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 2b8e695388bb9d14a8136b7c9362f212, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 2b8e695388bb9d14a8136b7c9362f212, type: 2}
-  - {fileID: 7400000, guid: 315f4c0a9dc249e47be5612efb9f7d71, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6db6589167aa45c4284f0ce661918260, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8441236006990101956
 PrefabInstance:
   m_ObjectHideFlags: 0

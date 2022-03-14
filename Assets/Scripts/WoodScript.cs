@@ -7,14 +7,20 @@ using System.Linq;
 
 public class WoodScript : MonoBehaviour
 {
-    [SerializeField] Transform ChildTransform;
+    [SerializeField] Transform ModelContainerT;
     [SerializeField] GameObject destroyableTree;
+    [SerializeField] Animator Animator;
 
     public ParticleSystem explosionEffect;
     public int modelindex;
     public int WoodPuan;
     public WoodStack transporter { set {
             _transporter = value;
+            if(value == null)
+            {
+                ModelContainerT.localScale = new Vector3(1f, 1f, 1f);
+                AnimPlay(false); 
+            }
         } 
         get { return _transporter; } }
 
@@ -22,23 +28,19 @@ public class WoodScript : MonoBehaviour
 
     private List<string> DoorsName;
     private Collider MyCollider;
-    private string scaleAnimName;
     private Models modeller;
     private GameObject Model;
-    private Animation Anim;
 
     private void Start()
     {
-        //waitAnimPlay = AnimTrigger(waitT); //131. satýrda Animreslemek için
-        WoodPuan = modelindex + 1;
-        ChildTransform = transform.GetChild(0).transform;
-        Anim = ChildTransform.GetComponent<Animation>();
-        DoorsName = new List<string>();
-        SpawnModel(modelindex);
         modeller = FindObjectOfType<Models>();
-        scaleAnimName = "ScaleWood";
-        AnimPlay(true);
         MyCollider = GetComponent<Collider>();
+        DoorsName = new List<string>();
+
+        WoodPuan = modelindex + 1;
+
+        SpawnModel(modelindex);
+        AnimPlay(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,23 +64,19 @@ public class WoodScript : MonoBehaviour
         Model = modeller.Modeller[modelindex];
         if (!GameManager.levelFinish)
         {
-            if (ChildTransform.childCount != 0) Destroy(ChildTransform.GetChild(0)?.gameObject);
+            if (ModelContainerT.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
         }
-        GameObject model = Instantiate(Model, ChildTransform);
+        GameObject model = Instantiate(Model, ModelContainerT);
         model.transform.localPosition = Vector3.zero;
     }
 
     public void AnimPlay(bool value)
     {
-        if (value)
+        Animator.SetBool("IdleAnim", value);
+        if (!value)
         {
-            Anim.Play("DefaultWood");
-        }
-        else
-        {
-            Anim.Stop("DefaultWood");
-            ChildTransform.localRotation = Quaternion.Euler(Vector3.zero);
-            ChildTransform.localPosition = Vector3.zero;
+            ModelContainerT.localRotation = Quaternion.Euler(Vector3.zero);
+            ModelContainerT.localPosition = Vector3.zero;
         }
     }
     public void DestRoyWood()
@@ -118,43 +116,32 @@ public class WoodScript : MonoBehaviour
                 gameObject.tag = Tags.taglar[modelindex];
                 WoodPuan = modelindex + 1;
                 Model = modeller.Modeller[modelindex];
-                if (transform.childCount != 0) Destroy(ChildTransform.GetChild(0)?.gameObject);
-                GameObject model = Instantiate(Model, ChildTransform);
+                if (transform.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
+                GameObject model = Instantiate(Model, ModelContainerT);
                 model.transform.localPosition = Vector3.zero;
-                Anim.enabled = false;
-                Anim.enabled = true;
+                Animator.enabled = false;
+                Animator.enabled = true;
                 AnimationScaleWood();
                 EventManager.Event_OnIncreaseScore(1);
             }
         }
     }
 
-    //private bool AnimCalisiyormu;
-    //private float waitT;
-    //IEnumerator waitAnimPlay;
+
     public void ShakeProcessStart(float waitTime)
     {
         StartCoroutine(AnimTrigger(waitTime));
-        //waitT = waitTime;
-        //if (AnimCalisiyormu != true)
-        //{
-        //    StartCoroutine(waitAnimPlay);
-        //}
     }
 
     IEnumerator AnimTrigger(float time)
     {
-        //AnimCalisiyormu = true;
-
         yield return new WaitForSeconds(time);
         AnimationScaleWood();
-
-        //AnimCalisiyormu = false;
     }
 
     public void AnimationScaleWood()
     {
-        Anim.Play("ScaleWood");
+        Animator.Play("ScaleWood");
     }
 
 
@@ -164,24 +151,24 @@ public class WoodScript : MonoBehaviour
         gameObject.tag = Tags.taglar[3];
         if (modelindex != 0)
         {
-            Material[] mats = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+            Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
             for (int i = 0; i < mats.Length; i++)
             {
                 mats[i] = color;
             }
-            ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
         }
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(1);
     }
 
     public void Polish(Material toPolish)
-    {
+    { 
         WoodPuan++;
         //toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
         //ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
-        ChildTransform.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
-        ChildTransform.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+        ModelContainerT.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
+        ModelContainerT.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(1);
     }
