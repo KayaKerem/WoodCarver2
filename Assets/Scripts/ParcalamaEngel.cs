@@ -24,4 +24,5 @@ public class ParcalamaEngel : MonoBehaviour
     {
         Effect.Play();
     }
+   
 }
