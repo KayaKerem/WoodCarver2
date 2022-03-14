@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     private int tempScore;
     public InGameUI UImanager;
 
-    private Transform characterT;
     private int collectscore;
     private int AnimPuan;
 
@@ -35,7 +34,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UImanager = FindObjectOfType<InGameUI>();
-        characterT = FindObjectOfType<CharacterMove>().transform;
         EventManager.Event_OnCharacterAnimControl(false);
         levelFinish = false;
         finishScore.gameObject.GetComponent<Animation>();

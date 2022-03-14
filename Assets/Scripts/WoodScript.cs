@@ -15,6 +15,8 @@ public class WoodScript : MonoBehaviour
     public int WoodPuan;
     public WoodStack transporter { set {
             _transporter = value;
+            ChildTransform.localScale = new Vector3(1f, 1f, 1f);
+            AnimPlay(true);
         } 
         get { return _transporter; } }
 

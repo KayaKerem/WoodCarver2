@@ -59,7 +59,6 @@ public class ToplanmaYeri : MonoBehaviour
             {
                 case 0:
                     x.transporter.woods.Remove(x);
-                    x.transporter = null;
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
@@ -67,7 +66,6 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
                 case 1:
                     x.transporter.woods.Remove(x);
-                    x.transporter = null;
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(woodM2.position.x, woodM2.position.y + woodsM2.Count / 2f, woodM2.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
@@ -75,7 +73,6 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
                 case 2:
                     x.transporter.woods.Remove(x);
-                    x.transporter = null;
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM3.Count / 3.33f, woodM3.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
