@@ -121,6 +121,8 @@ public class WoodScript : MonoBehaviour
                 if (transform.childCount != 0) Destroy(ChildTransform.GetChild(0)?.gameObject);
                 GameObject model = Instantiate(Model, ChildTransform);
                 model.transform.localPosition = Vector3.zero;
+                Anim.enabled = false;
+                Anim.enabled = true;
                 AnimationScaleWood();
                 EventManager.Event_OnIncreaseScore(1);
             }
@@ -152,7 +154,7 @@ public class WoodScript : MonoBehaviour
 
     public void AnimationScaleWood()
     {
-        Anim.Play(scaleAnimName);
+        Anim.Play("ScaleWood");
     }
 
 
