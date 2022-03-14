@@ -3477,6 +3477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40d08517427b85e4390157ac5ba790c6, type: 3}
+--- !u!198 &1024024324 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19864940, guid: 82bf03917e16d3d4cad30518cca28308, type: 3}
+  m_PrefabInstance: {fileID: 1439713425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1042542674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40d08517427b85e4390157ac5ba790c6, type: 3}
@@ -4711,8 +4716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b6b8ad7766ffb4699a3e234687c931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EziciMakine: {fileID: 1216958578}
-  Effect: {fileID: 0}
+  Animation: {fileID: 1216958581}
+  Effect: {fileID: 1024024324}
 --- !u!111 &1216958581
 Animation:
   m_ObjectHideFlags: 0

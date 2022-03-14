@@ -15,10 +15,6 @@ public class WoodScript : MonoBehaviour
     public int WoodPuan;
     public WoodStack transporter { set {
             _transporter = value;
-            if(value == null)
-            {
-                StopCoroutine(AnimTrigger(0));
-            }
         } 
         get { return _transporter; } }
 

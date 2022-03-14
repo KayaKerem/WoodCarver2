@@ -12,7 +12,7 @@ public class ParcalamaEngel : MonoBehaviour
 
     void Start()
     {
-        Animation.Play();
+        Animation.Play("Ezici");
     }
 
     void Update()

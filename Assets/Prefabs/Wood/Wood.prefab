@@ -128,7 +128,7 @@ Animation:
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_CullingType: 1
 --- !u!1001 &8441236006990101956
 PrefabInstance:
   m_ObjectHideFlags: 0
