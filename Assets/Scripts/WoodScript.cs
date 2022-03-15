@@ -14,6 +14,7 @@ public class WoodScript : MonoBehaviour
     public ParticleSystem explosionEffect;
     public int modelindex;
     public int WoodPuan;
+    [SerializeField] GameObject particul;
     public WoodStack transporter { set {
             _transporter = value;
             if(value == null)
@@ -111,6 +112,10 @@ public class WoodScript : MonoBehaviour
                 {
                     Instantiate(destroyableTree, transform.position + Vector3.down, Quaternion.identity);
 
+                }
+                if (modelindex == 1)
+                {
+                    Instantiate(particul, transform.position, Quaternion.identity);
                 }
                 modelindex++;
                 gameObject.tag = Tags.taglar[modelindex];

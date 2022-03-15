@@ -52,6 +52,7 @@ MonoBehaviour:
   explosionEffect: {fileID: 4718176511497291565, guid: 929b501f732c5f248a2223eccb4007c5, type: 3}
   modelindex: 0
   WoodPuan: 0
+  particul: {fileID: 100000, guid: 374180fbf28a3af4894bb436cb4bb2ea, type: 3}
 --- !u!65 &4974230530682191444
 BoxCollider:
   m_ObjectHideFlags: 0

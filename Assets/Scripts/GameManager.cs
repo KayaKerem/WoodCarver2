@@ -101,14 +101,14 @@ public class GameManager : MonoBehaviour
     {
 
         score += puan;
-        scoreText.text = score.ToString();
+        //scoreText.text = score.ToString();
         anim.Stop();
         anim.Play("Scale"); 
-        if (!settings.isPlaying)
-        {
-            tempScore += puan;
-            finishScore.text = tempScore.ToString();
-        }
+        //if (!settings.isPlaying)
+        //{
+        //    tempScore += puan;
+        //    finishScore.text = tempScore.ToString();
+        //}
     }
 
     private void OnEnable()
