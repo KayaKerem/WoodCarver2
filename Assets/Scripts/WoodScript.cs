@@ -7,6 +7,7 @@ using System.Linq;
 
 public class WoodScript : MonoBehaviour
 {
+    //[SerializeField] ObjectifPool objectPool;
     [SerializeField] Transform ModelContainerT;
     [SerializeField] GameObject destroyableTree;
     [SerializeField] Animator Animator;
@@ -110,8 +111,9 @@ public class WoodScript : MonoBehaviour
             {
                 if (modelindex == 0)
                 {
-                    Instantiate(destroyableTree, transform.position + Vector3.down, Quaternion.identity);
-
+                    GameObject parcalananAgac =  ObjectifPool.singleton.getModel("Agac");
+                    parcalananAgac.transform.position = transform.position + Vector3.down;
+                    parcalananAgac.SetActive(true);
                 }
                 if (modelindex == 1)
                 {

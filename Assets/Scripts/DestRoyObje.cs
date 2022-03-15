@@ -7,7 +7,12 @@ public class DestRoyObje : MonoBehaviour
 
     void Start()
     {
-        Destroy(transform.gameObject, 1f);
+        Invoke("GeriDondur", 1f);
+    }
+
+    void GeriDondur()
+    {
+        ObjectifPool.singleton.ReturnModel("Agac", this.gameObject);
     }
 
 }
