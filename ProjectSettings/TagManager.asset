@@ -8,6 +8,7 @@ TagManager:
   - Paintable
   - polished
   - tree
+  - pattern
   layers:
   - Default
   - TransparentFX

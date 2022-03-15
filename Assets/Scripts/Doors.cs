@@ -35,6 +35,10 @@ public class Doors : MonoBehaviour
             {
                 wood.Polish(material);
             }
+            else if ((wood.gameObject.tag == Tags.taglar[4]) && doorNumber == 4)
+            {
+                wood.Pattern(material);
+            }
         }
     }
 

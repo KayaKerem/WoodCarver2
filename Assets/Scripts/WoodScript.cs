@@ -10,6 +10,7 @@ public class WoodScript : MonoBehaviour
     //[SerializeField] ObjectifPool objectPool;
     [SerializeField] Transform ModelContainerT;
     [SerializeField] GameObject destroyableTree;
+    //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
 
     public ParticleSystem explosionEffect;
@@ -132,7 +133,7 @@ public class WoodScript : MonoBehaviour
                 Animator.enabled = false;
                 Animator.enabled = true;
                 AnimationScaleWood();
-                EventManager.Event_OnIncreaseScore(1);
+                EventManager.Event_OnIncreaseScore(WoodPuan);
             }
         }
     }
@@ -155,31 +156,44 @@ public class WoodScript : MonoBehaviour
     }
 
 
-    public void ChangeMaterial(Material color)
+    public void ChangeMaterial(Material _material)
     {
-        WoodPuan++;
+        WoodPuan += 5;
         gameObject.tag = Tags.taglar[3];
         if (modelindex != 0)
         {
-            Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+            Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
             for (int i = 0; i < mats.Length; i++)
             {
-                mats[i] = color;
+                mats[i] = _material;
             }
-            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials = mats;
         }
         AnimationScaleWood();
-        EventManager.Event_OnIncreaseScore(1);
+        EventManager.Event_OnIncreaseScore(WoodPuan);
     }
 
     public void Polish(Material toPolish)
-    { 
-        WoodPuan++;
-        //toPolish.color = ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.color;
-        //ChildTransform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = new Material(toPolish);
-        ModelContainerT.GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(true);
-        ModelContainerT.GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(true);
+    {
+        WoodPuan += 5;
+        gameObject.tag = Tags.taglar[4];
+        Material _material =  ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+        toPolish.color = _material.color;
+        Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
+        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = new Material(toPolish);
+        transform.GetChild(0).gameObject.SetActive(true);
         AnimationScaleWood();
-        EventManager.Event_OnIncreaseScore(1);
+        EventManager.Event_OnIncreaseScore(WoodPuan);
+    }
+
+    public void Pattern(Material _material)
+    {
+
+        WoodPuan += 5;
+        Renderer rend = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>();
+        _material.color = rend.sharedMaterial.color;
+        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = _material;
+        AnimationScaleWood();
+        EventManager.Event_OnIncreaseScore(WoodPuan);
     }
 }

@@ -49,11 +49,14 @@ public class ToplanmaYeri : MonoBehaviour
             switch (settings.howManyObjectsOpend)
             {
                 case 1:
+                    objectsToBuild[0].SetActive(false);
                     objectsToBuildsToGo[0].gameObject.SetActive(true);
                     objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
                     objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
                     break;
                 case 2:
+                    objectsToBuild[1].SetActive(false);
+                    objectsToBuild[0].SetActive(false);
                     objectsToBuildsToGo[0].gameObject.SetActive(true);
                     objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
                     objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
@@ -76,7 +79,7 @@ public class ToplanmaYeri : MonoBehaviour
     {
         if (!settings.isPlaying && allowCorutine)
         {
-            objectsToBuild[0].SetActive(true);
+            //objectsToBuild[0].SetActive(true);
             StartCoroutine(ObjectCreate());
         }
     }
@@ -165,6 +168,8 @@ public class ToplanmaYeri : MonoBehaviour
     //    ChangeAyaklar(_wood);
     //}
 
+    bool tamamlanmadi = false;
+
     IEnumerator ObjectCreate()
     {
         allowCorutine = false;
@@ -172,26 +177,29 @@ public class ToplanmaYeri : MonoBehaviour
         objectsToBuildsToGo[toplamAcilanObje].SetActive(true);
         while (woodsM1.Count != 0 || woodsM2.Count != 0 || woodsM3.Count != 0)
         {
+
             if (woodsM1.Count != 0)
             {
-                woodsM1.Last().transform.DOMove(positionToGo.position, 0.5f);
+                woodsM1.Last().transform.DOMove(positionToGo.position, 0.2f);
                 woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
                 woodsM1.Remove(woodsM1.Last().gameObject);
             }
 
             if (woodsM2.Count != 0)
             {
-                woodsM2.Last().transform.DOMove(positionToGo.position, 0.5f);
+                woodsM2.Last().transform.DOMove(positionToGo.position, 0.2f);
                 woodsM2.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
                 woodsM2.Remove(woodsM2.Last().gameObject);
             }
 
             if (woodsM3.Count != 0)
             {
-                woodsM3.Last().transform.DOMove(positionToGo.position, 0.5f);
+                woodsM3.Last().transform.DOMove(positionToGo.position, 0.2f);
                 woodsM3.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
                 woodsM3.Remove(woodsM3.Last().gameObject);
             }
+
+
             yield return new WaitForSeconds(0.2f);
 
         }
@@ -201,18 +209,21 @@ public class ToplanmaYeri : MonoBehaviour
 
     public void ObjectControl()
     {
+        tamamlanmadi = false;
         hit++;
-        if (hit >= 5)
+        if (hit > 5)
         {
+            objectsToBuild[toplamAcilanObje].SetActive(false);
+            positionToGo.transform.GetComponent<BoxCollider>().enabled = false;
             positionToGo = woodM4;
             settings.howManyObjectsOpend++;
             objectsToBuild.RemoveAt(toplamAcilanObje);
         }
-
-        else if (hit < 5)
+        else if (hit <= 5)
         {
             positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
         }
+        tamamlanmadi = true;
     }
 
 }
