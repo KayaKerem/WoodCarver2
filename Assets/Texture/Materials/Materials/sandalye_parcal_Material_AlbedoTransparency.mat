@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sandalye_yeni_yeni_Material_AlbedoTransparency
+  m_Name: sandalye_parcal_Material_AlbedoTransparency
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8f3c921837108e149b0ddfbca8d053b4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4db3137e387fcc3429681b9961f21146, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,11 +40,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 94cc2d3efb118a64dbe0102b1e8be7f2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85d46a30cff1248458a1df762dba5ff9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 6114e3c45de6990469797ecc06484b0b, type: 3}
+        m_Texture: {fileID: 2800000, guid: b19e8439d74220f428aa2b6d9e4b2821, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:

@@ -22,6 +22,7 @@ public class ToplanmaYeri : MonoBehaviour
     public List<GameObject> objectsToBuild = new List<GameObject>();
     public List<GameObject> objectsToBuildsToGo = new List<GameObject>();
 
+    public int toplamAcilanObje;
 
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
@@ -29,6 +30,7 @@ public class ToplanmaYeri : MonoBehaviour
     private bool allowCorutine = false;
     public GameObject[] ayaklar;
     private GameObject currentObject;
+    int hit;
 
     //private int InstantieModelIndex;
     //private Models modeller;
@@ -37,6 +39,37 @@ public class ToplanmaYeri : MonoBehaviour
     {
         woodStack = FindObjectOfType<WoodStack>();
         manager = FindObjectOfType<GameManager>();
+        toplamAcilanObje = settings.howManyObjectsOpend;
+        hit = 0;
+
+        ObjectControl();
+
+        if (settings.howManyObjectsOpend < objectsToBuild.Count)
+        {
+            switch (settings.howManyObjectsOpend)
+            {
+                case 1:
+                    objectsToBuildsToGo[0].gameObject.SetActive(true);
+                    objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
+                    objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
+                    break;
+                case 2:
+                    objectsToBuildsToGo[0].gameObject.SetActive(true);
+                    objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
+                    objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
+                    objectsToBuildsToGo[1].gameObject.SetActive(true);
+                    objectsToBuildsToGo[1].transform.localScale = objectsToBuild[1].transform.localScale;
+                    objectsToBuildsToGo[1].GetComponent<BoxCollider>().enabled = false;
+                    break;
+                case 3:
+                    settings.index++;
+                    break;
+            }
+        }
+        else if (settings.howManyObjectsOpend >= objectsToBuild.Count)
+        {
+            settings.howManyObjectsOpend = 0;
+        }
     }
 
     private void Update()
@@ -57,7 +90,6 @@ public class ToplanmaYeri : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
-
             WoodScript x = other.gameObject.GetComponent<WoodScript>();
             switch (x.modelindex)
             {
@@ -137,6 +169,7 @@ public class ToplanmaYeri : MonoBehaviour
     {
         allowCorutine = false;
         yield return new WaitForSeconds(1);
+        objectsToBuildsToGo[toplamAcilanObje].SetActive(true);
         while (woodsM1.Count != 0 || woodsM2.Count != 0 || woodsM3.Count != 0)
         {
             if (woodsM1.Count != 0)
@@ -168,16 +201,17 @@ public class ToplanmaYeri : MonoBehaviour
 
     public void ObjectControl()
     {
-        if (objectsToBuild[0].transform.localScale.x <= objectsToBuildsToGo[0].transform.localScale.x || objectsToBuild[0].transform.localScale.y <= objectsToBuildsToGo[0].transform.localScale.y || objectsToBuild[0].transform.localScale.z <= objectsToBuildsToGo[0].transform.localScale.z)
+        hit++;
+        if (hit >= 5)
         {
             positionToGo = woodM4;
-            objectsToBuild.RemoveAt(0);
-
+            settings.howManyObjectsOpend++;
+            objectsToBuild.RemoveAt(toplamAcilanObje);
         }
 
-        else if (objectsToBuild[0].transform.localScale.x >= objectsToBuildsToGo[0].transform.localScale.x || objectsToBuild[0].transform.localScale.y >= objectsToBuildsToGo[0].transform.localScale.y || objectsToBuild[0].transform.localScale.z >= objectsToBuildsToGo[0].transform.localScale.z)
+        else if (hit < 5)
         {
-            positionToGo = objectsToBuildsToGo[0].transform;
+            positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
         }
     }
 

@@ -12,4 +12,6 @@ public class PlayerSettings : ScriptableObject
     public int score;
     public int finishScore;
     public int level;
+    public int howManyObjectsOpend = 0;
+    public int index = 0;
 }

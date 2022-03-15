@@ -19,3 +19,5 @@ MonoBehaviour:
   score: 0
   finishScore: 0
   level: 0
+  howManyObjectsOpend: 4
+  index: 0

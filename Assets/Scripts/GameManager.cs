@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         score += puan;
         //scoreText.text = score.ToString();
         anim.Stop();
-        anim.Play("Scale"); 
+        //anim.Play("Scale"); 
         //if (!settings.isPlaying)
         //{
         //    tempScore += puan;
