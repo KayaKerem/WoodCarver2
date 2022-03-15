@@ -19,7 +19,10 @@ public class Doors : MonoBehaviour
         {
             WoodScript wood = other.GetComponent<WoodScript>();
 
-            if((wood.gameObject.tag == Tags.taglar[0] || wood.gameObject.tag == Tags.taglar[1]) && doorNumber == 1)
+            if((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
+            {
+                wood.UpGrade(transform.gameObject.name);
+            }else if(wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
                 ParticleEffect();

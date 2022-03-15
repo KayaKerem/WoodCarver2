@@ -115,15 +115,18 @@ public class WoodScript : MonoBehaviour
                     parcalananAgac.transform.position = transform.position + Vector3.down;
                     parcalananAgac.SetActive(true);
                 }
-                if (modelindex == 1)
+                else if (modelindex == 1)
                 {
                     Instantiate(particul, transform.position, Quaternion.identity);
+                    gameObject.tag = Tags.taglar[modelindex];
                 }
                 modelindex++;
-                gameObject.tag = Tags.taglar[modelindex];
-                WoodPuan = modelindex + 1;
+                WoodPuan = modelindex;
                 Model = modeller.Modeller[modelindex];
+                gameObject.tag = Tags.taglar[modelindex];
+
                 if (transform.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
+
                 GameObject model = Instantiate(Model, ModelContainerT);
                 model.transform.localPosition = Vector3.zero;
                 Animator.enabled = false;
