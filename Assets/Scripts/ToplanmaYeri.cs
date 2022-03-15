@@ -19,8 +19,8 @@ public class ToplanmaYeri : MonoBehaviour
     List<GameObject> woodsM1 = new List<GameObject>();
     List<GameObject> woodsM2 = new List<GameObject>();
     List<GameObject> woodsM3 = new List<GameObject>();
-    [SerializeField] List<GameObject> objectsToBuild = new List<GameObject>();
-    [SerializeField] List<GameObject> objectsToBuildsToGo = new List<GameObject>();
+    public List<GameObject> objectsToBuild = new List<GameObject>();
+    public List<GameObject> objectsToBuildsToGo = new List<GameObject>();
 
 
     private GameManager manager;

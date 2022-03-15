@@ -650,7 +650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387133866887445389, guid: 8f0920bfde86db44c831f03bd372a443, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7387133866887445389, guid: 8f0920bfde86db44c831f03bd372a443, type: 3}
       propertyPath: m_LocalScale.y
@@ -884,6 +884,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40d08517427b85e4390157ac5ba790c6, type: 3}
   m_PrefabInstance: {fileID: 374334061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &189166608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
+  m_PrefabInstance: {fileID: 311255823}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &221589399 stripped
 ParticleSystem:
@@ -1326,6 +1331,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4974230530682191446, guid: 1eb94e016d775b847925b1a1704fa371, type: 3}
   m_PrefabInstance: {fileID: 1218232940}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329021441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 329021442}
+  m_Layer: 0
+  m_Name: StackPoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &329021442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329021441}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.09, y: 2.89, z: 143.0831}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &333585056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2532,6 +2567,11 @@ Transform:
   m_Father: {fileID: 1606289125}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &649988507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 326decc467ac61946bcb201c2abb6656, type: 3}
+  m_PrefabInstance: {fileID: 659234764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &659234764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3195,7 +3235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
       propertyPath: m_LocalScale.z
@@ -3244,6 +3284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
       propertyPath: m_Name
       value: sandalye_srtlg
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe0f359613003744a9f01a885a66cbaf, type: 3}
@@ -4783,7 +4827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40366accc86406b4c807b147da879986, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40366accc86406b4c807b147da879986, type: 3}
       propertyPath: m_LocalScale.z
@@ -4835,7 +4879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 40366accc86406b4c807b147da879986, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40366accc86406b4c807b147da879986, type: 3}
@@ -5181,6 +5225,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40d08517427b85e4390157ac5ba790c6, type: 3}
   m_PrefabInstance: {fileID: 1002343788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1362855882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 40366accc86406b4c807b147da879986, type: 3}
+  m_PrefabInstance: {fileID: 1848509626}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1364076433
 GameObject:
@@ -5845,7 +5894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 326decc467ac61946bcb201c2abb6656, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.4999998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 326decc467ac61946bcb201c2abb6656, type: 3}
       propertyPath: m_LocalScale.y
@@ -5903,6 +5952,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sandalye_oturakfbx
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 326decc467ac61946bcb201c2abb6656, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 326decc467ac61946bcb201c2abb6656, type: 3}
 --- !u!4 &1600937107 stripped
@@ -5927,7 +5980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c847665fad4f7d84aba7c8ce46173858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toplanmaYeri: {fileID: 0}
+  toplanmaYeri: {fileID: 1962846721}
 --- !u!65 &1600937110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7164,11 +7217,16 @@ MonoBehaviour:
   woodM1: {fileID: 1270870259}
   woodM2: {fileID: 1594233946}
   woodM3: {fileID: 720420176}
-  woodM4: {fileID: 0}
+  woodM4: {fileID: 329021442}
   positionToGo: {fileID: 0}
   objectsToBuild:
+  - {fileID: 189166608}
+  - {fileID: 649988507}
+  - {fileID: 1362855882}
+  objectsToBuildsToGo:
   - {fileID: 1676529225}
-  objectsToBuildsToGo: []
+  - {fileID: 1600937108}
+  - {fileID: 875951687}
   settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
   ayaklar:
   - {fileID: 8049883035289295510}
