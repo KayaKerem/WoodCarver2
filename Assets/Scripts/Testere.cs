@@ -17,7 +17,7 @@ public class Testere : MonoBehaviour
         if (allow)
         {
             allow = false;
-            transform.DOLocalMove(first, 2f).OnComplete(Back); 
+            transform.DOLocalMove(first, 1f).OnComplete(Back); 
         }
     }
 

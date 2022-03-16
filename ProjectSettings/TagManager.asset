@@ -9,6 +9,7 @@ TagManager:
   - polished
   - tree
   - pattern
+  - x
   layers:
   - Default
   - TransparentFX

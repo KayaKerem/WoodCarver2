@@ -12,9 +12,9 @@ public class ToplanmaYeri : MonoBehaviour
     [SerializeField] Transform woodM1;
     [SerializeField] Transform woodM2;
     [SerializeField] Transform woodM3;
-    [SerializeField] Transform woodM4;
-    [SerializeField] Transform positionToGo;
-
+    [SerializeField] Transform scoreTransform;
+    public Transform positionToGo;
+    bool start = false;
 
     List<GameObject> woodsM1 = new List<GameObject>();
     List<GameObject> woodsM2 = new List<GameObject>();
@@ -22,7 +22,6 @@ public class ToplanmaYeri : MonoBehaviour
     public List<GameObject> objectsToBuild = new List<GameObject>();
     public List<GameObject> objectsToBuildsToGo = new List<GameObject>();
 
-    public int toplamAcilanObje;
 
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
@@ -31,18 +30,19 @@ public class ToplanmaYeri : MonoBehaviour
     public GameObject[] ayaklar;
     private GameObject currentObject;
     int hit;
+    public int toplamAcilanObje;
+
 
     //private int InstantieModelIndex;
     //private Models modeller;
-
+    
     void Start()
     {
         woodStack = FindObjectOfType<WoodStack>();
         manager = FindObjectOfType<GameManager>();
-        toplamAcilanObje = settings.howManyObjectsOpend;
         hit = 0;
 
-        ObjectControl();
+        //ObjectControl();
 
         if (settings.howManyObjectsOpend < objectsToBuild.Count)
         {
@@ -69,10 +69,16 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
             }
         }
-        else if (settings.howManyObjectsOpend >= objectsToBuild.Count)
-        {
-            settings.howManyObjectsOpend = 0;
-        }
+
+        currentObject = objectsToBuildsToGo[toplamAcilanObje];
+
+        toplamAcilanObje = settings.howManyObjectsOpend;
+        positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
+
+        //else if (settings.howManyObjectsOpend >= objectsToBuild.Count)
+        //{
+        //    settings.howManyObjectsOpend = 0;
+        //}
     }
 
     private void Update()
@@ -81,7 +87,16 @@ public class ToplanmaYeri : MonoBehaviour
         {
             //objectsToBuild[0].SetActive(true);
             StartCoroutine(ObjectCreate());
+           
         }
+        toplamAcilanObje = settings.howManyObjectsOpend;
+        Debug.Log(objectsToBuildsToGo[toplamAcilanObje].transform.name);
+        //positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
+        if (start)
+        {
+            positionToGo = scoreTransform;
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -177,31 +192,56 @@ public class ToplanmaYeri : MonoBehaviour
         objectsToBuildsToGo[toplamAcilanObje].SetActive(true);
         while (woodsM1.Count != 0 || woodsM2.Count != 0 || woodsM3.Count != 0)
         {
-
-            if (woodsM1.Count != 0)
+            
+            if (hit < 5)
             {
-                woodsM1.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM1.Remove(woodsM1.Last().gameObject);
-            }
 
-            if (woodsM2.Count != 0)
+                if (woodsM1.Count != 0)
+                {
+                    woodsM1.Last().transform.DOMove(positionToGo.position, 0.2f);
+                    woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM1.Remove(woodsM1.Last().gameObject);
+                }
+
+                if (woodsM2.Count != 0)
+                {
+                    woodsM2.Last().transform.DOMove(positionToGo.position, 0.2f);
+                    woodsM2.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM2.Remove(woodsM2.Last().gameObject);
+                }
+
+                if (woodsM3.Count != 0)
+                {
+                    woodsM3.Last().transform.DOMove(positionToGo.position, 0.2f);
+                    woodsM3.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM3.Remove(woodsM3.Last().gameObject);
+                }
+            }
+            else if (hit >=5)
             {
-                woodsM2.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM2.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM2.Remove(woodsM2.Last().gameObject);
+                if (woodsM1.Count != 0)
+                {
+                    woodsM1.Last().transform.DOMove(scoreTransform.position, 0.2f);
+                    woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM1.Remove(woodsM1.Last().gameObject);
+                }
+
+                if (woodsM2.Count != 0)
+                {
+                    woodsM2.Last().transform.DOMove(scoreTransform.position, 0.2f);
+                    woodsM2.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM2.Remove(woodsM2.Last().gameObject);
+                }
+
+                if (woodsM3.Count != 0)
+                {
+                    woodsM3.Last().transform.DOMove(scoreTransform.position, 0.2f);
+                    woodsM3.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                    woodsM3.Remove(woodsM3.Last().gameObject);
+                }
             }
-
-            if (woodsM3.Count != 0)
-            {
-                woodsM3.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM3.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM3.Remove(woodsM3.Last().gameObject);
-            }
-
-
+            
             yield return new WaitForSeconds(0.2f);
-
         }
         EventManager.Event_OnLevelFinish();
         allowCorutine = true;
@@ -209,21 +249,18 @@ public class ToplanmaYeri : MonoBehaviour
 
     public void ObjectControl()
     {
-        tamamlanmadi = false;
-        hit++;
-        if (hit > 5)
+        hit += 1;
+        if (hit == 5)
         {
+            start = true;
             objectsToBuild[toplamAcilanObje].SetActive(false);
-            positionToGo.transform.GetComponent<BoxCollider>().enabled = false;
-            positionToGo = woodM4;
+            positionToGo = GameObject.FindGameObjectWithTag("x").transform;
+            //positionToGo.transform.GetComponent<BoxCollider>().enabled = false;
             settings.howManyObjectsOpend++;
-            objectsToBuild.RemoveAt(toplamAcilanObje);
         }
-        else if (hit <= 5)
-        {
-            positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
-        }
-        tamamlanmadi = true;
+        //else if (hit < 5)
+        //{
+        //}
     }
 
 }
