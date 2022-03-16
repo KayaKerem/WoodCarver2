@@ -14,18 +14,22 @@ public class WoodScript : MonoBehaviour
     [SerializeField] Animator Animator;
 
     public ParticleSystem explosionEffect;
-    public int modelindex;
+    public int tagIndex;
     public int WoodPuan;
     [SerializeField] GameObject particul;
-    public WoodStack transporter { set {
+    public WoodStack transporter
+    {
+        set
+        {
             _transporter = value;
-            if(value == null)
+            if (value == null)
             {
                 ModelContainerT.localScale = new Vector3(1f, 1f, 1f);
-                AnimPlay(false); 
+                AnimPlay(false);
             }
-        } 
-        get { return _transporter; } }
+        }
+        get { return _transporter; }
+    }
 
     private WoodStack _transporter;
 
@@ -40,7 +44,7 @@ public class WoodScript : MonoBehaviour
         MyCollider = GetComponent<Collider>();
         DoorsName = new List<string>();
 
-        WoodPuan = modelindex + 1;
+        WoodPuan = tagIndex + 1;
 
         //SpawnModel(modelindex);
         AnimPlay(true);
@@ -48,11 +52,11 @@ public class WoodScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer(Layers.wood))
+        if (other.gameObject.layer == LayerMask.NameToLayer(Layers.wood))
         {
             EventManager.Event_OnWoodAdded(other.GetComponent<WoodScript>());
         }
-        if((other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle)) && transporter != null)
+        if ((other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle)) && transporter != null)
         {
             transporter.DropWood(this);
         }
@@ -61,10 +65,10 @@ public class WoodScript : MonoBehaviour
     public void SpawnModel(int indexModel = 0)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
-        modelindex = indexModel;
+        tagIndex = indexModel;
         gameObject.tag = Tags.taglar[indexModel];
-        WoodPuan = modelindex + 1;
-        Model = modeller.Modeller[modelindex];
+        WoodPuan = tagIndex + 1;
+        Model = modeller.Modeller[tagIndex];
         if (!GameManager.levelFinish)
         {
             if (ModelContainerT.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
@@ -88,14 +92,14 @@ public class WoodScript : MonoBehaviour
     }
     public void DestRoyWood()
     {
-        Instantiate(explosionEffect,transform.position,Quaternion.identity);
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 
     public void DropStackList()
     {
         MyCollider.enabled = false;
-        Invoke("EnableCollider",1f);
+        Invoke("EnableCollider", 1f);
         Vector3 paunch = new Vector3(transform.position.x + Random.Range(2f, -2f), transform.position.y, transform.position.z + Random.Range(1f, 3f));
         transform.DOJump(paunch, 2f, 1, 1f);
     }
@@ -105,45 +109,72 @@ public class WoodScript : MonoBehaviour
         MyCollider.enabled = true;
     }
 
-    public void UpGrade(string name)
+    public void UpGrade(string name , Material _material = null)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
 
         if (!DoorsName.Contains(name))
         {
             DoorsName.Add(name);// arda arda etkileþimi engellemek için
-            if (modelindex < modeller.Modeller.Length)
+            switch (tagIndex)
             {
-                if (modelindex == 0)
-                {
-                    GameObject parcalananAgac =  ObjectifPool.singleton.getModel("Agac");
-                    parcalananAgac.transform.position = transform.position + Vector3.down;
-                    parcalananAgac.SetActive(true);
-                }
-                else if (modelindex == 1)
-                {
-                    Instantiate(particul, transform.position, Quaternion.identity);
-                    gameObject.tag = Tags.taglar[modelindex];
-                }
-                modelindex++;
-                WoodPuan = modelindex;
-                Model = modeller.Modeller[modelindex];
-                gameObject.tag = Tags.taglar[modelindex];
-
-                if (transform.childCount != 0)
+                case 0:
                     {
-                        Destroy(transform.GetChild(1).GetChild(0).gameObject);
-                        transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
-                    Debug.Log(transform.GetChild(1).GetChild(0).gameObject.name);
+                        CutTree();
+                        break;
                     }
-
-                    GameObject model = Instantiate(Model, ModelContainerT);
-                model.transform.localPosition = Vector3.zero;
-                Animator.enabled = false;
-                Animator.enabled = true;
-                AnimationScaleWood();
-                EventManager.Event_OnIncreaseScore(WoodPuan);
+                case 1:
+                    {
+                        cutWood();
+                        break;
+                    }
+                case 2:
+                    {
+                        ChangeMaterial(_material);
+                        break;
+                    }
+                case 3:
+                    {
+                        Polish(_material);
+                        break;
+                    }
+                case 4:
+                    {
+                        Pattern(_material);
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogError("tagIndex olmamasý gereken bir deðerde !!");
+                        break;
+                    }
             }
+
+            if (tagIndex < Tags.taglar.Length)
+            {
+                tagIndex++;
+                gameObject.tag = Tags.taglar[tagIndex];
+                if(tagIndex < modeller.Modeller.Length)
+                {
+                    Model = modeller.Modeller[tagIndex];
+                }
+            }
+            
+            if (transform.childCount != 0)
+            {
+                Destroy(transform.GetChild(1).GetChild(0).gameObject);
+            }
+
+
+            WoodPuan = tagIndex * 5;
+
+            GameObject model = Instantiate(Model, ModelContainerT);
+            model.transform.localPosition = Vector3.zero;
+            Animator.enabled = false;
+            Animator.enabled = true;
+            AnimationScaleWood();
+            EventManager.Event_OnIncreaseScore(WoodPuan);
+
         }
     }
 
@@ -164,12 +195,20 @@ public class WoodScript : MonoBehaviour
         Animator.Play("ScaleWood");
     }
 
-
+    private void CutTree()
+    {
+        GameObject parcalananAgac = ObjectifPool.singleton.getModel("Agac");
+        parcalananAgac.transform.position = transform.position + Vector3.down;
+        parcalananAgac.SetActive(true);
+    }
+    private void cutWood()
+    {
+        Instantiate(particul, transform.position, Quaternion.identity);
+    }
     public void ChangeMaterial(Material _material)
     {
         WoodPuan += 5;
-        gameObject.tag = Tags.taglar[3];
-        if (modelindex != 0)
+        if (tagIndex != 0)
         {
             Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
             for (int i = 0; i < mats.Length; i++)
@@ -185,8 +224,7 @@ public class WoodScript : MonoBehaviour
     public void Polish(Material toPolish)
     {
         WoodPuan += 5;
-        gameObject.tag = Tags.taglar[4];
-        Material _material =  ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+        Material _material = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         toPolish.color = _material.color;
         Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
         ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = new Material(toPolish);

@@ -5,24 +5,21 @@ using System.Linq;
 
 public class ObjectifPool : MonoBehaviour
 {
-    public List<Model> poolModel;
+    static public ObjectifPool singleton;
 
+    public List<Model> poolModel;
     Dictionary<string, List<GameObject>> poolModelDictionary = new Dictionary<string, List<GameObject>>();
 
-    //
-    static public ObjectifPool singleton;
-    List<GameObject> treeList;
-    //
 
-    // ObjectModeller;
-    [SerializeField] GameObject treeModel;
+    /// <summary>
+    /// Model Parentler Oyun için
+    /// </summary>
+
     [SerializeField] Transform treeModelParent;
-    //
+  
     void Start()
     {
         singleton = this;
-        treeList = new List<GameObject>();
-
 
         for (int i = 0; i < poolModel.Count; i++)
         {
@@ -37,8 +34,6 @@ public class ObjectifPool : MonoBehaviour
                 poolModelDictionary[poolModel[i].isim].Add(model);
             }
         }
-
-        //CreateObjectPool(CreateTreeModel(),5);
 
     }
 

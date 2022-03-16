@@ -5,29 +5,14 @@ using DG.Tweening;
 
 public class Testere : MonoBehaviour
 {
-    [SerializeField] Vector3 dön;
-    [SerializeField] Vector3 first;
-    [SerializeField] Vector3 back;
-    bool allow = true;
+    [SerializeField] Transform _modelTestere;
+    [SerializeField] Transform move;
 
-    void Update()
+
+    private void Start()
     {
-        transform.Rotate(dön, Space.World);
-
-        if (allow)
-        {
-            allow = false;
-            transform.DOLocalMove(first, 1f).OnComplete(Back); 
-        }
+        _modelTestere.DOLocalMove(move.localPosition, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
-    void Back()
-    {
-        transform.DOLocalMove(back, 0.5f).OnComplete(Again);
-    }
-
-    void Again()
-    {
-        allow = true;
-    }
+    
 }

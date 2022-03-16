@@ -22,6 +22,7 @@ public class Doors : MonoBehaviour
             if((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
             {
                 wood.UpGrade(transform.gameObject.name);
+
             }else if(wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
@@ -29,15 +30,15 @@ public class Doors : MonoBehaviour
             }
             else if ((wood.gameObject.tag == Tags.taglar[2]) && doorNumber == 2)
             {
-                wood.ChangeMaterial(material);
+                wood.UpGrade(transform.gameObject.name, material);
             }
             else if((wood.gameObject.tag == Tags.taglar[3]) && doorNumber == 3)
             {
-                wood.Polish(material);
+                wood.UpGrade(transform.gameObject.name, material);
             }
             else if ((wood.gameObject.tag == Tags.taglar[4]) && doorNumber == 4)
             {
-                wood.Pattern(material);
+                wood.UpGrade(transform.gameObject.name,material);
             }
         }
     }

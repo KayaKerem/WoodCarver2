@@ -91,7 +91,6 @@ public class ToplanmaYeri : MonoBehaviour
         }
         toplamAcilanObje = settings.howManyObjectsOpend;
         Debug.Log(objectsToBuildsToGo[toplamAcilanObje].transform.name);
-        //positionToGo = objectsToBuildsToGo[toplamAcilanObje].transform;
         if (start)
         {
             positionToGo = scoreTransform;
@@ -109,7 +108,7 @@ public class ToplanmaYeri : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
             WoodScript x = other.gameObject.GetComponent<WoodScript>();
-            switch (x.modelindex)
+            switch (x.tagIndex)
             {
                 case 0:
                     x.transporter.woods.Remove(x);
