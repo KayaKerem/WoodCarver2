@@ -42,7 +42,7 @@ public class WoodScript : MonoBehaviour
 
         WoodPuan = modelindex + 1;
 
-        SpawnModel(modelindex);
+        //SpawnModel(modelindex);
         AnimPlay(true);
     }
 
@@ -69,8 +69,12 @@ public class WoodScript : MonoBehaviour
         {
             if (ModelContainerT.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
         }
-        GameObject model = Instantiate(Model, ModelContainerT);
-        model.transform.localPosition = Vector3.zero;
+        if (ModelContainerT.childCount == 0)
+        {
+            GameObject model = Instantiate(Model, ModelContainerT);
+            model.transform.localPosition = Vector3.zero;
+
+        }
     }
 
     public void AnimPlay(bool value)
@@ -126,9 +130,14 @@ public class WoodScript : MonoBehaviour
                 Model = modeller.Modeller[modelindex];
                 gameObject.tag = Tags.taglar[modelindex];
 
-                if (transform.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
+                if (transform.childCount != 0)
+                    {
+                        Destroy(transform.GetChild(1).GetChild(0).gameObject);
+                        transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
+                    Debug.Log(transform.GetChild(1).GetChild(0).gameObject.name);
+                    }
 
-                GameObject model = Instantiate(Model, ModelContainerT);
+                    GameObject model = Instantiate(Model, ModelContainerT);
                 model.transform.localPosition = Vector3.zero;
                 Animator.enabled = false;
                 Animator.enabled = true;
