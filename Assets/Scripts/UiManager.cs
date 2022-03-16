@@ -12,16 +12,22 @@ public class UiManager : MonoBehaviour
     [SerializeField] PlayerSettings settings;
 
     [SerializeField] GameObject startPanel;
+    [SerializeField] GameObject inGamePanel;
     [SerializeField] GameObject finishPanel;
     [SerializeField] GameObject chestPanel;
 
-    TextMeshPro leveltext;
-    TextMeshPro inGameScore;
-    TextMeshPro finishGameScore;
+    TextMeshProUGUI leveltext;
+    TextMeshProUGUI finishLeveltext;
+    TextMeshProUGUI inGameScore;
+    TextMeshProUGUI finishGameScore;
+    TextMeshProUGUI finishGameRewardScore;
     
 
     void Awake()
     {
+        leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        inGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        finishGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         GameObject[] tempLevels = GameObject.FindGameObjectsWithTag("Level");
 
         foreach (var item in tempLevels)
