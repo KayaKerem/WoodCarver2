@@ -89,22 +89,10 @@ public class ToplanmaYeri : MonoBehaviour
             StartCoroutine(ObjectCreate());
            
         }
-        toplamAcilanObje = settings.howManyObjectsOpend;
-        Debug.Log(objectsToBuildsToGo[toplamAcilanObje].transform.name);
-        if (start)
-        {
-            positionToGo = scoreTransform;
-        }
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        //if (!activePortal)
-        //{
-        //    InstantieModelIndex = manager.InstantieWood();
-        //    PortalActive(true);
-        //}
-
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
             WoodScript x = other.gameObject.GetComponent<WoodScript>();
