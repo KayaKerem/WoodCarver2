@@ -8,7 +8,7 @@ using TMPro;
 
 public class UiManager : MonoBehaviour
 {
-    List<GameObject> levels = new List<GameObject>();
+    [SerializeField] List<GameObject> levels = new List<GameObject>();
     [SerializeField] PlayerSettings settings;
 
     [SerializeField] GameObject startPanel;
@@ -21,29 +21,34 @@ public class UiManager : MonoBehaviour
     TextMeshProUGUI inGameScore;
     TextMeshProUGUI finishGameScore;
     TextMeshProUGUI finishGameRewardScore;
-    
+
 
     void Awake()
     {
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         inGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        finishGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        GameObject[] tempLevels = GameObject.FindGameObjectsWithTag("Level");
-
-        foreach (var item in tempLevels)
-        {
-            levels.Add(item);
-        }
+        finishGameScore = finishPanel.transform.GetChild(0).transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        finishGameRewardScore = finishPanel.transform.GetChild(0).transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+        finishLeveltext = finishPanel.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         levels = levels.OrderBy(go => go.name).ToList();
 
         StartLevel();
 
     }
-
+    private void Start()
+    {
+        settings.score = 0;
+        leveltext.text = "Level " + (settings.levelcount + 1).ToString();
+        LoadScene();
+    }
     void Update()
     {
-
+        inGameScore.text = settings.score.ToString();
+        if (settings.isPlaying)
+        {
+            startPanel.SetActive(false);
+        }
     }
 
     private void LoadScene()
@@ -70,8 +75,14 @@ public class UiManager : MonoBehaviour
 
     public void NextLevel()
     {
+        settings.allScore += settings.score;
+        settings.score = 0;
         settings.level++;
-        LoadScene();
+        if (settings.level > levels.Count)
+        {
+            settings.level = 0;
+        }
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void LevelStart()
@@ -83,6 +94,8 @@ public class UiManager : MonoBehaviour
 
     public void LevelFinished()
     {
+        finishGameScore.text = settings.score.ToString();
+        finishLeveltext.text = "Level " + settings.level.ToString();
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
         chestPanel.SetActive(false);

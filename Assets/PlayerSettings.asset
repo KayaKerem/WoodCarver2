@@ -15,10 +15,11 @@ MonoBehaviour:
   isPlaying: 0
   isDeath: 0
   ForwardSpeed: 10
-  sensitivity: 10
+  sensitivity: 40
   score: 0
   finishScore: 0
   level: 0
   howManyObjectsOpend: 0
   index: 0
-  levelcount: 1
+  levelcount: 0
+  allScore: 0

@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour
 
     public static bool levelFinish;
     public int score;
-    private int tempScore;
-    public InGameUI UImanager;
+    public UiManager UImanager;
 
     private int collectscore;
     private int AnimPuan;
@@ -33,16 +32,16 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        UImanager = FindObjectOfType<InGameUI>();
+        UImanager = FindObjectOfType<UiManager>();
         EventManager.Event_OnCharacterAnimControl(false);
         levelFinish = false;
-        finishScore.gameObject.GetComponent<Animation>();
+        //finishScore.gameObject.GetComponent<Animation>();
     }
 
     public void LevelFinish()
     {
-       
-        StartCoroutine(UImanager.levelComplete());   //level complete paneli açýlmasý
+
+        UImanager.LevelFinished();   //level complete paneli açýlmasý
     }
 
     public void FinishFirstTouch()
@@ -77,6 +76,7 @@ public class GameManager : MonoBehaviour
 
         AnimPuan += puan;
         collectscore += puan;
+        settings.score += puan;
         animText.color = Color.yellow;
         animText.text = "+" + AnimPuan.ToString();
         collectScoreText.text = "$ " + collectscore.ToString();

@@ -10,6 +10,7 @@ TagManager:
   - tree
   - pattern
   - x
+  - Level
   layers:
   - Default
   - TransparentFX
