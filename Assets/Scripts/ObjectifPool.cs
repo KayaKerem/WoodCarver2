@@ -16,7 +16,7 @@ public class ObjectifPool : MonoBehaviour
 
     [SerializeField] List<Transform> ModelParent = new List<Transform>();
   
-    void Start()
+    void Awake()
     {
         singleton = this;
 

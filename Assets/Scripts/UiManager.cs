@@ -5,11 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
+using DG.Tweening;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> levels = new List<GameObject>();
     [SerializeField] PlayerSettings settings;
+     int temp = 0;
+
 
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
@@ -22,7 +25,6 @@ public class UiManager : MonoBehaviour
     TextMeshProUGUI inGameScore;
     TextMeshProUGUI finishGameScore;
     TextMeshProUGUI finishGameRewardScore;
-
 
     void Awake()
     {
@@ -96,10 +98,10 @@ public class UiManager : MonoBehaviour
 
     public void LevelFinished()
     {
-        finishGameScore.text = settings.score.ToString();
-        finishLeveltext.text = "Level " + settings.level.ToString();
+        finishLeveltext.text =levels[settings.level].name;
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
+        StartCoroutine(LevelFinishDelay());
         chestPanel.SetActive(false);
         button.SetActive(true);
     }
@@ -110,5 +112,35 @@ public class UiManager : MonoBehaviour
         finishPanel.SetActive(true);
         chestPanel.SetActive(false);
         button.SetActive(false);
+    }
+
+
+    IEnumerator LevelFinishDelay()
+    {
+        int reward = Mathf.RoundToInt(settings.score / 20);
+        int tempReward = 0;
+        yield return new WaitForSeconds(0.2f);
+        finishPanel.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPosX(0, 0.2f);
+
+        while (temp < settings.score)
+        {
+            temp += 10;
+            if (temp > settings.score)
+            {
+                temp = settings.score;
+            }
+            finishGameScore.text = temp.ToString();
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        finishGameRewardScore.gameObject.SetActive(true);
+        while (tempReward < reward)
+        {
+            reward++;
+            finishGameScore.text = reward.ToString();
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 }

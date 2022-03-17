@@ -124,7 +124,7 @@ public class WoodScript : MonoBehaviour
         MyCollider.enabled = true;
     }
 
-    public void UpGrade(string name, Material _material = null)
+    public void UpGrade(string name, Material _material = null, Texture pattern = null)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
 
@@ -155,7 +155,7 @@ public class WoodScript : MonoBehaviour
                     }
                 case 4:
                     {
-                        Pattern(_material);
+                        Pattern(pattern);
                         break;
                     }
                 default:
@@ -245,21 +245,24 @@ public class WoodScript : MonoBehaviour
 
     public void Polish(Material toPolish)
     {
+        WoodPuan += 5;
         Material _material = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         toPolish.color = _material.color;
         Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
         ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = new Material(toPolish);
+        mats[0] = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+        toPolish.color = mats[0].color;
+        //mats[1] = toPolish;
         transform.GetChild(0).gameObject.SetActive(true);
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(WoodPuan);
     }
 
-    public void Pattern(Material _material)
+    public void Pattern(Texture pattern)
     {
 
         Renderer rend = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>();
-        _material.color = rend.sharedMaterial.color;
-        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = _material;
+        rend.material.SetTexture("_MainTex", pattern);
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(WoodPuan);
     }
