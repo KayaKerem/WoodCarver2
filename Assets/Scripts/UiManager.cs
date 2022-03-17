@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject inGamePanel;
     [SerializeField] GameObject finishPanel;
     [SerializeField] GameObject chestPanel;
+    [SerializeField] GameObject button;
 
     TextMeshProUGUI leveltext;
     TextMeshProUGUI finishLeveltext;
@@ -39,7 +40,7 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         settings.score = 0;
-        leveltext.text = "Level " + (settings.levelcount + 1).ToString();
+        leveltext.text = levels[settings.level].name;
         LoadScene();
     }
     void Update()
@@ -78,7 +79,7 @@ public class UiManager : MonoBehaviour
         settings.allScore += settings.score;
         settings.score = 0;
         settings.level++;
-        if (settings.level > levels.Count)
+        if (settings.level >= levels.Count)
         {
             settings.level = 0;
         }
@@ -90,6 +91,7 @@ public class UiManager : MonoBehaviour
         startPanel.SetActive(true);
         finishPanel.SetActive(false);
         chestPanel.SetActive(false);
+        button.SetActive(false);
     }
 
     public void LevelFinished()
@@ -99,6 +101,7 @@ public class UiManager : MonoBehaviour
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
         chestPanel.SetActive(false);
+        button.SetActive(true);
     }
 
     public void OpenChest()
@@ -106,5 +109,6 @@ public class UiManager : MonoBehaviour
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
         chestPanel.SetActive(false);
+        button.SetActive(false);
     }
 }

@@ -17,6 +17,8 @@ public class WoodScript : MonoBehaviour
     public int tagIndex;
     public int WoodPuan;
     [SerializeField] GameObject particul;
+    public Material[] mats;
+
     public WoodStack transporter
     {
         set
@@ -57,6 +59,26 @@ public class WoodScript : MonoBehaviour
         if ((other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle)) && transporter != null)
         {
             transporter.DropWood(this);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (tagIndex != 0 && tagIndex != 1)
+        {
+            if (other.gameObject.CompareTag("x"))
+            {
+                ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+            }
+
+            if (other.gameObject.CompareTag("y"))
+            {
+                if (mats.Length > 1)
+                {
+                    mats[1] = mats[0];
+                }
+                ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+            }
         }
     }
 
@@ -204,13 +226,18 @@ public class WoodScript : MonoBehaviour
     public void ChangeMaterial(Material _material)
     {
 
-        //Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
-        //for (int i = 0; i < mats.Length; i++)
-        //{
-        //    mats[i] = _material;
-        //}
+        if (tagIndex != 0)
+        {
+            mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
+            mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+            for (int i = 0; i < mats.Length; i++)
+            {
+                mats[i] = _material;
+            }
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials = mats;
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+        }
 
-        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material = _material;
 
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(WoodPuan);
