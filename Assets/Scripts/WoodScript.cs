@@ -44,9 +44,7 @@ public class WoodScript : MonoBehaviour
         MyCollider = GetComponent<Collider>();
         DoorsName = new List<string>();
 
-        WoodPuan = tagIndex + 1;
-
-        //SpawnModel(modelindex);
+        SpawnModel(tagIndex);
         AnimPlay(true);
     }
 
@@ -67,18 +65,13 @@ public class WoodScript : MonoBehaviour
         if (modeller == null) modeller = FindObjectOfType<Models>();
         tagIndex = indexModel;
         gameObject.tag = Tags.taglar[indexModel];
-        WoodPuan = tagIndex + 1;
+        WoodPuan = tagIndex + 5;
         Model = modeller.Modeller[tagIndex];
-        if (!GameManager.levelFinish)
-        {
-            if (ModelContainerT.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
-        }
-        if (ModelContainerT.childCount == 0)
-        {
-            GameObject model = Instantiate(Model, ModelContainerT);
-            model.transform.localPosition = Vector3.zero;
+        if (ModelContainerT.childCount != 0) Destroy(ModelContainerT.GetChild(0)?.gameObject);
 
-        }
+        GameObject model = Instantiate(Model, ModelContainerT);
+        model.transform.localPosition = Vector3.zero;
+
     }
 
     public void AnimPlay(bool value)
@@ -109,7 +102,7 @@ public class WoodScript : MonoBehaviour
         MyCollider.enabled = true;
     }
 
-    public void UpGrade(string name , Material _material = null)
+    public void UpGrade(string name, Material _material = null)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
 
@@ -154,19 +147,19 @@ public class WoodScript : MonoBehaviour
             {
                 tagIndex++;
                 gameObject.tag = Tags.taglar[tagIndex];
-                if(tagIndex < modeller.Modeller.Length)
+                if (tagIndex < modeller.Modeller.Length)
                 {
                     Model = modeller.Modeller[tagIndex];
                 }
             }
-            
+
             if (transform.childCount != 0)
             {
                 Destroy(transform.GetChild(1).GetChild(0).gameObject);
             }
 
 
-            WoodPuan = tagIndex * 5;
+            WoodPuan = (tagIndex * 5) + WoodPuan;
 
             GameObject model = Instantiate(Model, ModelContainerT);
             model.transform.localPosition = Vector3.zero;
@@ -198,32 +191,33 @@ public class WoodScript : MonoBehaviour
     private void CutTree()
     {
         GameObject parcalananAgac = ObjectifPool.singleton.getModel("Agac");
-        parcalananAgac.transform.position = transform.position + Vector3.down;
+        parcalananAgac.transform.position = transform.position + (Vector3.down * 2f);
         parcalananAgac.SetActive(true);
     }
     private void cutWood()
     {
+        GameObject parcalananOdun = ObjectifPool.singleton.getModel("Wood");
+        parcalananOdun.transform.position = transform.position;
+        parcalananOdun.SetActive(true);
         Instantiate(particul, transform.position, Quaternion.identity);
     }
     public void ChangeMaterial(Material _material)
     {
-        WoodPuan += 5;
-        if (tagIndex != 0)
-        {
-            Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
-            for (int i = 0; i < mats.Length; i++)
-            {
-                mats[i] = _material;
-            }
-            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials = mats;
-        }
+
+        //Material[] mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
+        //for (int i = 0; i < mats.Length; i++)
+        //{
+        //    mats[i] = _material;
+        //}
+
+        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material = _material;
+
         AnimationScaleWood();
         EventManager.Event_OnIncreaseScore(WoodPuan);
     }
 
     public void Polish(Material toPolish)
     {
-        WoodPuan += 5;
         Material _material = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         toPolish.color = _material.color;
         Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
@@ -236,7 +230,6 @@ public class WoodScript : MonoBehaviour
     public void Pattern(Material _material)
     {
 
-        WoodPuan += 5;
         Renderer rend = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>();
         _material.color = rend.sharedMaterial.color;
         ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = _material;

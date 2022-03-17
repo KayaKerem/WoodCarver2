@@ -10,16 +10,16 @@ public class ObjectifPool : MonoBehaviour
     public List<Model> poolModel;
     Dictionary<string, List<GameObject>> poolModelDictionary = new Dictionary<string, List<GameObject>>();
 
-
     /// <summary>
     /// Model Parentler Oyun için
     /// </summary>
 
-    [SerializeField] Transform treeModelParent;
+    [SerializeField] List<Transform> ModelParent = new List<Transform>();
   
     void Start()
     {
         singleton = this;
+
 
         for (int i = 0; i < poolModel.Count; i++)
         {
@@ -29,11 +29,12 @@ public class ObjectifPool : MonoBehaviour
             }
             for (int y = 0; y < poolModel[i].sayisi; y++)
             {
-                GameObject model = Instantiate(poolModel[i].gameObject, treeModelParent);
+                GameObject model = Instantiate(poolModel[i].gameObject, ModelParent[i]);
                 model.SetActive(false);
                 poolModelDictionary[poolModel[i].isim].Add(model);
             }
         }
+        
 
     }
 
@@ -52,8 +53,16 @@ public class ObjectifPool : MonoBehaviour
 
             }else{
                 Model model = poolModel.Find(x => x.isim == modelName);
+                int x = 0;
+                for (int i = 0; i < poolModelDictionary.Count ; i++)
+                {
+                    if(modelName == poolModel[i].isim)
+                    {
+                        x = i;
+                    }
+                }
                 
-                GameObject newModel = Instantiate(model.gameObject, treeModelParent);
+                GameObject newModel = Instantiate(model.gameObject, ModelParent[x]);
 
                 return newModel;
             }
@@ -68,7 +77,6 @@ public class ObjectifPool : MonoBehaviour
     {
         gameObject.SetActive(false);
         poolModelDictionary[modelName].Add(gameObject);
-
     }
 
 }
