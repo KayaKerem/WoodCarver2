@@ -11,11 +11,7 @@ public class ToplanmaYeri : MonoBehaviour
     [SerializeField] WoodScript spawnwood;
     [SerializeField] GameObject portal;
     [SerializeField] Transform spawnWoodT;
-    [SerializeField] Transform woodM1;
-    [SerializeField] Transform woodM2;
-    [SerializeField] Transform woodM3;
-    [SerializeField] Transform woodM4;
-    [SerializeField] Transform scoreTransform;
+    [SerializeField] Transform woodM1, woodM2, woodM3, woodM4, woodM5, scoreTransform;
     public Transform positionToGo;
     bool start = false;
 
@@ -23,6 +19,7 @@ public class ToplanmaYeri : MonoBehaviour
     List<GameObject> woodsM2 = new List<GameObject>();
     List<GameObject> woodsM3 = new List<GameObject>();
     List<GameObject> woodsM4 = new List<GameObject>();
+    List<GameObject> woodsM5 = new List<GameObject>();
     public List<GameObject> objectsToBuild = new List<GameObject>();
     public List<GameObject> objectsToBuildsToGo = new List<GameObject>();
 
@@ -74,9 +71,7 @@ public class ToplanmaYeri : MonoBehaviour
                     objectsToBuildsToGo[1].transform.localScale = objectsToBuild[1].transform.localScale;
                     objectsToBuildsToGo[1].GetComponent<BoxCollider>().enabled = false;
                     break;
-                case 3:
-                    settings.index++;
-                    break;
+                
             }
         }
 
@@ -150,6 +145,15 @@ public class ToplanmaYeri : MonoBehaviour
                     other.gameObject.transform.DOMove(new Vector3(woodM4.position.x, woodM4.position.y + woodsM4.Count / 3.33f, woodM4.position.z), 0.5f);
                     other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                     woodsM4.Add(other.gameObject);
+                    break; 
+                
+                case 5:
+                    EventManager.Event_OnLastScore(x.WoodPuan);
+                    x.transporter.woods.Remove(x);
+                    other.gameObject.transform.parent = null;
+                    other.gameObject.transform.DOMove(new Vector3(woodM5.position.x, woodM5.position.y + woodsM5.Count / 3.33f, woodM5.position.z), 0.5f);
+                    other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+                    woodsM5.Add(other.gameObject);
                     break;
             }
 
@@ -245,6 +249,14 @@ public class ToplanmaYeri : MonoBehaviour
                 woodsM4.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
                 woodsM4.Last().transform.DOScale(woodsM4.Last().transform.localScale / 2, 0.5f);
                 woodsM4.Remove(woodsM4.Last().gameObject);
+            }
+            
+            if (woodsM5.Count != 0)
+            {
+                woodsM5.Last().transform.DOMove(positionToGo.position, 0.2f);
+                woodsM5.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                woodsM5.Last().transform.DOScale(woodsM5.Last().transform.localScale / 2, 0.5f);
+                woodsM5.Remove(woodsM4.Last().gameObject);
             }
 
 

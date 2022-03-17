@@ -16,10 +16,10 @@ MonoBehaviour:
   isDeath: 0
   ForwardSpeed: 13
   sensitivity: 10
-  score: 0
+  score: 875
   finishScore: 0
   level: 0
   howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  allScore: 0
+  allScore: 3475

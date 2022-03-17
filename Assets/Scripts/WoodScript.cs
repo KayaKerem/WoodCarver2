@@ -237,15 +237,10 @@ public class WoodScript : MonoBehaviour
             ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials = mats;
             ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
         }
-
-
-        AnimationScaleWood();
-        EventManager.Event_OnIncreaseScore(WoodPuan);
     }
 
     public void Polish(Material toPolish)
     {
-        WoodPuan += 5;
         Material _material = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         toPolish.color = _material.color;
         Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
@@ -254,16 +249,18 @@ public class WoodScript : MonoBehaviour
         toPolish.color = mats[0].color;
         //mats[1] = toPolish;
         transform.GetChild(0).gameObject.SetActive(true);
-        AnimationScaleWood();
-        EventManager.Event_OnIncreaseScore(WoodPuan);
+        
     }
 
     public void Pattern(Texture pattern)
     {
 
         Renderer rend = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>();
-        rend.material.SetTexture("_MainTex", pattern);
-        AnimationScaleWood();
-        EventManager.Event_OnIncreaseScore(WoodPuan);
+        Material[] mat = rend.materials;
+        foreach (Material item in mat)
+        {
+            item.SetTexture("_MainTex", pattern);
+        }
+
     }
 }
