@@ -10,7 +10,7 @@ public class PoolingObje : MonoBehaviour
     void Start()
     {
         Destroy(this.gameObject,1f);
-        transform.DOScale(0, 3f);
+        transform.DOScale(0, 5f);
         //Invoke("GeriDondur", 1f);
     }
 

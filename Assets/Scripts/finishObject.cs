@@ -6,38 +6,38 @@ using DG.Tweening;
 public class finishObject : MonoBehaviour
 {
     [SerializeField] ToplanmaYeri toplanmaYeri;
+    [SerializeField] PlayerSettings settings;
+    Transform ghost;
+    Transform buildObejct;
 
-    int hit;
-    private void Update()
+    private void Start()
     {
-        if (hit >= 5)
-        {
-            //GetComponent<BoxCollider>().enabled = false;
-        }
+        ghost = transform.GetChild(0).GetChild(settings.howManyObjectsOpend).transform;
+        buildObejct = transform.GetChild(1).GetChild(settings.howManyObjectsOpend).transform;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
             toplanmaYeri.ObjectControl();
-            hit++;
             Destroy(other.gameObject);
-
-            if (transform.localScale.x < 2.5f)
+            if (ghost.localScale.x > buildObejct.localScale.x)
             {
-                transform.DOScale(new Vector3(transform.localScale.x + toplanmaYeri.objectsToBuild[0].transform.localScale.x/5, transform.localScale.y , transform.localScale.z), 0.1f);
+                buildObejct.DOScaleX(buildObejct.localScale.x + ghost.localScale.x / 5f, 0.1f);
             }
 
-            else if (transform.localScale.y <2.5f)
+            else if (ghost.localScale.y > buildObejct.localScale.y)
             {
-                transform.DOScale(new Vector3(transform.localScale.x , transform.localScale.y + toplanmaYeri.objectsToBuild[0].transform.localScale.y / 5, transform.localScale.z), 0.1f);
+                buildObejct.DOScaleY(buildObejct.localScale.y + ghost.localScale.y / 5f, 0.1f);
+
             }
 
-            else if (transform.localScale.z < 2.5f)
+            else if (ghost.localScale.z > buildObejct.localScale.z)
             {
-                transform.DOScale(new Vector3(transform.localScale.x , transform.localScale.y, transform.localScale.z + toplanmaYeri.objectsToBuild[0].transform.localScale.z / 5), 0.1f);
-            }
+                buildObejct.DOScaleZ(buildObejct.localScale.z + ghost.localScale.z / 5f, 0.1f);
 
+            }
         }
     }
 }
