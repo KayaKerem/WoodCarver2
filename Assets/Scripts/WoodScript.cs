@@ -13,11 +13,13 @@ public class WoodScript : MonoBehaviour
     //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
 
+    public Material[] mats;
+
+
     public ParticleSystem explosionEffect;
     public int tagIndex;
     public int WoodPuan;
     [SerializeField] GameObject particul;
-    public Material[] mats;
 
     public WoodStack transporter
     {
@@ -48,6 +50,8 @@ public class WoodScript : MonoBehaviour
 
         SpawnModel(tagIndex);
         IdleAnimPlay(true);
+
+        mats = new Material[2];
     }
 
     private void OnTriggerEnter(Collider other)
@@ -123,7 +127,7 @@ public class WoodScript : MonoBehaviour
         MyCollider.enabled = true;
     }
 
-    public void UpGrade(string name, Material _material = null, Texture pattern = null)
+    public void UpGrade(string name, Material _material = null, Texture pattern = null, Texture patternMetal = null)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
 
@@ -154,7 +158,7 @@ public class WoodScript : MonoBehaviour
                     }
                 case 4:
                     {
-                        Pattern(pattern);
+                        Pattern(pattern, patternMetal);
                         break;
                     }
                 default:
@@ -213,6 +217,7 @@ public class WoodScript : MonoBehaviour
         parcalananAgac.transform.position = transform.position + (Vector3.down * 2f);
         parcalananAgac.SetActive(true);
     }
+
     private void cutWood()
     {
         GameObject parcalananOdun = ObjectifPool.singleton.getModel("Wood");
@@ -220,10 +225,7 @@ public class WoodScript : MonoBehaviour
         parcalananOdun.SetActive(true);
         //Instantiate(particul, transform.position, Quaternion.identity);
     }
-    public void ChangeColor(Material _material)
-    {
-            StartCoroutine(changeMat(0.2f, _material));
-    }
+
     public void Polish(Material _material)
     {
         Material mat = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
@@ -232,15 +234,40 @@ public class WoodScript : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Pattern(Texture pattern)
+    public void Pattern(Texture pattern, Texture patternMetal)
     {
-        StartCoroutine(changeMat(0.2f, null , pattern));
-
+        mats[0] = new Material(mats[0]);
+        mats[1] = mats[0];
+        foreach (Material item in mats)
+        {
+            item.SetTexture("_MainTex", pattern);
+        }
+        StartCoroutine(changeMat(0.2f, null));
     }
-    IEnumerator changeMat(float time, Material changeMat = null , Texture pattern = null)
+
+    public void ChangeColor(Material _material)
+    {
+        mats[0] = _material;
+        mats[1] = mats[0];
+        StartCoroutine(changeMat(0.2f, _material));
+    }
+
+    IEnumerator changeMat(float time, Material changeMat = null)
     {
         yield return new WaitForSeconds(time);
-        if(changeMat != null) ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material = changeMat;
-        if (pattern != null) ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex",pattern);
+        if (changeMat != null)
+        {
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material = changeMat;
+        }
+        else
+        {
+            Material[] mat = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+            for (int i = 0; i < mat.Length; i++)
+            {
+                mat[i] = mats[i];
+                
+            }
+            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mat;
+        }
     }
 }

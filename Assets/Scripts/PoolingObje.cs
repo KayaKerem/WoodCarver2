@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PoolingObje : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PoolingObje : MonoBehaviour
     void Start()
     {
         Destroy(this.gameObject,1f);
+        transform.DOScale(0, 3f);
         //Invoke("GeriDondur", 1f);
     }
 

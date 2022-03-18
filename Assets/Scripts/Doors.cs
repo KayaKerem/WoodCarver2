@@ -11,6 +11,7 @@ public class Doors : MonoBehaviour
     [SerializeField] Material material;
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;
+    [SerializeField] Texture patternMetal;
     Coroutine falseParticul;
 
 
@@ -39,7 +40,7 @@ public class Doors : MonoBehaviour
             }
             else if ((wood.gameObject.tag == Tags.taglar[4]) && doorNumber == 4)
             {
-                wood.UpGrade(transform.gameObject.name,null,patterm);
+                wood.UpGrade(transform.gameObject.name,null,patterm,patternMetal);
             }
             
         }
