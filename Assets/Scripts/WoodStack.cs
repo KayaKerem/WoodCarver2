@@ -9,13 +9,16 @@ public class WoodStack : MonoBehaviour
 {
     [SerializeField] private PlayerSettings settings;
     [SerializeField] Transform ToplanacakOdunlar;
-    private CharacterMove characterT;
     [SerializeField] Transform TwoodTakip;
     [SerializeField] string woodTag;
     [SerializeField] Transform StartT;
-    public List<WoodScript> woods;
     [SerializeField] float DistanceObject;
+
+    public List<WoodScript> woods;
     public UnityEvent OnWoodAdded;
+
+    private CharacterMove characterT;
+
 
     void Start()
     {
@@ -52,7 +55,7 @@ public class WoodStack : MonoBehaviour
     void AddWoodList(WoodScript wood)
     {
         wood.transporter = this;
-        wood.AnimPlay(false);
+        wood.IdleAnimPlay(false);
         //wood.gameObject.SetActive(false);
         woods.Add(wood);
         wood.gameObject.layer = LayerMask.NameToLayer(Layers.collectWood);
@@ -135,11 +138,10 @@ public class WoodStack : MonoBehaviour
         characterT.MousePosRest();
         characterT.mouseDif = Vector3.zero;
         characterT.transform.DOMoveZ(characterT.transform.position.z - 5f, 0.7f, false).OnComplete(() => EnableIsPlay(true));
-
     }
     public void EnableIsPlay(bool value)
     {
-        EventManager.Event_OnCharacterAnimControl(value);
+        EventManager.Event_OnCharacterAnimControl(!value, AnimName.CharacterObstacleHit);
         settings.isPlaying = value;
     }
 
@@ -160,7 +162,6 @@ public class WoodStack : MonoBehaviour
             woods[i].DropStackList();
             woods[i].transporter = null;
             woods[i].transform.parent = null;
-            woods[i].AnimPlay(true);
             woods.RemoveAt(i);
         }
 

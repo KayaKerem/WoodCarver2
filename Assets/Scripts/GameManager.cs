@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UImanager = FindObjectOfType<UiManager>();
-        EventManager.Event_OnCharacterAnimControl(false);
+        EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterRunnig);
+        EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterObstacleHit);
         levelFinish = false;
         //finishScore.gameObject.GetComponent<Animation>();
     }

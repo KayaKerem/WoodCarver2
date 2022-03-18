@@ -27,6 +27,6 @@ public static class EventManager
     public static event Action<int> OnRestScore;
     public static void Event_OnRestScore(int puan) { OnRestScore?.Invoke(puan); }
 
-    public static event Action<bool> OnCharacterAnimControl;
-    public static void Event_OnCharacterAnimControl(bool value) { OnCharacterAnimControl?.Invoke(value); }
+    public static event Action<bool,string> OnCharacterAnimControl;
+    public static void Event_OnCharacterAnimControl(bool value,string boolName) { OnCharacterAnimControl?.Invoke(value, boolName); }
 }

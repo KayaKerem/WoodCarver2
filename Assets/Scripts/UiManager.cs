@@ -78,7 +78,7 @@ public class UiManager : MonoBehaviour
 
     public void NextLevel()
     {
-        settings.allScore += settings.score;
+        settings.TotalScore += settings.score;
         settings.score = 0;
         settings.level++;
         if (settings.level >= levels.Count)

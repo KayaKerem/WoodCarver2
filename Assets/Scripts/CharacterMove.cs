@@ -54,7 +54,7 @@ public class CharacterMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !rundStart)
         {
             settings.isPlaying = true;
-            EventManager.Event_OnCharacterAnimControl(true);
+            EventManager.Event_OnCharacterAnimControl(true,AnimName.CharacterRunnig);
             rundStart = true;
         }
 
@@ -88,9 +88,9 @@ public class CharacterMove : MonoBehaviour
         mouseDif *= settings.sensitivity * Time.deltaTime;
     }
 
-    public void AnimControl(bool value)
+    public void AnimControl(bool value , string boolName)
     {
-        animPlayer.SetBool("isRunning",value);
+        animPlayer.SetBool(boolName, value);
     }
 
     private void OnEnable()

@@ -27,7 +27,7 @@ public class WoodScript : MonoBehaviour
             if (value == null)
             {
                 ModelContainerT.localScale = new Vector3(1f, 1f, 1f);
-                AnimPlay(false);
+                IdleAnimPlay(true);
             }
         }
         get { return _transporter; }
@@ -47,7 +47,7 @@ public class WoodScript : MonoBehaviour
         DoorsName = new List<string>();
 
         SpawnModel(tagIndex);
-        AnimPlay(true);
+        IdleAnimPlay(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,25 +62,25 @@ public class WoodScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (tagIndex != 0 && tagIndex != 1)
-        {
-            if (other.gameObject.CompareTag("x"))
-            {
-                ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
-            }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (tagIndex != 0 && tagIndex != 1)
+    //    {
+    //        if (other.gameObject.CompareTag("x"))
+    //        {
+    //            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+    //        }
 
-            if (other.gameObject.CompareTag("y"))
-            {
-                if (mats.Length > 1)
-                {
-                    mats[1] = mats[0];
-                }
-                ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
-            }
-        }
-    }
+    //        if (other.gameObject.CompareTag("y"))
+    //        {
+    //            if (mats.Length > 1)
+    //            {
+    //                mats[1] = mats[0];
+    //            }
+    //            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
+    //        }
+    //    }
+    //}
 
     public void SpawnModel(int indexModel = 0)
     {
@@ -96,12 +96,11 @@ public class WoodScript : MonoBehaviour
 
     }
 
-    public void AnimPlay(bool value)
+    public void IdleAnimPlay(bool value)
     {
         Animator.SetBool("IdleAnim", value);
         if (!value)
         {
-            ModelContainerT.localRotation = Quaternion.Euler(Vector3.zero);
             ModelContainerT.localPosition = Vector3.zero;
         }
     }
@@ -145,7 +144,7 @@ public class WoodScript : MonoBehaviour
                     }
                 case 2:
                     {
-                        ChangeMaterial(_material);
+                        ChangeColor(_material);
                         break;
                     }
                 case 3:
@@ -165,7 +164,7 @@ public class WoodScript : MonoBehaviour
                     }
             }
 
-            if (tagIndex < Tags.taglar.Length)
+            if (tagIndex < Tags.taglar.Length - 1)
             {
                 tagIndex++;
                 gameObject.tag = Tags.taglar[tagIndex];
@@ -185,8 +184,6 @@ public class WoodScript : MonoBehaviour
 
             GameObject model = Instantiate(Model, ModelContainerT);
             model.transform.localPosition = Vector3.zero;
-            Animator.enabled = false;
-            Animator.enabled = true;
             AnimationScaleWood();
             EventManager.Event_OnIncreaseScore(WoodPuan);
 
@@ -221,46 +218,29 @@ public class WoodScript : MonoBehaviour
         GameObject parcalananOdun = ObjectifPool.singleton.getModel("Wood");
         parcalananOdun.transform.position = transform.position;
         parcalananOdun.SetActive(true);
-        Instantiate(particul, transform.position, Quaternion.identity);
+        //Instantiate(particul, transform.position, Quaternion.identity);
     }
-    public void ChangeMaterial(Material _material)
+    public void ChangeColor(Material _material)
     {
-
-        if (tagIndex != 0)
-        {
-            mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials;
-            mats = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
-            for (int i = 0; i < mats.Length; i++)
-            {
-                mats[i] = _material;
-            }
-            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterials = mats;
-            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
-        }
+            StartCoroutine(changeMat(0.2f, _material));
     }
-
-    public void Polish(Material toPolish)
+    public void Polish(Material _material)
     {
-        Material _material = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
-        toPolish.color = _material.color;
-        Destroy(ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material);
-        ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().sharedMaterial = new Material(toPolish);
-        mats[0] = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
-        toPolish.color = mats[0].color;
-        //mats[1] = toPolish;
+        Material mat = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+        _material.color = mat.color;
+        StartCoroutine(changeMat(0.2f, _material));
         transform.GetChild(0).gameObject.SetActive(true);
-        
     }
 
     public void Pattern(Texture pattern)
     {
+        StartCoroutine(changeMat(0.2f, null , pattern));
 
-        Renderer rend = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>();
-        Material[] mat = rend.materials;
-        foreach (Material item in mat)
-        {
-            item.SetTexture("_MainTex", pattern);
-        }
-
+    }
+    IEnumerator changeMat(float time, Material changeMat = null , Texture pattern = null)
+    {
+        yield return new WaitForSeconds(time);
+        if(changeMat != null) ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material = changeMat;
+        if (pattern != null) ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex",pattern);
     }
 }

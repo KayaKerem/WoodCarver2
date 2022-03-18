@@ -14,3 +14,9 @@ public static class Tags
 {
     public static string[] taglar = new string[] {"tree","Wood","Paintable" ,"polished" , "pattern"};
 }
+
+public static class AnimName
+{
+    public static string CharacterRunnig = "isRunning";
+    public static string CharacterObstacleHit = "obstacleHit";
+}
