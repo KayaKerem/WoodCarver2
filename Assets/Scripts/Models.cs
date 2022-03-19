@@ -11,7 +11,6 @@ public class Models : MonoBehaviour
 
     private void Awake()
     {
-
         switch (settings.howManyObjectsOpend)
         {
             case 0:

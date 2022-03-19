@@ -9,17 +9,13 @@ using UnityEditor;
 public class ToplanmaYeri : MonoBehaviour
 {
     OyunSonu oyunSonu;
-    Transform woodM1, woodM2, woodM3, woodM4, woodM5, scoreTransform;
     [SerializeField] List<Transform> stackTransform = new List<Transform>(); // Kanka buraya parçalarýn stackleneceði tranformlarý atacaz sýralamasý önemli olur düzgün gözükmesi için
     public Transform positionToGo;
     bool start = false;
-    List<List<WoodScript>> oyunSonuObjectList = new List<List<WoodScript>>();
 
-    List<GameObject> woodsM1 = new List<GameObject>();
-    List<GameObject> woodsM2 = new List<GameObject>();
-    List<GameObject> woodsM3 = new List<GameObject>();
-    List<GameObject> woodsM4 = new List<GameObject>();
-    List<GameObject> woodsM5 = new List<GameObject>();
+    public List<List<WoodScript>> oyunSonuObjectList = new List<List<WoodScript>>();
+
+    public Material duplicate;
 
     bool objectFinished;
 
@@ -28,57 +24,18 @@ public class ToplanmaYeri : MonoBehaviour
     private WoodStack woodStack;
     private bool allowCorutine = false;
     int hit;
+    bool odenGeldimi = false;
 
     void Start()
     {
-        //---
-        for (int i = 0; i <Tags.taglar.Length; i++)
+        oyunSonu = GetComponent<OyunSonu>();
+        for (int i = 0; i < Tags.taglar.Length - 1; i++)
         {
             oyunSonuObjectList.Add(new List<WoodScript>());
         }
 
-        //oyunSonuObjectList.Add(woodsM1);
-        //oyunSonuObjectList.Add(woodsM2);
-        //oyunSonuObjectList.Add(woodsM3);
-        //oyunSonuObjectList.Add(woodsM4);
-        //oyunSonuObjectList.Add(woodsM5);
-
-        //---
-        woodStack = FindObjectOfType<WoodStack>();
-        manager = FindObjectOfType<GameManager>();
-        oyunSonu = GetComponent<OyunSonu>();
         hit = 0;
 
-
-        //KANKA aþaðýdaki yorum satýrýnda normalde bitirdiðimiz objeleri aktif ediyordum buna yeni bir çözüm bulmamýz gerekli çümkü yaptýðýmýz objeleri desenlerini felan atayacaðýz
-
-
-
-        //if (settings.howManyObjectsOpend < objectsToBuild.Count)
-        //{
-        //    switch (settings.howManyObjectsOpend)
-        //    {
-        //        case 1:
-        //            objectsToBuild[0].SetActive(false);
-        //            objectsToBuildsToGo[0].gameObject.SetActive(true);
-        //            objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
-        //            objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
-        //            break;
-        //        case 2:
-        //            objectsToBuild[1].SetActive(false);
-        //            objectsToBuild[0].SetActive(false);
-        //            objectsToBuildsToGo[0].gameObject.SetActive(true);
-        //            objectsToBuildsToGo[0].transform.localScale = objectsToBuild[0].transform.localScale;
-        //            objectsToBuildsToGo[0].GetComponent<BoxCollider>().enabled = false;
-        //            objectsToBuildsToGo[1].gameObject.SetActive(true);
-        //            objectsToBuildsToGo[1].transform.localScale = objectsToBuild[1].transform.localScale;
-        //            objectsToBuildsToGo[1].GetComponent<BoxCollider>().enabled = false;
-        //            break;
-
-        //    }
-        //}
-
-        positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
     }
 
     private void Update()
@@ -101,193 +58,56 @@ public class ToplanmaYeri : MonoBehaviour
                 case 0:
                     collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
-                    other.gameObject.transform.DOLocalMove(new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), 0.5f);
+                    other.gameObject.transform.DOMove(new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), 0.5f);
                     Destroy(other.gameObject, 2);
                     break;
-                    //
                 default:
                     {
+                        odenGeldimi = true;
+                        int index = collectWood.tagIndex - 1; //eksi olma sebebi tagsindex i 1 olmasý çünkü tree tagý buraya hiç gelmiyor
                         collectWood.transporter.woods.Remove(collectWood);
                         collectWood.transform.parent = null;
-                        if (oyunSonuObjectList[collectWood.tagIndex] == null)
-                        {
-                            woodM1 = stackTransform[0];
-                            stackTransform.Remove(woodM1);
-                        }
-                        else
-                        {
-                            collectWood.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
-                            collectWood.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                            oyunSonuObjectList[collectWood.tagIndex].Add(collectWood);
-                        }
+                        Vector3 pos = stackTransform[index].position;
+                        collectWood.transform.DOMove(new Vector3(pos.x, pos.y + oyunSonuObjectList[index].Count / 2f, pos.z), 0.5f);
+                        collectWood.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+                        oyunSonuObjectList[index].Add(collectWood);
                         EventManager.Event_OnLastScore(collectWood.WoodPuan);
                         break;
                     }
-                    //
-                case 1:
-                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
-                    collectWood.transporter.woods.Remove(collectWood);
-                    other.gameObject.transform.parent = null;
-                    if (woodM1 == null)
-                    {
-                        woodM1 = stackTransform[0];
-                        stackTransform.Remove(woodM1);
-                    }
-
-                    if (woodM1 != null)
-                    {
-                        other.gameObject.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
-                        other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                        woodsM1.Add(other.gameObject);
-                    }
-
-                    break;
-
-                case 2:
-                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
-                    collectWood.transporter.woods.Remove(collectWood);
-                    other.gameObject.transform.parent = null;
-
-                    if (woodM2 == null)
-                    {
-                        woodM2 = stackTransform[0];
-                        stackTransform.Remove(woodM2);
-
-                    }
-
-                    if (woodM2 != null)
-                    {
-                        other.gameObject.transform.DOMove(new Vector3(woodM2.position.x, woodM2.position.y + woodsM2.Count / 3.33f, woodM2.position.z), 0.5f);
-                        other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                        woodsM2.Add(other.gameObject);
-                    }
-
-                    break;
-
-                case 3:
-                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
-                    collectWood.transporter.woods.Remove(collectWood);
-                    other.gameObject.transform.parent = null;
-
-                    if (woodM3 == null)
-                    {
-                        woodM3 = stackTransform[0];
-                        stackTransform.Remove(woodM3);
-                    }
-
-                    if (woodM3 != null)
-                    {
-                        other.gameObject.transform.DOMove(new Vector3(woodM3.position.x, woodM3.position.y + woodsM4.Count / 3.33f, woodM3.position.z), 0.5f);
-                        other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                        woodsM3.Add(other.gameObject);
-                    }
-
-                    break;
-
-                case 4:
-                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
-                    collectWood.transporter.woods.Remove(collectWood);
-                    other.gameObject.transform.parent = null;
-
-                    if (woodM4 == null)
-                    {
-                        woodM4 = stackTransform[0];
-                        stackTransform.Remove(woodM4);
-                    }
-
-                    if (woodM4 != null)
-                    {
-                        other.gameObject.transform.DOMove(new Vector3(woodM4.position.x, woodM4.position.y + woodsM4.Count / 3.33f, woodM4.position.z), 0.5f);
-                        other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                        woodsM4.Add(other.gameObject);
-                    }
-
-                    break;
-
-                case 5:
-                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
-                    collectWood.transporter.woods.Remove(collectWood);
-                    other.gameObject.transform.parent = null;
-
-                    if (woodM5 == null)
-                    {
-                        woodM5 = stackTransform[0];
-                        stackTransform.Remove(woodM5);
-                    }
-
-                    if (woodM5 != null)
-                    {
-                        other.gameObject.transform.DOMove(new Vector3(woodM5.position.x, woodM5.position.y + woodsM5.Count / 3.33f, woodM5.position.z), 0.5f);
-                        other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
-                        woodsM5.Add(other.gameObject);
-                    }
-
-                    break;
-            }  // kanka burda burda deðen objenin indeksine göre sýrayla listedeki transformlarý atýyorum
+            }
         }
-
-        if (other.gameObject.CompareTag("Player"))
+        else if (other.gameObject.CompareTag("Player"))
         {
-            woodStack.EnableIsPlay(false);
-            allowCorutine = true;
+            settings.isPlaying = false;
             EventManager.Event_OnCharacterAnimControl(false, AnimName.CharacterRunnig);  //Karakter Aniamsyon kapanmasý
+            if (odenGeldimi)
+            {
+                StartCoroutine(ObjectCreate());
+            }
+            else Invoke("finishLeve",2f);
         }
     }
 
     IEnumerator ObjectCreate()
     {
-        oyunSonu.startMove = true;
-        allowCorutine = false;
-        yield return new WaitForSeconds(1);
         chooseMat();
+        positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
+        oyunSonu.startMove = true;
+        yield return new WaitForSeconds(1);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
-        while (woodsM1.Count != 0 || woodsM2.Count != 0 || woodsM3.Count != 0 || woodsM4.Count != 0 || woodsM5.Count != 0)
+        oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.GetComponent<Renderer>().material = duplicate;
+
+        for (int i = 0; i < oyunSonuObjectList.Count; i++)
         {
-
-            if (woodsM1.Count != 0)
+            for (int j = oyunSonuObjectList[i].Count - 1; j > -1; j--)
             {
-                woodsM1.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM1.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM1.Remove(woodsM1.Last().gameObject);
+                oyunSonuObjectList[i][j].transform.DOMove(positionToGo.position, 0.5f);
+                oyunSonuObjectList[i][j].transform.DORotate(new Vector3(0, 0, 90), 0.5f);
+                yield return new WaitForSeconds(0.2f);
             }
-
-            if (woodsM2.Count != 0)
-            {
-                woodsM2.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM2.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM2.Last().transform.DOScale(woodsM4.Last().transform.localScale / 2, 0.5f);
-                woodsM2.Remove(woodsM2.Last().gameObject);
-            }
-
-            if (woodsM3.Count != 0)
-            {
-                woodsM3.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM3.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM3.Last().transform.DOScale(woodsM4.Last().transform.localScale / 2, 0.5f);
-                woodsM3.Remove(woodsM3.Last().gameObject);
-            }
-
-            if (woodsM4.Count != 0)
-            {
-                woodsM4.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM4.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM4.Last().transform.DOScale(woodsM4.Last().transform.localScale / 2, 0.5f);
-                woodsM4.Remove(woodsM4.Last().gameObject);
-            }
-
-            if (woodsM5.Count != 0)
-            {
-                woodsM5.Last().transform.DOMove(positionToGo.position, 0.2f);
-                woodsM5.Last().transform.DORotate(new Vector3(0, 0, 90), 0.5f);
-                woodsM5.Last().transform.DOScale(woodsM5.Last().transform.localScale / 2, 0.5f);
-                woodsM5.Remove(woodsM4.Last().gameObject);
-            }
-            yield return new WaitForSeconds(0.2f);
-        } // buradada ayný stacklediðimiz malzemelerin yapýlacak objeye gtmesini saðlýyoruz
-
-
+            oyunSonuObjectList[i].Clear();
+        }
         StartCoroutine(FinishMove());
-
     }
 
     public void ObjectControl()
@@ -316,12 +136,7 @@ public class ToplanmaYeri : MonoBehaviour
     {
         int index = selectionSort(oyunSonuObjectList);
         Debug.Log(index);
-        Material duplicate = oyunSonuObjectList[index][0].GetComponent<WoodScript>().getChildMat();
-        string matName = settings.index.ToString() + "." + settings.howManyObjectsOpend.ToString() + ".mat";
-        //AssetDatabase.CreateAsset(duplicate, "Assets/ÝnGameMaterial/" + matName);
-        settings.oyunSonuMats[settings.index].Add(duplicate);
-       
-
+        duplicate = oyunSonuObjectList[index][0].GetComponent<WoodScript>().getChildMat();
     }
     int selectionSort(List<List<WoodScript>> array)
     {
@@ -335,6 +150,10 @@ public class ToplanmaYeri : MonoBehaviour
             }
         }
         return max;
+    }
+    void finishLeve()
+    {
+        EventManager.Event_OnLevelFinish();
     }
 
 }

@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
 using DG.Tweening;
+using UnityEditor;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> levels = new List<GameObject>();
     [SerializeField] PlayerSettings settings;
+    [SerializeField] ToplanmaYeri toplanma;
+    [SerializeField] OyunSonu OyunSonu;
      int temp = 0;
+    int tempReward = 0;
 
 
     [SerializeField] GameObject startPanel;
@@ -37,8 +41,8 @@ public class UiManager : MonoBehaviour
         levels = levels.OrderBy(go => go.name).ToList();
 
         StartLevel();
-
     }
+
     private void Start()
     {
         settings.score = 0;
@@ -85,6 +89,13 @@ public class UiManager : MonoBehaviour
         {
             settings.level = 0;
         }
+        string matName = settings.index.ToString() + "." + (settings.howManyObjectsOpend-1).ToString() + ".mat";
+        AssetDatabase.CreateAsset(toplanma.duplicate, "Assets/InGameMaterial/" + matName);
+        if (settings.howManyObjectsOpend == 3)
+        {
+            settings.index++;
+            settings.howManyObjectsOpend = 0;
+        }
         SceneManager.LoadScene("SampleScene");
     }
 
@@ -118,7 +129,6 @@ public class UiManager : MonoBehaviour
     IEnumerator LevelFinishDelay()
     {
         int reward = Mathf.RoundToInt(settings.score / 20);
-        int tempReward = 0;
         yield return new WaitForSeconds(0.2f);
         finishPanel.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPosX(0, 0.2f);
 
@@ -141,6 +151,9 @@ public class UiManager : MonoBehaviour
             finishGameScore.text = reward.ToString();
             yield return new WaitForEndOfFrame();
         }
+        yield return new WaitForSeconds(0.7f);
+        button.SetActive(true);
+        button.GetComponent<RectTransform>().DOScale(new Vector3(2,6,2), 1f).SetEase(Ease.OutBack);
 
     }
 }

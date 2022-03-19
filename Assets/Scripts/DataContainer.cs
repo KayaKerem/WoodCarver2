@@ -12,7 +12,7 @@ public static class Layers
 
 public static class Tags
 {
-    public static string[] taglar = new string[] {"tree","Wood","Paintable" ,"polished" , "pattern"};
+    public static string[] taglar = new string[] { "tree", "Wood", "plank", "Paintable", "polished", "pattern" };
 }
 
 public static class AnimName

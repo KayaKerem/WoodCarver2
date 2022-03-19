@@ -10,8 +10,6 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public PlayerSettings settings;
-    [SerializeField] Text collectScoreText;
-    [SerializeField] Text scoreText;
     [SerializeField] Text animText;
     [SerializeField] Text finishScore;
     [SerializeField] GameObject secondCam;
@@ -83,7 +81,7 @@ public class GameManager : MonoBehaviour
         animText.text = "+" + AnimPuan.ToString();
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
-        collectScoreText.text = "$ " + collectscore.ToString();
+        //collectScoreText.text = "$ " + collectscore.ToString();
         Invoke("waitAnimPuan", 0.4f);
 
     }
@@ -94,7 +92,7 @@ public class GameManager : MonoBehaviour
         animText.color = Color.red;
         animText.text = "-" + (collectscore - puan);
         collectscore = puan;
-        collectScoreText.text = "$ " + collectscore.ToString();
+        //collectScoreText.text = "$ " + collectscore.ToString();
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
     }

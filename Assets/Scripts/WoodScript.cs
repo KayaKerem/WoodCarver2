@@ -170,21 +170,18 @@ public class WoodScript : MonoBehaviour
                     }
             }
 
-            if (tagIndex < Tags.taglar.Length - 1)
-            {
-                tagIndex++;
-                gameObject.tag = Tags.taglar[tagIndex];
-                if (tagIndex < modeller.Modeller.Length)
-                {
-                    Model = modeller.Modeller[tagIndex];
-                }
-            }
 
+            tagIndex++;
+            gameObject.tag = Tags.taglar[tagIndex];
+
+            if (tagIndex < modeller.Modeller.Length)
+            {
+                Model = modeller.Modeller[tagIndex];
+            }
             if (transform.childCount != 0)
             {
                 Destroy(transform.GetChild(1).GetChild(0).gameObject);
             }
-
 
             WoodPuan = (tagIndex * 5) + WoodPuan;
 
