@@ -13,13 +13,14 @@ public class ToplanmaYeri : MonoBehaviour
     [SerializeField] List<Transform> stackTransform = new List<Transform>(); // Kanka buraya parçalarýn stackleneceði tranformlarý atacaz sýralamasý önemli olur düzgün gözükmesi için
     public Transform positionToGo;
     bool start = false;
-    List<List<GameObject>> karþýlaþtýrma = new List<List<GameObject>>();
+    List<List<WoodScript>> oyunSonuObjectList = new List<List<WoodScript>>();
 
     List<GameObject> woodsM1 = new List<GameObject>();
     List<GameObject> woodsM2 = new List<GameObject>();
     List<GameObject> woodsM3 = new List<GameObject>();
     List<GameObject> woodsM4 = new List<GameObject>();
     List<GameObject> woodsM5 = new List<GameObject>();
+
     bool objectFinished;
 
     private GameManager manager;
@@ -30,12 +31,19 @@ public class ToplanmaYeri : MonoBehaviour
 
     void Start()
     {
-        karþýlaþtýrma.Add(woodsM1);
-        karþýlaþtýrma.Add(woodsM2);
-        karþýlaþtýrma.Add(woodsM3);
-        karþýlaþtýrma.Add(woodsM4);
-        karþýlaþtýrma.Add(woodsM5);
+        //---
+        for (int i = 0; i <Tags.taglar.Length; i++)
+        {
+            oyunSonuObjectList.Add(new List<WoodScript>());
+        }
 
+        //oyunSonuObjectList.Add(woodsM1);
+        //oyunSonuObjectList.Add(woodsM2);
+        //oyunSonuObjectList.Add(woodsM3);
+        //oyunSonuObjectList.Add(woodsM4);
+        //oyunSonuObjectList.Add(woodsM5);
+
+        //---
         woodStack = FindObjectOfType<WoodStack>();
         manager = FindObjectOfType<GameManager>();
         oyunSonu = GetComponent<OyunSonu>();
@@ -87,19 +95,38 @@ public class ToplanmaYeri : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
-            WoodScript x = other.gameObject.GetComponent<WoodScript>();
-            switch (x.tagIndex)
+            WoodScript collectWood = other.gameObject.GetComponent<WoodScript>();
+            switch (collectWood.tagIndex)
             {
                 case 0:
-                    x.transporter.woods.Remove(x);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
                     other.gameObject.transform.DOLocalMove(new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), 0.5f);
                     Destroy(other.gameObject, 2);
                     break;
-
+                    //
+                default:
+                    {
+                        collectWood.transporter.woods.Remove(collectWood);
+                        collectWood.transform.parent = null;
+                        if (oyunSonuObjectList[collectWood.tagIndex] == null)
+                        {
+                            woodM1 = stackTransform[0];
+                            stackTransform.Remove(woodM1);
+                        }
+                        else
+                        {
+                            collectWood.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
+                            collectWood.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+                            oyunSonuObjectList[collectWood.tagIndex].Add(collectWood);
+                        }
+                        EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                        break;
+                    }
+                    //
                 case 1:
-                    EventManager.Event_OnLastScore(x.WoodPuan);
-                    x.transporter.woods.Remove(x);
+                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
                     if (woodM1 == null)
                     {
@@ -112,14 +139,13 @@ public class ToplanmaYeri : MonoBehaviour
                         other.gameObject.transform.DOLocalMove(new Vector3(woodM1.position.x, woodM1.position.y + woodsM1.Count / 2f, woodM1.position.z), 0.5f);
                         other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                         woodsM1.Add(other.gameObject);
-                        return;
                     }
 
                     break;
 
                 case 2:
-                    EventManager.Event_OnLastScore(x.WoodPuan);
-                    x.transporter.woods.Remove(x);
+                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
 
                     if (woodM2 == null)
@@ -139,8 +165,8 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
 
                 case 3:
-                    EventManager.Event_OnLastScore(x.WoodPuan);
-                    x.transporter.woods.Remove(x);
+                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
 
                     if (woodM3 == null)
@@ -159,8 +185,8 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
 
                 case 4:
-                    EventManager.Event_OnLastScore(x.WoodPuan);
-                    x.transporter.woods.Remove(x);
+                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
 
                     if (woodM4 == null)
@@ -179,8 +205,8 @@ public class ToplanmaYeri : MonoBehaviour
                     break;
 
                 case 5:
-                    EventManager.Event_OnLastScore(x.WoodPuan);
-                    x.transporter.woods.Remove(x);
+                    EventManager.Event_OnLastScore(collectWood.WoodPuan);
+                    collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
 
                     if (woodM5 == null)
@@ -288,16 +314,16 @@ public class ToplanmaYeri : MonoBehaviour
 
     void chooseMat()
     {
-        int index = selectionSort(karþýlaþtýrma);
+        int index = selectionSort(oyunSonuObjectList);
         Debug.Log(index);
-        Material duplicate = karþýlaþtýrma[index][0].GetComponent<WoodScript>().getChildMat();
+        Material duplicate = oyunSonuObjectList[index][0].GetComponent<WoodScript>().getChildMat();
         string matName = settings.index.ToString() + "." + settings.howManyObjectsOpend.ToString() + ".mat";
         //AssetDatabase.CreateAsset(duplicate, "Assets/ÝnGameMaterial/" + matName);
         settings.oyunSonuMats[settings.index].Add(duplicate);
        
 
     }
-    int selectionSort(List<List<GameObject>> array)
+    int selectionSort(List<List<WoodScript>> array)
     {
         int max = 0;
 

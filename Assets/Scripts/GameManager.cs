@@ -78,12 +78,12 @@ public class GameManager : MonoBehaviour
 
         AnimPuan += puan;
         collectscore += puan;
-        settings.score += puan;
+        //settings.score += puan;
         animText.color = Color.yellow;
         animText.text = "+" + AnimPuan.ToString();
-        collectScoreText.text = "$ " + collectscore.ToString();
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
+        collectScoreText.text = "$ " + collectscore.ToString();
         Invoke("waitAnimPuan", 0.4f);
 
     }

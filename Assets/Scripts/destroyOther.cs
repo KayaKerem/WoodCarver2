@@ -6,7 +6,7 @@ public class destroyOther : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
-        EventManager.Event_OnIncreaseScore(10);
+        EventManager.Event_OnIncreaseScore(other.GetComponent<WoodScript>().WoodPuan);
+        Destroy(other.gameObject,0.05f);
     }
 }
