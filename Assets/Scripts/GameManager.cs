@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         settings.isPlaying = false;
+        settings.oyunSonuMats =new List<List<Material>>();
     }
     void Start()
     {

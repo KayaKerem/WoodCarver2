@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using Cinemachine;
+using UnityEditor;
 
 public class ToplanmaYeri : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ToplanmaYeri : MonoBehaviour
     [SerializeField] List<Transform> stackTransform = new List<Transform>(); // Kanka buraya parçalarýn stackleneceði tranformlarý atacaz sýralamasý önemli olur düzgün gözükmesi için
     public Transform positionToGo;
     bool start = false;
+    List<List<GameObject>> karþýlaþtýrma = new List<List<GameObject>>();
 
     List<GameObject> woodsM1 = new List<GameObject>();
     List<GameObject> woodsM2 = new List<GameObject>();
@@ -19,7 +21,6 @@ public class ToplanmaYeri : MonoBehaviour
     List<GameObject> woodsM4 = new List<GameObject>();
     List<GameObject> woodsM5 = new List<GameObject>();
     bool objectFinished;
-
 
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
@@ -29,6 +30,12 @@ public class ToplanmaYeri : MonoBehaviour
 
     void Start()
     {
+        karþýlaþtýrma.Add(woodsM1);
+        karþýlaþtýrma.Add(woodsM2);
+        karþýlaþtýrma.Add(woodsM3);
+        karþýlaþtýrma.Add(woodsM4);
+        karþýlaþtýrma.Add(woodsM5);
+
         woodStack = FindObjectOfType<WoodStack>();
         manager = FindObjectOfType<GameManager>();
         oyunSonu = GetComponent<OyunSonu>();
@@ -59,7 +66,7 @@ public class ToplanmaYeri : MonoBehaviour
         //            objectsToBuildsToGo[1].transform.localScale = objectsToBuild[1].transform.localScale;
         //            objectsToBuildsToGo[1].GetComponent<BoxCollider>().enabled = false;
         //            break;
-                
+
         //    }
         //}
 
@@ -94,7 +101,6 @@ public class ToplanmaYeri : MonoBehaviour
                     EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
-
                     if (woodM1 == null)
                     {
                         woodM1 = stackTransform[0];
@@ -108,26 +114,28 @@ public class ToplanmaYeri : MonoBehaviour
                         woodsM1.Add(other.gameObject);
                         return;
                     }
-                   
-                    
+
                     break;
 
                 case 2:
                     EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
+
                     if (woodM2 == null)
                     {
                         woodM2 = stackTransform[0];
                         stackTransform.Remove(woodM2);
 
                     }
+
                     if (woodM2 != null)
                     {
                         other.gameObject.transform.DOMove(new Vector3(woodM2.position.x, woodM2.position.y + woodsM2.Count / 3.33f, woodM2.position.z), 0.5f);
                         other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                         woodsM2.Add(other.gameObject);
                     }
+
                     break;
 
                 case 3:
@@ -147,58 +155,65 @@ public class ToplanmaYeri : MonoBehaviour
                         other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                         woodsM3.Add(other.gameObject);
                     }
+
                     break;
-                
+
                 case 4:
                     EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
+
                     if (woodM4 == null)
                     {
                         woodM4 = stackTransform[0];
                         stackTransform.Remove(woodM4);
                     }
+
                     if (woodM4 != null)
                     {
                         other.gameObject.transform.DOMove(new Vector3(woodM4.position.x, woodM4.position.y + woodsM4.Count / 3.33f, woodM4.position.z), 0.5f);
                         other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                         woodsM4.Add(other.gameObject);
                     }
-                    break; 
-                
+
+                    break;
+
                 case 5:
                     EventManager.Event_OnLastScore(x.WoodPuan);
                     x.transporter.woods.Remove(x);
                     other.gameObject.transform.parent = null;
+
                     if (woodM5 == null)
                     {
                         woodM5 = stackTransform[0];
                         stackTransform.Remove(woodM5);
                     }
+
                     if (woodM5 != null)
                     {
                         other.gameObject.transform.DOMove(new Vector3(woodM5.position.x, woodM5.position.y + woodsM5.Count / 3.33f, woodM5.position.z), 0.5f);
                         other.gameObject.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
                         woodsM5.Add(other.gameObject);
                     }
+
                     break;
             }  // kanka burda burda deðen objenin indeksine göre sýrayla listedeki transformlarý atýyorum
-
-            
         }
 
         if (other.gameObject.CompareTag("Player"))
         {
             woodStack.EnableIsPlay(false);
             allowCorutine = true;
-            EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterRunnig);  //Karakter Aniamsyon kapanmasý
+            EventManager.Event_OnCharacterAnimControl(false, AnimName.CharacterRunnig);  //Karakter Aniamsyon kapanmasý
         }
     }
 
     IEnumerator ObjectCreate()
     {
+        oyunSonu.startMove = true;
         allowCorutine = false;
         yield return new WaitForSeconds(1);
+        chooseMat();
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
         while (woodsM1.Count != 0 || woodsM2.Count != 0 || woodsM3.Count != 0 || woodsM4.Count != 0 || woodsM5.Count != 0)
         {
@@ -233,7 +248,7 @@ public class ToplanmaYeri : MonoBehaviour
                 woodsM4.Last().transform.DOScale(woodsM4.Last().transform.localScale / 2, 0.5f);
                 woodsM4.Remove(woodsM4.Last().gameObject);
             }
-            
+
             if (woodsM5.Count != 0)
             {
                 woodsM5.Last().transform.DOMove(positionToGo.position, 0.2f);
@@ -243,12 +258,10 @@ public class ToplanmaYeri : MonoBehaviour
             }
             yield return new WaitForSeconds(0.2f);
         } // buradada ayný stacklediðimiz malzemelerin yapýlacak objeye gtmesini saðlýyoruz
-        oyunSonu.startMove = true;
-        if (!objectFinished)
-        {
-            EventManager.Event_OnLevelFinish();
-        }
-        allowCorutine = true;
+
+
+        StartCoroutine(FinishMove());
+
     }
 
     public void ObjectControl()
@@ -263,7 +276,6 @@ public class ToplanmaYeri : MonoBehaviour
             if (settings.howManyObjectsOpend == 3)
             {
                 objectFinished = true;
-                StartCoroutine(FinishMove());
             }
         } // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
     }
@@ -272,6 +284,31 @@ public class ToplanmaYeri : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         oyunSonu.startMove = false;
+    }
+
+    void chooseMat()
+    {
+        int index = selectionSort(karþýlaþtýrma);
+        Debug.Log(index);
+        Material duplicate = karþýlaþtýrma[index][0].GetComponent<WoodScript>().getChildMat();
+        string matName = settings.index.ToString() + "." + settings.howManyObjectsOpend.ToString() + ".mat";
+        //AssetDatabase.CreateAsset(duplicate, "Assets/ÝnGameMaterial/" + matName);
+        settings.oyunSonuMats[settings.index].Add(duplicate);
+       
+
+    }
+    int selectionSort(List<List<GameObject>> array)
+    {
+        int max = 0;
+
+        for (int i = 1; i < array.Count; i++)
+        {
+            if (array[i].Count > array[max].Count)
+            {
+                max = i;
+            }
+        }
+        return max;
     }
 
 }

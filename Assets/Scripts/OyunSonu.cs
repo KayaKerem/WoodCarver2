@@ -9,8 +9,8 @@ public class OyunSonu : MonoBehaviour
     [SerializeField] PlayerSettings settings;
     List<GameObject> ghosts = new List<GameObject>();
     [SerializeField] List<List<ModelParts>> oyunSonu = new List<List<ModelParts>>();
-    Transform firstPoint;
-    Transform pointToGo;
+    Vector3 firstPoint;
+    [SerializeField] Transform pointToGo;
     [SerializeField] GameObject puff;
     public bool startMove
     {
@@ -35,18 +35,19 @@ public class OyunSonu : MonoBehaviour
 
     public GameObject ObjectToBuild()
     {
-        return models.modelParts[settings.index].buildObje;
+        GameObject obje = models.modelParts[settings.index].buildObje;
+        return obje;
     }
 
     void MoveToPoint()
     {
-        firstPoint = ObjectToBuild().transform;
+        firstPoint = ObjectToBuild().transform.position;
         ObjectToBuild().transform.DOMove(pointToGo.position, 0.5f);
     }
 
     void GetBack()
     {
-        ObjectToBuild().transform.DOMove(firstPoint.position, 0.5f).OnComplete(ComplateObject);
+        ObjectToBuild().transform.DOMove(firstPoint, 0.5f).OnComplete(ComplateObject);
     }
 
     void ComplateObject()
@@ -56,15 +57,21 @@ public class OyunSonu : MonoBehaviour
             ObjectToBuild().transform.DOPunchScale(ObjectToBuild().transform.localScale * 1.5f, 0.5f, 1).OnComplete(OnComplite);
             Instantiate(puff, ObjectToBuild().transform.position, Quaternion.identity);
         }
+        else InvokeFinish();
     }
 
     void OnComplite()
     {
         settings.index++;
         settings.howManyObjectsOpend = 0;
-        Invoke("FinishScren", 1.5f);
+        InvokeFinish();
     }
 
+    void InvokeFinish()
+    {
+        Invoke("FinishScren", 1.5f);
+
+    }
     void FinishScren()
     {
         EventManager.Event_OnLevelFinish();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Events;
 using DG.Tweening;
 using System.Linq;
@@ -14,6 +15,7 @@ public class WoodScript : MonoBehaviour
     [SerializeField] Animator Animator;
 
     public Material[] mats;
+    
 
 
     public ParticleSystem explosionEffect;
@@ -269,5 +271,9 @@ public class WoodScript : MonoBehaviour
             }
             ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mat;
         }
+    }
+    public Material getChildMat()
+    {
+        return ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
     }
 }
