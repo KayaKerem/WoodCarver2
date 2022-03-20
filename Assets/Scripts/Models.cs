@@ -34,6 +34,6 @@ public class ModelParts
 {
     public GameObject buildObje;
     public List<GameObject> models = new List<GameObject>();
-    public Material modeMaterial;
+
 }
 
