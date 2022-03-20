@@ -93,9 +93,9 @@ public class ToplanmaYeri : MonoBehaviour
         //chooseMat();
         positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
         oyunSonu.startMove = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
-        for (int i = 0; i < oyunSonuObjectList.Count; i++)
+        for (int i = oyunSonuObjectList.Count - 1 ; i > -1; --i)
         {
             for (int j = oyunSonuObjectList[i].Count - 1; j > -1; j--)
             {
