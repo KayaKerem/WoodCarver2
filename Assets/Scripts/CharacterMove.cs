@@ -87,19 +87,24 @@ public class CharacterMove : MonoBehaviour
         mouseDif *= settings.sensitivity * Time.deltaTime;
     }
 
-    public void AnimControl(bool value , string boolName)
+    public void AnimControl(bool value, string valueName)
     {
-        animPlayer.SetBool(boolName, value);
+        animPlayer.SetBool(valueName, value);
     }
-
+    public void RunCharacterAnim(float woodCount,string valueName)
+    {
+        animPlayer.SetFloat(valueName, woodCount);
+    }
     private void OnEnable()
     {
         EventManager.OnCharacterAnimControl += AnimControl;
+        EventManager.OnCharacterRunAnim += RunCharacterAnim;
     }
 
     private void OnDisable()
     {
         EventManager.OnCharacterAnimControl -= AnimControl;
+        EventManager.OnCharacterRunAnim -= RunCharacterAnim;
     }
 
 }

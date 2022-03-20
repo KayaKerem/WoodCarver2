@@ -19,4 +19,5 @@ public static class AnimName
 {
     public static string CharacterRunnig = "isRunning";
     public static string CharacterObstacleHit = "obstacleHit";
+    public static string Woodcount = "WoodCount";
 }

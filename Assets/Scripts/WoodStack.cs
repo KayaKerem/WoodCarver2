@@ -15,7 +15,7 @@ public class WoodStack : MonoBehaviour
     [SerializeField] float DistanceObject;
 
     public List<WoodScript> woods;
-    public UnityEvent OnWoodAdded;
+    public UnityEvent OnShake;
 
     private CharacterMove characterT;
 
@@ -56,7 +56,6 @@ public class WoodStack : MonoBehaviour
     {
         wood.transporter = this;
         wood.IdleAnimPlay(false);
-        //wood.gameObject.SetActive(false);
         woods.Add(wood);
         wood.gameObject.layer = LayerMask.NameToLayer(Layers.collectWood);
         wood.transform.SetParent(TwoodTakip,true);      //Dünya pozisyonu açýk korunsun
@@ -70,8 +69,8 @@ public class WoodStack : MonoBehaviour
             wood.transform.localPosition = new Vector3(lastPos.x, 0, woods.Count * (radius + DistanceObject));
         }
 
-        //wood.gameObject.SetActive(true);
-        OnWoodAdded.Invoke();
+        EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
+        OnShake.Invoke();
         EventManager.Event_OnIncreaseScore(wood.GetComponent<WoodScript>().WoodPuan);
 
     }
@@ -132,6 +131,7 @@ public class WoodStack : MonoBehaviour
         }
 
     }
+
     private void AddforcePlayer()
     {
         EnableIsPlay(false);
@@ -164,7 +164,7 @@ public class WoodStack : MonoBehaviour
             woods[i].transform.parent = null;
             woods.RemoveAt(i);
         }
-
+        EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
         if (!GameManager.levelFinish)
         {
             CollectScoreRest();
