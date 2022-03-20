@@ -65,26 +65,6 @@ public class WoodScript : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (tagIndex != 0 && tagIndex != 1)
-    //    {
-    //        if (other.gameObject.CompareTag("x"))
-    //        {
-    //            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
-    //        }
-
-    //        if (other.gameObject.CompareTag("y"))
-    //        {
-    //            if (mats.Length > 1)
-    //            {
-    //                mats[1] = mats[0];
-    //            }
-    //            ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mats;
-    //        }
-    //    }
-    //}
-
     public void SpawnModel(int indexModel = 0)
     {
         if (modeller == null) modeller = FindObjectOfType<Models>();
@@ -179,13 +159,13 @@ public class WoodScript : MonoBehaviour
             {
                 Destroy(transform.GetChild(1).GetChild(0).gameObject);
             }
-
+            int tutucu = WoodPuan;
             WoodPuan = (tagIndex * 5) + WoodPuan;
 
             GameObject model = Instantiate(Model, ModelContainerT);
             model.transform.localPosition = Vector3.zero;
             AnimationScaleWood();
-            EventManager.Event_OnIncreaseScore(WoodPuan);
+            EventManager.Event_OnIncreaseScore(WoodPuan - tutucu);
 
         }
     }

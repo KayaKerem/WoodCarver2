@@ -34,9 +34,9 @@ public class UiManager : MonoBehaviour
     {
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         inGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        finishGameScore = finishPanel.transform.GetChild(0).transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        finishGameRewardScore = finishPanel.transform.GetChild(0).transform.GetChild(4).GetComponent<TextMeshProUGUI>();
-        finishLeveltext = finishPanel.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        finishGameScore = finishPanel.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+        finishGameRewardScore = finishPanel.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>();
+        finishLeveltext = finishPanel.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
         levels = levels.OrderBy(go => go.name).ToList();
 
@@ -135,10 +135,9 @@ public class UiManager : MonoBehaviour
         reward = Mathf.RoundToInt(settings.score / 20); ;
         yield return new WaitForSeconds(0.2f);
         finishPanel.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPosX(0, 0.2f);
-
         while (temp < settings.score)
         {
-            temp += 10;
+            temp += (int)((settings.score / 5f) + temp + 10);
             if (temp > settings.score)
             {
                 temp = settings.score;

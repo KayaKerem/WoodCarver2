@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
     {
         UImanager.StartPanelEnable(false);
         startCam.SetActive(false);
-        StartCoroutine(wait(1.5f));
+        //startCam.GetComponent<cin>
+        StartCoroutine(wait(0.4f));
     }
     IEnumerator wait(float time)
     {
@@ -89,24 +90,19 @@ public class GameManager : MonoBehaviour
         CancelInvoke();
 
         AnimPuan += puan;
-        collectscore += puan;
         settings.score += puan;
         animText.color = Color.yellow;
         animText.text = "+" + AnimPuan.ToString();
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
-        //collectScoreText.text = "$ " + collectscore.ToString();
         Invoke("waitAnimPuan", 0.4f);
 
     }
     public void RestScore(int puan)
     {
-        AnimPuan = 0;
-        AnimPuan += puan;
         animText.color = Color.red;
-        animText.text = "-" + (collectscore - puan);
-        collectscore = puan;
-        //collectScoreText.text = "$ " + collectscore.ToString();
+        animText.text = "-" + (settings.score - puan);
+        settings.score = puan;
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
     }
@@ -114,14 +110,6 @@ public class GameManager : MonoBehaviour
     public void LastScore(int puan)
     {
         score += puan;
-        //scoreText.text = score.ToString();
-       // anim.Stop();
-        //anim.Play("Scale"); 
-        //if (!settings.isPlaying)
-        //{
-        //    tempScore += puan;
-        //    finishScore.text = tempScore.ToString();
-        //}
     }
 
     private void OnEnable()
