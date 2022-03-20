@@ -58,7 +58,7 @@ public class ToplanmaYeri : MonoBehaviour
                 case 0:
                     collectWood.transporter.woods.Remove(collectWood);
                     other.gameObject.transform.parent = null;
-                    other.gameObject.transform.DOMove(new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), 0.5f);
+                    other.gameObject.transform.DOMove(new Vector3(transform.position.x + 20, transform.position.y, transform.position.z), 1f);
                     Destroy(other.gameObject, 2);
                     break;
                 default:

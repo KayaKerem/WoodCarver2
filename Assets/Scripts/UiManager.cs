@@ -52,12 +52,12 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         inGameScore.text = settings.score.ToString();
-        if (settings.isPlaying)
-        {
-            startPanel.SetActive(false);
-        }
     }
 
+    public void StartPanelEnable(bool value)
+    {
+        startPanel.SetActive(value);
+    }
     private void LoadScene()
     {
         if (settings.level > 0)

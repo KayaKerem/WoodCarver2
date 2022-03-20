@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text animText;
     [SerializeField] Text finishScore;
     [SerializeField] GameObject secondCam;
+    [SerializeField] GameObject startCam;
     [SerializeField] WoodStack woodStack;
 
     public static bool levelFinish;
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        UImanager.StartPanelEnable(true);
+        startCam.SetActive(true);
         UImanager = FindObjectOfType<UiManager>();
         EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterRunnig);
         EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterObstacleHit);
@@ -38,6 +41,18 @@ public class GameManager : MonoBehaviour
         //finishScore.gameObject.GetComponent<Animation>();
     }
 
+    public void LevelStart()
+    {
+        UImanager.StartPanelEnable(false);
+        startCam.SetActive(false);
+        StartCoroutine(wait(1.5f));
+    }
+    IEnumerator wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+        settings.isPlaying = true;
+        EventManager.Event_OnCharacterAnimControl(true, AnimName.CharacterRunnig);
+    }
     public void LevelFinish()
     {
 
@@ -113,6 +128,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.OnStartLevel += LevelStart;
         EventManager.OnIncreaseScore += IncreaseScore;
         EventManager.OnLastScore += LastScore;
         EventManager.OnLevelFinish += LevelFinish;
@@ -121,6 +137,7 @@ public class GameManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        EventManager.OnStartLevel -= LevelStart;
         EventManager.OnIncreaseScore -= IncreaseScore;
         EventManager.OnLevelFinish -= LevelFinish;
         EventManager.OnLastScore -= LastScore;

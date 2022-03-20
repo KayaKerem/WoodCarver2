@@ -6,6 +6,9 @@ using System;
 public static class EventManager
 {
 
+    public static event Action OnStartLevel;
+    public static void Event_OnStartLevel() { OnStartLevel?.Invoke(); }
+
     public static event Action<int> OnIncreaseScore;
     public static void Event_OnIncreaseScore(int value) { OnIncreaseScore?.Invoke(value); }
 

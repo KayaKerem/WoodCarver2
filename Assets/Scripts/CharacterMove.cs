@@ -53,9 +53,8 @@ public class CharacterMove : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !rundStart)
         {
-            settings.isPlaying = true;
-            EventManager.Event_OnCharacterAnimControl(true,AnimName.CharacterRunnig);
             rundStart = true;
+            EventManager.Event_OnStartLevel();
         }
 
     }
