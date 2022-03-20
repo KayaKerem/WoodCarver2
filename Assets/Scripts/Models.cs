@@ -9,6 +9,7 @@ public class Models : MonoBehaviour
 
     public GameObject[] Modeller;
 
+
     private void Awake()
     {
         switch (settings.howManyObjectsOpend)
@@ -33,5 +34,6 @@ public class ModelParts
 {
     public GameObject buildObje;
     public List<GameObject> models = new List<GameObject>();
+
 }
 

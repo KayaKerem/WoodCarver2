@@ -13,6 +13,7 @@ TagManager:
   - Level
   - y
   - plank
+  - z
   layers:
   - Default
   - TransparentFX

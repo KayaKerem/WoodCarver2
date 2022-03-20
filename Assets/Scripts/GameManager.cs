@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         AnimPuan += puan;
         collectscore += puan;
-        //settings.score += puan;
+        settings.score += puan;
         animText.color = Color.yellow;
         animText.text = "+" + AnimPuan.ToString();
         animText.gameObject.SetActive(false);

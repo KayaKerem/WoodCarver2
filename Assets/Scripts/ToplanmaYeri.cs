@@ -90,13 +90,11 @@ public class ToplanmaYeri : MonoBehaviour
 
     IEnumerator ObjectCreate()
     {
-        chooseMat();
+        //chooseMat();
         positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
         oyunSonu.startMove = true;
         yield return new WaitForSeconds(1);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
-        oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.GetComponent<Renderer>().material = duplicate;
-
         for (int i = 0; i < oyunSonuObjectList.Count; i++)
         {
             for (int j = oyunSonuObjectList[i].Count - 1; j > -1; j--)
@@ -117,7 +115,7 @@ public class ToplanmaYeri : MonoBehaviour
         {
             start = true;
             oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
-            positionToGo = GameObject.FindGameObjectWithTag("x").transform;
+            positionToGo = GameObject.FindGameObjectWithTag("z").transform;
             settings.howManyObjectsOpend++;
             if (settings.howManyObjectsOpend == 3)
             {

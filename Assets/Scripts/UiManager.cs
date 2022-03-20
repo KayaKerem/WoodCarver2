@@ -16,7 +16,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] OyunSonu OyunSonu;
      int temp = 0;
     int tempReward = 0;
-
+    int reward;
 
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
@@ -89,12 +89,16 @@ public class UiManager : MonoBehaviour
         {
             settings.level = 0;
         }
-        string matName = settings.index.ToString() + "." + (settings.howManyObjectsOpend-1).ToString() + ".mat";
-        AssetDatabase.CreateAsset(toplanma.duplicate, "Assets/InGameMaterial/" + matName);
+        //string matName = settings.index.ToString() + "." + (settings.howManyObjectsOpend-1).ToString() + ".mat";
+        //AssetDatabase.CreateAsset(toplanma.duplicate, "Assets/InGameMaterial/" + matName);
         if (settings.howManyObjectsOpend == 3)
         {
             settings.index++;
             settings.howManyObjectsOpend = 0;
+        }
+        if (settings.index > 1)
+        {
+            settings.index = 0;
         }
         SceneManager.LoadScene("SampleScene");
     }
@@ -128,7 +132,7 @@ public class UiManager : MonoBehaviour
 
     IEnumerator LevelFinishDelay()
     {
-        int reward = Mathf.RoundToInt(settings.score / 20);
+        reward = Mathf.RoundToInt(settings.score / 20); ;
         yield return new WaitForSeconds(0.2f);
         finishPanel.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPosX(0, 0.2f);
 
@@ -147,8 +151,8 @@ public class UiManager : MonoBehaviour
         finishGameRewardScore.gameObject.SetActive(true);
         while (tempReward < reward)
         {
-            reward++;
-            finishGameScore.text = reward.ToString();
+            tempReward++;
+            finishGameRewardScore.text = tempReward.ToString();
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.7f);

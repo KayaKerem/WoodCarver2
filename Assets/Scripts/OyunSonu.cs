@@ -29,6 +29,7 @@ public class OyunSonu : MonoBehaviour
         get { return _startMove; }
     }
     bool _startMove;
+
    
     void Start()
     {
@@ -55,11 +56,14 @@ public class OyunSonu : MonoBehaviour
     {
         firstPoint = ObjectToBuild().transform.position;
         ObjectToBuild().transform.DOMove(pointToGo.position, 0.5f);
+        ObjectToBuild().transform.DOScale(Vector3.one * 2, 0.5f);
     }
 
     void GetBack()
     {
         ObjectToBuild().transform.DOMove(firstPoint, 0.5f).OnComplete(ComplateObject);
+        ObjectToBuild().transform.DOScale(Vector3.one, 0.5f);
+
     }
 
     void ComplateObject()
@@ -98,22 +102,23 @@ public class OyunSonu : MonoBehaviour
                 {
                     for (int j = 0; j < obje.transform.GetChild(0).childCount; j++)
                     {
-                        string name = i.ToString() + "." + j.ToString() + ".mat";
+                       // string name = i.ToString() + "." + j.ToString() + ".mat";
                         obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
                         obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
-                        obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = (Material)AssetDatabase.LoadAssetAtPath("Assets/InGameMaterial/" + name, typeof(Material));
-                    }
+                        //obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = Resources.Load<Material>("Assets/InGameMaterial/" + name);
+                }
                     obje.transform.GetChild(0).gameObject.SetActive(false);
                 }
+
                 else
                 {
                     for (int j = 0; j < settings.howManyObjectsOpend; j++)
                     {
-                        string name = 0.ToString() + "." + j.ToString() + ".mat";
+                        //string name = 0.ToString() + "." + j.ToString() + ".mat";
                         obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
                         obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
                         obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
-                        obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = (Material)AssetDatabase.LoadAssetAtPath("Assets/InGameMaterial/" + name, typeof(Material));
+                       // obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = Resources.Load<Material>("Assets/InGameMaterial/" + name);
                     }
                 }
                 

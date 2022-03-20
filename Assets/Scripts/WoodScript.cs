@@ -237,6 +237,7 @@ public class WoodScript : MonoBehaviour
     {
         mats[0] = new Material(mats[0]);
         mats[1] = mats[0];
+        transform.GetChild(0).gameObject.SetActive(false);
         foreach (Material item in mats)
         {
             item.SetTexture("_MainTex", pattern);

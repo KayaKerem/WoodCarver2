@@ -44,6 +44,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FoamTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -93,10 +97,13 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DepthColorDistance: 0.5
     - _DetailNormalMapScale: 1
     - _DirectIntensityOutline: 1
     - _DstBlend: 10
     - _EmissionChannel: 4
+    - _FoamSpread: 2
+    - _FoamStrength: 0.8
     - _FresnelMax: 1.5
     - _FresnelMin: 0
     - _GlossMapScale: 1
@@ -108,8 +115,8 @@ Material:
     - _MatCapType: 0
     - _Metallic: 0
     - _Mode: 2
-    - _NDVMaxFrag: 1
-    - _NDVMinFrag: 0.15
+    - _NDVMaxFrag: 0.07
+    - _NDVMinFrag: 1.86
     - _NormalsSource: 0
     - _NormalsUVType: 0
     - _OcclusionChannel: 0
@@ -177,15 +184,22 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 0
+    - _WavesFrequency: 1
+    - _WavesHeight: 0.1
+    - _WavesSpeed: 2
     - _ZSmooth: -0.5
     - _ZWrite: 0
     - __dummy__: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 0.7214558, b: 0, a: 0}
     - _Color: {r: 0.9716981, g: 0.70005155, b: 0.14208792, a: 1}
+    - _CustomTime: {r: 0.05, g: 1, b: 2, a: 3}
+    - _DepthColor: {r: 0, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _HColor: {r: 0.785, g: 0.785, b: 0.785, a: 1}
-    - _HologramColor: {r: 1, g: 0.6053485, b: 0, a: 1}
+    - _HologramColor: {r: 0.08235295, g: 0.9254902, b: 0.1329331, a: 1}
+    - _MainTex_SinAnimParams: {r: 1, g: 0.05, b: 1, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 0.8066038, b: 0.8066038, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -193,4 +207,5 @@ Material:
     - _SColor: {r: 0.195, g: 0.195, b: 0.195, a: 1}
     - _ScanlinesTex_SC: {r: 1, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+    - _WaterColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

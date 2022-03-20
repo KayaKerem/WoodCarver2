@@ -15,11 +15,11 @@ MonoBehaviour:
   isPlaying: 0
   isDeath: 0
   ForwardSpeed: 13
-  sensitivity: 10
-  score: 0
+  sensitivity: 20
+  score: 1235
   finishScore: 0
   level: 0
-  howManyObjectsOpend: 1
+  howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  TotalScore: 2845
+  TotalScore: 21095
