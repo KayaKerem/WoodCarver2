@@ -56,12 +56,22 @@ public class OyunSonu : MonoBehaviour
     {
         firstPoint = ObjectToBuild().transform.position;
         ObjectToBuild().transform.DOMove(pointToGo.position, 0.5f);
+        if (settings.index == 1)
+        {
+            ObjectToBuild().transform.DORotate(Vector3.zero, 0.5f);
+
+        }
         ObjectToBuild().transform.DOScale(Vector3.one * 2, 0.5f);
     }
 
     void GetBack()
     {
         ObjectToBuild().transform.DOMove(firstPoint, 0.5f).OnComplete(ComplateObject);
+        if (settings.index == 1)
+        {
+            ObjectToBuild().transform.DORotate(Vector3.up *90, 0.5f);
+
+        }
         ObjectToBuild().transform.DOScale(Vector3.one, 0.5f);
 
     }
