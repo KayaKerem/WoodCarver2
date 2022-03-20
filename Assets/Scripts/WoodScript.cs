@@ -15,9 +15,6 @@ public class WoodScript : MonoBehaviour
     [SerializeField] Animator Animator;
 
     public Material[] mats;
-    
-
-
     public ParticleSystem explosionEffect;
     public int tagIndex;
     public int WoodPuan;
