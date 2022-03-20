@@ -103,8 +103,8 @@ public class GameManager : MonoBehaviour
     {
         animText.color = Color.red;
         animText.text = "-" + (settings.score - puan);
-        settings.score = puan;
         settings.TotalScore -= settings.score - puan;
+        settings.score = puan;
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
     }
