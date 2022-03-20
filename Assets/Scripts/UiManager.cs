@@ -40,14 +40,15 @@ public class UiManager : MonoBehaviour
 
         levels = levels.OrderBy(go => go.name).ToList();
 
-        StartLevel();
     }
 
     private void Start()
     {
         settings.score = 0;
         leveltext.text = levels[settings.level].name;
+        StartLevel();
         LoadScene();
+
     }
     void Update()
     {

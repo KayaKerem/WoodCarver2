@@ -12,9 +12,15 @@ public class Doors : MonoBehaviour
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;
     [SerializeField] Texture patternMetal;
+    [SerializeField] PlayerSettings settings;
     Coroutine falseParticul;
+    Models modeller;
 
-
+    private void Start()
+    {
+        modeller = FindObjectOfType<Models>();
+        material = modeller.modelParts[settings.index].modeMaterial;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))

@@ -7,6 +7,7 @@ using DG.Tweening;
 using TMPro;
 
 
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public PlayerSettings settings;
@@ -27,8 +28,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         settings.isPlaying = false;
-        settings.oyunSonuMats =new List<List<Material>>();
     }
     void Start()
     {
@@ -113,7 +114,12 @@ public class GameManager : MonoBehaviour
     {
         score += puan;
     }
-
+    public void TestVibration()
+    {
+        Debug.Log("TestVibration");
+        MVibrationManager.Haptic(HapticTypes.HeavyImpact, false, true, this);
+    }
+  
     private void OnEnable()
     {
         EventManager.OnStartLevel += LevelStart;

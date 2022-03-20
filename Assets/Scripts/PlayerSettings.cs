@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/PlayerSettings")]
 public class PlayerSettings : ScriptableObject
 {
+    
     public bool isPlaying;
     public bool isDeath;
     public float ForwardSpeed;
@@ -17,7 +18,6 @@ public class PlayerSettings : ScriptableObject
     public int levelcount = 0;
     public int TotalScore;
 
-    public List<List<Material>> oyunSonuMats;
-
+    
 
 }

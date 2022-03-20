@@ -1,18 +1,49 @@
-Nice Vibrations | Haptic Feedback for Mobile
-v4.1.0, using Lofelt Studio SDK v1.3.2
+A more user friendly doc is available at http://nice-vibrations-docs.moremountains.com/
+Find out more about the asset at http://nice-vibrations.moremountains.com/
 
-This Asset Package includes everything you need to begin adding advanced haptic feedback to your mobile applications created with Unity. It consists of a few important parts:
+Nice Vibrations v3.3
 
-- The Nice Vibrations plug-in for Unity: Provides haptic playback functionality, as a code-only API for C# scripts and as a MonoBehaviour API for the Unity editor.
+## WHAT'S IN THE ASSET ?
+-------------------------
 
-- Haptic Samples: To help you get started fast without needing to design any haptics first, the Asset includes a growing collection of free-to-use haptic clips with associated audio files covering use cases such as Application UX and game effects. You can drop these into your app and start experiencing haptics on your mobile device immediately.
+The asset contains three main folders : Common, Demos, and ThirdParty.
 
-- Demo: This is a project you can build for either iOS (iPhone) or Android which showcases the current functionality of this package.
+- As the name implies, Common contains all the scripts necessary for the mobile vibrations and gamepad rumble to work. 
+You'll want to keep that folder in your game. 
 
-- Older Versions: Older versions of Nice Vibrations are included as well, for reference and as a porting aid. You can run the current version side-by-side with the older 3.9 version in case you haven't ported everything to the new API yet.
+- Demos contains a demo scene meant to be compiled for Android or iOS.
+It's recommended to keep that folder, but if you really want to, you can remove it safely.
 
-Full documentation can be found at https://developer.lofelt.com, and API documentation at https://developer.lofelt.com/nice-vibrations-api-docs/index.html.
+- ThirdParty contains an open source json parsing library used to convert AHAP files to Android Waveforms.
+You'll also want to keep that folder.
 
-Information about the entire Lofelt Studio Ecosystem, including the haptic design tools, can be found at https://lofelt.com.
+- OlderVersions contains old releases of Nice Vibrations
 
-And if you haven’t got it already, the free Studio mobile app for iOS and Android can be downloaded fro the Apple App Store and Google Play Store, respectively.
+
+## HOW DO I ADD THIS TO MY GAME ?
+------------------------------
+
+You should probably go check out http://nice-vibrations-docs.moremountains.com/, there'll be more details. 
+But basically all you need is to import the asset into your project, and you can instantly call the vibration 
+methods from anywhere in your code. 
+No need to add anything to your scenes. 
+Nice Vibrations comes with universal methods (that will target both iOS and Android in one line, as well as gamepad rumble on PC/Console), 
+or specific ones to get more tailored results on each platform.
+
+## IS THERE DOCUMENTATION SOMEWHERE ?
+-------------------------------------
+
+There is!
+There's a functional documentation at http://nice-vibrations-docs.moremountains.com/
+And a complete API documentation at http://nice-vibrations-docs.moremountains.com/API/
+
+## I STILL HAVE A QUESTION!
+---------------------------
+
+If something's still not clear, you can always drop me a line using the form at http://nice-vibrations.moremountains.com/. 
+It's entirely possible that I forgot to document something, but please make sure you've read the documentation before filling this form. 
+You can also please check the FAQ before sending me an email. Chances are, your question's answered right there. 
+If it's not, then go ahead!
+
+Also, if you're asking for support, please send me your invoice number, 
+along with your Unity version and the version of Nice Vibrations you're using, so I can help you best.
