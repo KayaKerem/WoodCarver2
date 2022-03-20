@@ -14,12 +14,6 @@ public class ParcalamaEngel : MonoBehaviour
     {
         Animation.Play("Ezici");
     }
-
-    void Update()
-    {
-        
-    }
-
     public void ParticleEffect()
     {
         Effect.Play();
