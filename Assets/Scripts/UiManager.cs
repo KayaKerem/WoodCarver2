@@ -51,7 +51,7 @@ public class UiManager : MonoBehaviour
     }
     void Update()
     {
-        inGameScore.text = settings.score.ToString();
+        inGameScore.text = settings.TotalScore.ToString();
     }
 
     public void StartPanelEnable(bool value)

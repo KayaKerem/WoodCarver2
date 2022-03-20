@@ -11,6 +11,7 @@ public class OyunSonu : MonoBehaviour
     List<GameObject> ghosts = new List<GameObject>();
     [SerializeField] List<List<ModelParts>> oyunSonu = new List<List<ModelParts>>();
     Vector3 firstPoint;
+    Vector3 firstScale;
     [SerializeField] Transform pointToGo;
     [SerializeField] GameObject puff;
 
@@ -55,6 +56,7 @@ public class OyunSonu : MonoBehaviour
     void MoveToPoint()
     {
         firstPoint = ObjectToBuild().transform.position;
+        firstScale = ObjectToBuild().transform.localScale;
         ObjectToBuild().transform.DOMove(pointToGo.position, 0.5f);
         if (settings.index == 1)
         {
@@ -72,7 +74,7 @@ public class OyunSonu : MonoBehaviour
             ObjectToBuild().transform.DORotate(Vector3.up *90, 0.5f);
 
         }
-        ObjectToBuild().transform.DOScale(Vector3.one, 0.5f);
+        ObjectToBuild().transform.DOScale(firstScale, 0.5f);
 
     }
 

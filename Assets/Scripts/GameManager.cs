@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
 
         AnimPuan += puan;
         settings.score += puan;
+        settings.TotalScore += puan;
         animText.color = Color.yellow;
         animText.text = "+" + AnimPuan.ToString();
         animText.gameObject.SetActive(false);
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         animText.color = Color.red;
         animText.text = "-" + (settings.score - puan);
         settings.score = puan;
+        settings.TotalScore -= settings.score - puan;
         animText.gameObject.SetActive(false);
         animText.gameObject.SetActive(true);
     }
