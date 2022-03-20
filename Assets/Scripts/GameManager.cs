@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
     }
     public void LevelFinish()
     {
-
         UImanager.LevelFinished();   //level complete paneli açýlmasý
     }
 
@@ -114,7 +113,6 @@ public class GameManager : MonoBehaviour
 
     public void LastScore(int puan)
     {
-
         score += puan;
         //scoreText.text = score.ToString();
        // anim.Stop();
