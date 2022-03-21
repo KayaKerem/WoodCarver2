@@ -33,11 +33,12 @@ public class UiManager : MonoBehaviour
 
     void Awake()
     {
-        
         settings.level = PlayerPrefs.GetInt("Level");
         settings.index = PlayerPrefs.GetInt("Index");
         settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
         settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
+        settings.scaleNumber = PlayerPrefs.GetFloat("scale");
+        settings.axis = PlayerPrefs.GetString("axis");
 
         modeller = GameObject.FindObjectOfType<Models>();
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -93,13 +94,14 @@ public class UiManager : MonoBehaviour
     {
         settings.score = 0;
         settings.level++;
+        settings.howManyObjectsOpend++;
         if (settings.level >= levels.Count)
         {
             settings.level = 0;
         }
         //string matName = settings.index.ToString() + "." + (settings.howManyObjectsOpend-1).ToString() + ".mat";
         //AssetDatabase.CreateAsset(toplanma.duplicate, "Assets/InGameMaterial/" + matName);
-        if (settings.howManyObjectsOpend == 3)
+        if (settings.howManyObjectsOpend == 4)
         {
             settings.index++;
             settings.howManyObjectsOpend = 0;
@@ -177,5 +179,7 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt("Index", settings.index);
         PlayerPrefs.SetInt("howManyObjectsOpend", settings.howManyObjectsOpend);
         PlayerPrefs.SetInt("Level", settings.level);
+        PlayerPrefs.SetString("axis", settings.axis);
+        PlayerPrefs.SetFloat("scale", settings.scaleNumber);
     }
 }

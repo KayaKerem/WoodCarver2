@@ -19,22 +19,6 @@ public class ToplanmaYeri : MonoBehaviour
 
     bool objectFinished;
 
-    public bool finishBuilding
-    {
-        set
-        {
-            finishBuild = value;
-            if (value)
-            {
-                ObjectControl();
-            }
-            else 
-        }
-        get { return finishBuild; }
-    }
-
-    bool finishBuild;
-
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
     private WoodStack woodStack;
@@ -109,6 +93,10 @@ public class ToplanmaYeri : MonoBehaviour
         //chooseMat();
         positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
         oyunSonu.startMove = true;
+        if (settings.howManyObjectsOpend == 0)
+        {
+            settings.howManyObjectsOpend++;
+        }
         yield return new WaitForSeconds(1.5f);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
         for (int i = oyunSonuObjectList.Count - 1; i > -1; --i)
@@ -130,11 +118,14 @@ public class ToplanmaYeri : MonoBehaviour
             oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
             positionToGo = GameObject.FindGameObjectWithTag("z").transform;
             settings.howManyObjectsOpend++;
-            if (settings.howManyObjectsOpend == 3)
-            {
-                objectFinished = true;
-            }
+            
         // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
+    }
+
+    public void NotFinished(float scale,string axisName)
+    {
+        settings.scaleNumber = scale;
+        settings.axis = axisName;
     }
 
     IEnumerator FinishMove()
@@ -142,6 +133,8 @@ public class ToplanmaYeri : MonoBehaviour
         yield return new WaitForSeconds(2);
         oyunSonu.startMove = false;
     }
+
+    
 
     void chooseMat()
     {

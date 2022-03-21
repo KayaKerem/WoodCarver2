@@ -51,6 +51,7 @@ public class CharacterMove : MonoBehaviour
                 }
             }
         }
+
         if (Input.GetMouseButtonDown(0) && !rundStart)
         {
             rundStart = true;

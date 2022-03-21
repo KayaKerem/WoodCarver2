@@ -16,6 +16,8 @@ public class PlayerSettings : ScriptableObject
     public int index = 0;
     public int levelcount = 0;
     public int TotalScore;
+    public float scaleNumber;
+    public string axis;
 
     public List<List<Material>> oyunSonuMats;
 

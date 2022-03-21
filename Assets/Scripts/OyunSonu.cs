@@ -124,31 +124,40 @@ public class OyunSonu : MonoBehaviour
 
                 else
                 {
-                    for (int j = 0; j < settings.howManyObjectsOpend; j++)
+                    for (int j = 0; j <= settings.howManyObjectsOpend; j++)
                     {
-                        //string name = 0.ToString() + "." + j.ToString() + ".mat";
+                        if (j == settings.howManyObjectsOpend )
+                        {
+                            Vector3 objeScale = obje.transform.GetChild(1).GetChild(j).localScale;
+
+                            if (settings.axis == "x")
+                            {
+                                objeScale = new Vector3(settings.scaleNumber, objeScale.y, objeScale.z);
+
+                            }
+
+                            else if (settings.axis == "y")
+                            {
+                                objeScale = new Vector3(objeScale.x, settings.scaleNumber, objeScale.z);
+
+                            }
+
+                            else if (settings.axis == "z")
+                            {
+                                objeScale = new Vector3(objeScale.x, objeScale.z, settings.scaleNumber);
+                            }
+
+                            obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
+                            obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
+                    }
                         obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
                         obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
                         obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
-                       // obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = Resources.Load<Material>("Assets/InGameMaterial/" + name);
                     }
                 }
                 
             }
         
-        //else
-        //{
-        //    if (settings.howManyObjectsOpend != 0)
-        //    {
-        //        GameObject obje = models.modelParts[0].buildObje;
-        //        for (int j = 0; j < settings.howManyObjectsOpend; j++)
-        //        {
-        //            string name = 0.ToString() + "." + j.ToString() + ".mat";
-        //            obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
-        //            obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(false);
-        //            obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = (Material)AssetDatabase.LoadAssetAtPath("Assets/InGameMaterial/" + name, typeof(Material));
-        //        }
-        //    }
-        //}
+        
     }
 }

@@ -39,15 +39,21 @@ public class finishObject : MonoBehaviour
                     diveded = 5;
                     break;
             }
-            toplanmaYeri.ObjectControl();
+
             Destroy(other.gameObject);
+
             if (ghost.localScale.x > buildObejct.localScale.x)
             {
                 buildObejct.DOScaleX(buildObejct.localScale.x + ghost.localScale.x / diveded, 0.1f);
                 if (ghost.localScale.x <= buildObejct.localScale.x)
                 {
                     buildObejct.localScale = ghost.localScale;
-                    toplanmaYeri.finishBuilding = true;
+                    toplanmaYeri.ObjectControl();
+                }
+
+                if (ghost.localScale.x > buildObejct.localScale.x)
+                {
+                    toplanmaYeri.NotFinished(buildObejct.localScale.x,"x");
                 }
             }
 
@@ -57,10 +63,12 @@ public class finishObject : MonoBehaviour
                 if (ghost.localScale.y <= buildObejct.localScale.y)
                 {
                     buildObejct.localScale = ghost.localScale;
-                    toplanmaYeri.finishBuilding = true;
-
+                    toplanmaYeri.ObjectControl();
                 }
-
+                if (ghost.localScale.y > buildObejct.localScale.y)
+                {
+                    toplanmaYeri.NotFinished(buildObejct.localScale.y, "y");
+                }
             }
 
             else if (ghost.localScale.z > buildObejct.localScale.z)
@@ -69,9 +77,12 @@ public class finishObject : MonoBehaviour
                 if (ghost.localScale.z <= buildObejct.localScale.z)
                 {
                     buildObejct.localScale = ghost.localScale;
-                    toplanmaYeri.finishBuilding = true;
+                    toplanmaYeri.ObjectControl();
                 }
-
+                if (ghost.localScale.z > buildObejct.localScale.z)
+                {
+                    toplanmaYeri.NotFinished(buildObejct.localScale.z, "z");
+                }
             }
             
         }
