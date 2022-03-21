@@ -13,6 +13,7 @@ public class Doors : MonoBehaviour
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;
     [SerializeField] Texture patternMetal;
+
     Coroutine falseParticul;
     Models modeller;
 
@@ -44,15 +45,14 @@ public class Doors : MonoBehaviour
             {
                 wood.UpGrade(transform.gameObject.name, material);
             }
-            else if((wood.gameObject.tag == Tags.taglar[3]) && doorNumber == 3)
-            {
-                wood.UpGrade(transform.gameObject.name, material);
-            }
-            else if ((wood.gameObject.tag == Tags.taglar[4]) && doorNumber == 4)
-            {
-                wood.UpGrade(transform.gameObject.name,null,patterm,patternMetal);
-            }
-            
+            //else if((wood.gameObject.tag == Tags.taglar[3]) && doorNumber == 3)
+            //{
+            //    wood.UpGrade(transform.gameObject.name, material);
+            //}
+            //else if ((wood.gameObject.tag == Tags.taglar[4]) && doorNumber == 4)
+            //{
+            //    wood.UpGrade(transform.gameObject.name,null,patterm,patternMetal);
+            //}
         }
     }
 

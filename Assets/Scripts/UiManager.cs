@@ -54,6 +54,7 @@ public class UiManager : MonoBehaviour
     
     private void Start()
     {
+        print("çalýþtý");
         settings.score = 0;
         leveltext.text = levels[settings.level].name;
         LoadScene();
@@ -70,13 +71,12 @@ public class UiManager : MonoBehaviour
     }
     private void LoadScene()
     {
-        if (settings.level > 0)
+        if (settings.level >= 0)
         {
             //levels[settings.level].SetActive(true);
             if (!currentLevelObject)
             {
                 Destroy(currentLevelObject);
-
             }
             currentLevelObject = Instantiate(levels[settings.level], new Vector3(4.19999981f, -20.1800003f, 123.699997f), Quaternion.identity);
             //levels[settings.level - 1].SetActive(false);
