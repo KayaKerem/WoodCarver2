@@ -79,17 +79,21 @@ public class WoodStack : MonoBehaviour
     [SerializeField] float animIgnoreTime = 0.09f;
     public void ShakeWood()
     {
-        if (Time.time - sonOynatmaZaman < animIgnoreTime) return;
-
-        float waitTime = 0f;
-        for (int index = woods.Count - 1; index > -1; index--)
+        if (settings.isPlaying)
         {
-            //IEnumerator animRoutine = waitSeconds(waitTime, index);
-            //StartCoroutine(animRoutine);
-            woods[index].ShakeProcessStart(waitTime);
-            waitTime += 0.05f;
+            if (Time.time - sonOynatmaZaman < animIgnoreTime) return;
+
+            float waitTime = 0f;
+            for (int index = woods.Count - 1; index > -1; index--)
+            {
+                //IEnumerator animRoutine = waitSeconds(waitTime, index);
+                //StartCoroutine(animRoutine);
+                woods[index].ShakeProcessStart(waitTime);
+                waitTime += 0.05f;
+            }
+            sonOynatmaZaman = Time.time;
         }
-        sonOynatmaZaman = Time.time;
+        
     }
 
     //IEnumerator waitSeconds(float time, int index)

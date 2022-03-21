@@ -33,6 +33,7 @@ public class Models : MonoBehaviour
 public class ModelParts
 {
     public GameObject buildObje;
+    public Material material;
     public List<GameObject> models = new List<GameObject>();
 
 }

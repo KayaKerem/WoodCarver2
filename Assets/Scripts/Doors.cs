@@ -8,11 +8,21 @@ public class Doors : MonoBehaviour
     //public UnityEvent<string> UpgradeModel;
     //public UnityEvent<int> IncreaseScore;
     [SerializeField] int doorNumber;
+    [SerializeField] PlayerSettings settings;
     [SerializeField] Material material;
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;
     [SerializeField] Texture patternMetal;
     Coroutine falseParticul;
+    Models modeller;
+
+
+    private void Start()
+    {
+        modeller = GameObject.FindObjectOfType<Models>();
+
+        material = modeller.modelParts[settings.index].material;
+    }
 
 
     private void OnTriggerEnter(Collider other)

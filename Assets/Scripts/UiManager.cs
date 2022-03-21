@@ -29,9 +29,17 @@ public class UiManager : MonoBehaviour
     TextMeshProUGUI inGameScore;
     TextMeshProUGUI finishGameScore;
     TextMeshProUGUI finishGameRewardScore;
+    Models modeller;
 
     void Awake()
     {
+        
+        settings.level = PlayerPrefs.GetInt("Level");
+        settings.index = PlayerPrefs.GetInt("Index");
+        settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
+        settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
+
+        modeller = GameObject.FindObjectOfType<Models>();
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         inGameScore = inGamePanel.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         finishGameScore = finishPanel.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -48,6 +56,7 @@ public class UiManager : MonoBehaviour
         settings.score = 0;
         leveltext.text = levels[settings.level].name;
         LoadScene();
+        PlayerPrefs.SetInt("Level", settings.level);
     }
     void Update()
     {
@@ -95,10 +104,11 @@ public class UiManager : MonoBehaviour
             settings.index++;
             settings.howManyObjectsOpend = 0;
         }
-        if (settings.index > 1)
+        if (settings.index > modeller.modelParts.Count-1)
         {
             settings.index = 0;
         }
+        SaveLoad();
         SceneManager.LoadScene("SampleScene");
     }
 
@@ -132,17 +142,19 @@ public class UiManager : MonoBehaviour
     IEnumerator LevelFinishDelay()
     {
         reward = Mathf.RoundToInt(settings.score / 20); ;
+        temp = 0;
         yield return new WaitForSeconds(0.2f);
         finishPanel.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPosX(0, 0.2f);
+        yield return new WaitForSeconds(0.2f);
         while (temp < settings.score)
         {
-            temp += (int)((settings.score / 5f) + temp + 10);
+            temp += 50;
             if (temp > settings.score)
             {
                 temp = settings.score;
             }
             finishGameScore.text = temp.ToString();
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.01f);
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -157,5 +169,13 @@ public class UiManager : MonoBehaviour
         button.SetActive(true);
         button.GetComponent<RectTransform>().DOScale(new Vector3(2,6,2), 1f).SetEase(Ease.OutBack);
 
+    }
+
+    void SaveLoad()
+    {
+        PlayerPrefs.SetInt("TotalScore", settings.TotalScore);
+        PlayerPrefs.SetInt("Index", settings.index);
+        PlayerPrefs.SetInt("howManyObjectsOpend", settings.howManyObjectsOpend);
+        PlayerPrefs.SetInt("Level", settings.level);
     }
 }
