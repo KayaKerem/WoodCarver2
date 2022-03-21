@@ -23,7 +23,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject finishPanel;
     [SerializeField] GameObject chestPanel;
     [SerializeField] GameObject button;
-
+    GameObject currentLevelObject;
     TextMeshProUGUI leveltext;
     TextMeshProUGUI finishLeveltext;
     TextMeshProUGUI inGameScore;
@@ -72,8 +72,14 @@ public class UiManager : MonoBehaviour
     {
         if (settings.level > 0)
         {
-            levels[settings.level].SetActive(true);
-            levels[settings.level - 1].SetActive(false);
+            //levels[settings.level].SetActive(true);
+            if (!currentLevelObject)
+            {
+                Destroy(currentLevelObject);
+
+            }
+            currentLevelObject = Instantiate(levels[settings.level], Vector3.zero, Quaternion.identity);
+            //levels[settings.level - 1].SetActive(false);
         }
     }
 
@@ -99,8 +105,7 @@ public class UiManager : MonoBehaviour
         {
             settings.level = 0;
         }
-        //string matName = settings.index.ToString() + "." + (settings.howManyObjectsOpend-1).ToString() + ".mat";
-        //AssetDatabase.CreateAsset(toplanma.duplicate, "Assets/InGameMaterial/" + matName);
+        
         if (settings.howManyObjectsOpend == 4)
         {
             settings.index++;
