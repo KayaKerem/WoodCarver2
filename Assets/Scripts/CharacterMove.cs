@@ -6,17 +6,14 @@ public class CharacterMove : MonoBehaviour
 {
     [SerializeField] private PlayerSettings settings;
     [SerializeField] Animator animPlayer;
+    [SerializeField] Camera ortho;
+
+    public Vector3 mouseDif;
+    
     private Vector3 mousePos;
     private Vector3 firstPos;
-    public Vector3 mouseDif;
-    [SerializeField] Camera ortho;
-    public  Transform myt;
     private bool rundStart;
 
-    private void Awake()
-    {
-        myt = this.transform;
-    }
     private void Start()
     {
         rundStart = settings.isPlaying;
@@ -70,7 +67,7 @@ public class CharacterMove : MonoBehaviour
     
     void Move()
     {
-        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -4f, 3.90f);
+        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -5.5f, 5.5f);
 
         transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
 
