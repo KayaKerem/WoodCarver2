@@ -51,7 +51,7 @@ public class UiManager : MonoBehaviour
 
         StartLevel();
     }
-
+    
     private void Start()
     {
         settings.score = 0;
@@ -78,7 +78,7 @@ public class UiManager : MonoBehaviour
                 Destroy(currentLevelObject);
 
             }
-            currentLevelObject = Instantiate(levels[settings.level], Vector3.zero, Quaternion.identity);
+            currentLevelObject = Instantiate(levels[settings.level], new Vector3(4.19999981f, -20.1800003f, 123.699997f), Quaternion.identity);
             //levels[settings.level - 1].SetActive(false);
         }
     }

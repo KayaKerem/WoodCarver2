@@ -21,7 +21,7 @@ public class Doors : MonoBehaviour
     {
         modeller = GameObject.FindObjectOfType<Models>();
 
-        material = modeller.modelParts[settings.index].material;
+         material = modeller.modelParts[settings.index].material;
     }
 
 
