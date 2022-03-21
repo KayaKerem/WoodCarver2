@@ -9,6 +9,7 @@ public class finishObject : MonoBehaviour
     [SerializeField] PlayerSettings settings;
     Transform ghost;
     Transform buildObejct;
+    float diveded;
 
     private void Start()
     {
@@ -20,24 +21,59 @@ public class finishObject : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
+            switch (other.gameObject.GetComponent<WoodScript>().tagIndex)
+            {
+                case 1:
+                    diveded = 10;
+                    break;
+                case 2:
+                    diveded = 9;
+                    break;
+                case 3:
+                    diveded = 7;
+                    break;
+                case 4:
+                    diveded = 6;
+                    break;
+                case 5:
+                    diveded = 5;
+                    break;
+            }
             toplanmaYeri.ObjectControl();
             Destroy(other.gameObject);
             if (ghost.localScale.x > buildObejct.localScale.x)
             {
-                buildObejct.DOScaleX(buildObejct.localScale.x + ghost.localScale.x / 5f, 0.1f);
+                buildObejct.DOScaleX(buildObejct.localScale.x + ghost.localScale.x / diveded, 0.1f);
+                if (ghost.localScale.x <= buildObejct.localScale.x)
+                {
+                    buildObejct.localScale = ghost.localScale;
+                    toplanmaYeri.finishBuilding = true;
+                }
             }
 
             else if (ghost.localScale.y > buildObejct.localScale.y)
             {
-                buildObejct.DOScaleY(buildObejct.localScale.y + ghost.localScale.y / 5f, 0.1f);
+                buildObejct.DOScaleY(buildObejct.localScale.y + ghost.localScale.y / diveded, 0.1f);
+                if (ghost.localScale.y <= buildObejct.localScale.y)
+                {
+                    buildObejct.localScale = ghost.localScale;
+                    toplanmaYeri.finishBuilding = true;
+
+                }
 
             }
 
             else if (ghost.localScale.z > buildObejct.localScale.z)
             {
-                buildObejct.DOScaleZ(buildObejct.localScale.z + ghost.localScale.z / 5f, 0.1f);
+                buildObejct.DOScaleZ(buildObejct.localScale.z + ghost.localScale.z / diveded, 0.1f);
+                if (ghost.localScale.z <= buildObejct.localScale.z)
+                {
+                    buildObejct.localScale = ghost.localScale;
+                    toplanmaYeri.finishBuilding = true;
+                }
 
             }
+            
         }
     }
 }

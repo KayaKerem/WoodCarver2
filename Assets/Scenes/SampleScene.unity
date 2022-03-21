@@ -19542,25 +19542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: 0
-  m_VolumeLayerMask:
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 1
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1 &965011041
 GameObject:
   m_ObjectHideFlags: 0
@@ -23677,11 +23658,13 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
   modelParts:
   - buildObje: {fileID: 1518901136}
+    material: {fileID: 0}
     models:
     - {fileID: 2176299173138618012, guid: 40cb8c86d7985fa449cc76db0844ebba, type: 3}
     - {fileID: 2882198586416367283, guid: 5d931c0fde5f96945b41f8ed7dad6c50, type: 3}
     - {fileID: 2882198586416367283, guid: 76590848c2b21364fae31ce9b5c3be5a, type: 3}
   - buildObje: {fileID: 777623728}
+    material: {fileID: 0}
     models:
     - {fileID: 2882198586416367283, guid: b2c11396d09c36f4c8976d89f020aeea, type: 3}
     - {fileID: 2882198586416367283, guid: 70c7ea95c276d664c9291fa84e6d7062, type: 3}
@@ -37668,7 +37651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5681228241567730121, guid: 288fd05a6c61f814ab0dac258f49e217, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7770578103334751623, guid: 288fd05a6c61f814ab0dac258f49e217, type: 3}
       propertyPath: m_LocalPosition.z

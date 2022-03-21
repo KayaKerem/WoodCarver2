@@ -19,6 +19,22 @@ public class ToplanmaYeri : MonoBehaviour
 
     bool objectFinished;
 
+    public bool finishBuilding
+    {
+        set
+        {
+            finishBuild = value;
+            if (value)
+            {
+                ObjectControl();
+            }
+            else 
+        }
+        get { return finishBuild; }
+    }
+
+    bool finishBuild;
+
     private GameManager manager;
     [SerializeField] private PlayerSettings settings;
     private WoodStack woodStack;
@@ -84,7 +100,7 @@ public class ToplanmaYeri : MonoBehaviour
             {
                 StartCoroutine(ObjectCreate());
             }
-            else Invoke("finishLeve",2f);
+            else Invoke("finishLeve", 2f);
         }
     }
 
@@ -95,7 +111,7 @@ public class ToplanmaYeri : MonoBehaviour
         oyunSonu.startMove = true;
         yield return new WaitForSeconds(1.5f);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
-        for (int i = oyunSonuObjectList.Count - 1 ; i > -1; --i)
+        for (int i = oyunSonuObjectList.Count - 1; i > -1; --i)
         {
             for (int j = oyunSonuObjectList[i].Count - 1; j > -1; j--)
             {
@@ -110,9 +126,6 @@ public class ToplanmaYeri : MonoBehaviour
 
     public void ObjectControl()
     {
-        hit += 1;
-        if (hit == 5)
-        {
             start = true;
             oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
             positionToGo = GameObject.FindGameObjectWithTag("z").transform;
@@ -121,7 +134,7 @@ public class ToplanmaYeri : MonoBehaviour
             {
                 objectFinished = true;
             }
-        } // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
+        // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
     }
 
     IEnumerator FinishMove()
