@@ -18,10 +18,10 @@ MonoBehaviour:
   sensitivity: 10
   score: 0
   finishScore: 0
-  level: 3
-  howManyObjectsOpend: 0
-  index: 1
+  level: 1
+  howManyObjectsOpend: 1
+  index: 0
   levelcount: 0
-  TotalScore: 1575
-  scaleNumber: 0
-  axis: 
+  TotalScore: 1835
+  scaleNumber: 0.0055555557
+  axis: z

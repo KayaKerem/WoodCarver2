@@ -33,12 +33,13 @@ public class UiManager : MonoBehaviour
 
     void Awake()
     {
-        settings.level = PlayerPrefs.GetInt("Level");
-        settings.index = PlayerPrefs.GetInt("Index");
-        settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
-        settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
-        settings.scaleNumber = PlayerPrefs.GetFloat("scale");
-        settings.axis = PlayerPrefs.GetString("axis");
+        //PlayerPrefs.DeleteAll();
+        //settings.level = PlayerPrefs.GetInt("Level");
+        //settings.index = PlayerPrefs.GetInt("Index");
+        //settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
+        //settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
+        //settings.scaleNumber = PlayerPrefs.GetFloat("scale");
+        //settings.axis = PlayerPrefs.GetString("axis");
 
         modeller = GameObject.FindObjectOfType<Models>();
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
@@ -72,14 +73,14 @@ public class UiManager : MonoBehaviour
     {
         if (settings.level > 0)
         {
-            //levels[settings.level].SetActive(true);
-            if (!currentLevelObject)
-            {
-                Destroy(currentLevelObject);
+            levels[settings.level].SetActive(true);
+            //if (!currentLevelObject)
+            //{
+            //    Destroy(currentLevelObject);
 
-            }
-            currentLevelObject = Instantiate(levels[settings.level], new Vector3(4.19999981f, -20.1800003f, 123.699997f), Quaternion.identity);
-            //levels[settings.level - 1].SetActive(false);
+            //}
+            //currentLevelObject = Instantiate(levels[settings.level], new Vector3(4.19999981f, -20.1800003f, 123.699997f), Quaternion.identity);
+            levels[settings.level - 1].SetActive(false);
         }
     }
 
@@ -100,7 +101,7 @@ public class UiManager : MonoBehaviour
     {
         settings.score = 0;
         settings.level++;
-        settings.howManyObjectsOpend++;
+        //settings.howManyObjectsOpend++;
         if (settings.level >= levels.Count)
         {
             settings.level = 0;
@@ -111,10 +112,12 @@ public class UiManager : MonoBehaviour
             settings.index++;
             settings.howManyObjectsOpend = 0;
         }
+
         if (settings.index > modeller.modelParts.Count-1)
         {
             settings.index = 0;
         }
+
         SaveLoad();
         SceneManager.LoadScene("SampleScene");
     }

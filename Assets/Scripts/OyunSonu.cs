@@ -61,8 +61,8 @@ public class OyunSonu : MonoBehaviour
         if (settings.index == 1)
         {
             ObjectToBuild().transform.DORotate(Vector3.zero, 0.5f);
-
         }
+
         ObjectToBuild().transform.DOScale(Vector3.one * 2, 0.5f);
     }
 
@@ -148,11 +148,16 @@ public class OyunSonu : MonoBehaviour
                             }
 
                             obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
+                            //obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
+
+                        }
+                        else if (j < settings.howManyObjectsOpend)
+                        {
+                            obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
+                            obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
                             obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
-                    }
-                        obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
-                        obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
-                        obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
+                        }
+                        
                     }
                 }
                 

@@ -21,7 +21,6 @@ public class Doors : MonoBehaviour
     {
         modeller = GameObject.FindObjectOfType<Models>();
 
-         material = modeller.modelParts[settings.index].material;
     }
 
 
@@ -30,8 +29,9 @@ public class Doors : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
             WoodScript wood = other.GetComponent<WoodScript>();
+            if(modeller == null) material = modeller.modelParts[settings.index].material;
 
-            if((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
+            if ((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
             {
                 wood.UpGrade(transform.gameObject.name);
 
