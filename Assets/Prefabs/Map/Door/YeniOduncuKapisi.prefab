@@ -3330,7 +3330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
-  settings: {fileID: 0}
+  settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
   material: {fileID: 0}
   cutParticul: {fileID: 0}
   patterm: {fileID: 0}

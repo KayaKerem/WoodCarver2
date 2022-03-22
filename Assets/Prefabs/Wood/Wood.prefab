@@ -100,12 +100,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ModelContainerT: {fileID: 7757687870730118884}
   destroyableTree: {fileID: 4591911427495991066, guid: 1ce0a7bd49b7d864199233489c49e2bf, type: 3}
+  settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
   Animator: {fileID: 6751641551286048437}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8192
   mats: []
   explosionEffect: {fileID: 4718176511497291565, guid: 929b501f732c5f248a2223eccb4007c5, type: 3}
   tagIndex: 0
   WoodPuan: 0
   particul: {fileID: 100000, guid: 374180fbf28a3af4894bb436cb4bb2ea, type: 3}
+  turn: 1
+  upgradeIsDone: 0
 --- !u!65 &8339675553849602835
 BoxCollider:
   m_ObjectHideFlags: 0

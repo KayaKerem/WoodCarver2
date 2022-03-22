@@ -11,9 +11,11 @@ public class WoodScript : MonoBehaviour
     //[SerializeField] ObjectifPool objectPool;
     [SerializeField] Transform ModelContainerT;
     [SerializeField] GameObject destroyableTree;
+    [SerializeField] PlayerSettings settings;
     //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
     RaycastHit hit;
+    public LayerMask mask;
     public Material[] mats;
     public ParticleSystem explosionEffect;
     public int tagIndex;
@@ -58,25 +60,30 @@ public class WoodScript : MonoBehaviour
     {
         if (turn && tagIndex == 0)
         {
-            if (Physics.Raycast(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            if (Physics.Raycast(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward, 4f, mask))
             {
+                Debug.Log("1");
                 turn = false;
-
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+                Debug.DrawRay(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward*4f,Color.green);
             }
 
-            else if (Physics.Raycast(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            else if (Physics.Raycast(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward, 4f, mask))
             {
                 turn = false;
-
+                Debug.Log("2");
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+                Debug.DrawRay(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward * 4f, Color.green);
+
             }
 
-            else if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            else if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward, 4f, mask))
             {
                 turn = false;
-
+                Debug.Log("3");
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+                Debug.DrawRay(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward * 4f, Color.green);
+
             }
         }
     }
@@ -146,7 +153,7 @@ public class WoodScript : MonoBehaviour
             {
                 case 0:
                     {
-                        //CutTree();
+                        CutTree();
                         break;
                     }
                 case 1:
@@ -223,7 +230,8 @@ public class WoodScript : MonoBehaviour
     private void CutTree()
     {
         GameObject parcalananAgac = ObjectifPool.singleton.getModel("Agac");
-        parcalananAgac.transform.position = transform.position + (Vector3.down * 2f);
+        parcalananAgac.transform.position = transform.position + (Vector3.down);
+        parcalananAgac.transform.rotation =Quaternion.Euler(90, 0, 0);
         parcalananAgac.SetActive(true);
     }
 
@@ -287,5 +295,7 @@ public class WoodScript : MonoBehaviour
     void CanTurn()
     {
         turn = true;
+        transform.DORotate(Vector3.zero, 0.5f);
+
     }
 }

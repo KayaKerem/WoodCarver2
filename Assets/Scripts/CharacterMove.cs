@@ -58,18 +58,6 @@ public class CharacterMove : MonoBehaviour
             EventManager.Event_OnStartLevel();
         }
 
-
-
-        if (Physics.Raycast(stack.transform.position, Vector3.forward, 2*stack.woods.Count + 1, mask))
-        {
-            settings.ForwardSpeed = 8;
-
-        }
-
-        else
-        {
-            settings.ForwardSpeed = 13;
-        }
     }
     void FixedUpdate()
     {

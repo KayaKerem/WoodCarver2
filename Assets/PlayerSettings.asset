@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlaying: 1
   isDeath: 0
-  ForwardSpeed: 5
+  ForwardSpeed: 13
   sensitivity: 10
-  score: 140
+  score: 40
   finishScore: 0
   level: 0
   howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  TotalScore: 6820
+  TotalScore: 8335
   scaleNumber: 0
   axis: 

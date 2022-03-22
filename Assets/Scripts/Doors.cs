@@ -14,10 +14,9 @@ public class Doors : MonoBehaviour
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;
     [SerializeField] Texture patternMetal;
-
+    Coroutine slowDown;
     Coroutine falseParticul;
     Models modeller;
-
 
     private void Start()
     {
@@ -30,24 +29,35 @@ public class Doors : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
-            other.gameObject.transform.DORotate(Vector3.right * -90, 0.5f);
             WoodScript wood = other.GetComponent<WoodScript>();
             if (modeller == null) material = modeller.modelParts[settings.index].material;
 
             if ((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
             {
                 wood.UpGrade(transform.gameObject.name);
-
+                if (slowDown == null)
+                {
+                    slowDown = StartCoroutine(SlowDown());
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    slowDown = StartCoroutine(SlowDown());
+                }
             }
+
             else if (wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
                 ParticleEffect();
             }
+
             else if ((wood.gameObject.tag == Tags.taglar[2]) && doorNumber == 2)
             {
                 wood.UpGrade(transform.gameObject.name, material);
             }
+
+
             //else if((wood.gameObject.tag == Tags.taglar[3]) && doorNumber == 3)
             //{
             //    wood.UpGrade(transform.gameObject.name, material);
@@ -78,5 +88,12 @@ public class Doors : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         cutParticul.SetActive(false);
+    }
+
+    IEnumerator SlowDown()
+    {
+        settings.ForwardSpeed = 8;
+        yield return new WaitForSeconds(0.5f);
+        settings.ForwardSpeed = 13;
     }
 }
