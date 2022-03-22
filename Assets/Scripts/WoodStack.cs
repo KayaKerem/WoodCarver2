@@ -86,10 +86,8 @@ public class WoodStack : MonoBehaviour
             float waitTime = 0f;
             for (int index = woods.Count - 1; index > -1; index--)
             {
-                //IEnumerator animRoutine = waitSeconds(waitTime, index);
-                //StartCoroutine(animRoutine);
                 woods[index].ShakeProcessStart(waitTime);
-                waitTime += 0.05f;
+                waitTime += 0.09f;
             }
             sonOynatmaZaman = Time.time;
         }

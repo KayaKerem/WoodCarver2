@@ -60,16 +60,14 @@ public class CharacterMove : MonoBehaviour
 
 
 
-        if (Physics.Raycast(transform.position, Vector3.forward, 2*stack.woods.Count + 1, mask))
+        if (Physics.Raycast(stack.transform.position, Vector3.forward, 2*stack.woods.Count + 1, mask))
         {
-            settings.ForwardSpeed = 5;
-            Debug.DrawRay(transform.position, Vector3.forward*(stack.woods.Count + 1), Color.green);
+            settings.ForwardSpeed = 8;
 
         }
 
         else
         {
-            Debug.DrawRay(transform.position, Vector3.forward * (stack.woods.Count + 1), Color.red);
             settings.ForwardSpeed = 13;
         }
     }
