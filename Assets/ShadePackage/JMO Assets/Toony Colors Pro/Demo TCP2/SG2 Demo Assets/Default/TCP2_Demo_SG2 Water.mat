@@ -59,6 +59,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0
@@ -116,3 +117,4 @@ Material:
     - _WaterColor: {r: 0.26599997, g: 0.7630727, b: 1, a: 1}
     - _WavesPhaseOffsets1: {r: 0.67, g: 1.35, b: 1.1, a: 0.9}
     - _WavesSinOffsets1: {r: 0.88, g: 1.7, b: 2.1, a: 1.7}
+  m_BuildTextureStacks: []
