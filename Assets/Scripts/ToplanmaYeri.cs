@@ -93,10 +93,10 @@ public class ToplanmaYeri : MonoBehaviour
         //chooseMat();
         positionToGo = oyunSonu.ObjectToBuild().transform.GetChild(1).transform;
         oyunSonu.startMove = true;
-        if (settings.howManyObjectsOpend == 0)
-        {
-            settings.howManyObjectsOpend++;
-        }
+        //if (settings.howManyObjectsOpend == 0)
+        //{
+        //    settings.howManyObjectsOpend++;
+        //}
         yield return new WaitForSeconds(1.5f);
         oyunSonu.ObjectToBuild().transform.GetChild(1).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
         for (int i = oyunSonuObjectList.Count - 1; i > -1; --i)
@@ -114,15 +114,17 @@ public class ToplanmaYeri : MonoBehaviour
 
     public void ObjectControl()
     {
-            start = true;
-            oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
-            positionToGo = GameObject.FindGameObjectWithTag("z").transform;
-            settings.howManyObjectsOpend++;
-            
+        start = true;
+        oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
+        positionToGo = GameObject.FindGameObjectWithTag("z").transform;
+        settings.scaleNumber = 0;
+        settings.axis = null;
+        settings.howManyObjectsOpend++;
+
         // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
     }
 
-    public void NotFinished(float scale,string axisName)
+    public void NotFinished(float scale, string axisName)
     {
         settings.scaleNumber = scale;
         settings.axis = axisName;
@@ -134,7 +136,7 @@ public class ToplanmaYeri : MonoBehaviour
         oyunSonu.startMove = false;
     }
 
-    
+
 
     void chooseMat()
     {

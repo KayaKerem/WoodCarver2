@@ -7,9 +7,10 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private PlayerSettings settings;
     [SerializeField] Animator animPlayer;
     [SerializeField] Camera ortho;
-
+    [SerializeField] WoodStack stack;
+    public LayerMask mask;
     public Vector3 mouseDif;
-    
+
     private Vector3 mousePos;
     private Vector3 firstPos;
     private bool rundStart;
@@ -18,6 +19,7 @@ public class CharacterMove : MonoBehaviour
     {
         rundStart = settings.isPlaying;
         //myRB.centerOfMass = Vector3.zero; //Devrilmemesi için
+
 
     }
     public void MousePosRest()
@@ -32,9 +34,10 @@ public class CharacterMove : MonoBehaviour
         {
             transform.position = new Vector3(0, transform.position.y, transform.position.z);
         }
+
         if (settings.isPlaying)
         {
-            if(!GameManager.levelFinish)
+            if (!GameManager.levelFinish)
             {
                 firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
 
@@ -55,6 +58,20 @@ public class CharacterMove : MonoBehaviour
             EventManager.Event_OnStartLevel();
         }
 
+
+
+        if (Physics.Raycast(transform.position, Vector3.forward, 2*stack.woods.Count + 1, mask))
+        {
+            settings.ForwardSpeed = 5;
+            Debug.DrawRay(transform.position, Vector3.forward*(stack.woods.Count + 1), Color.green);
+
+        }
+
+        else
+        {
+            Debug.DrawRay(transform.position, Vector3.forward * (stack.woods.Count + 1), Color.red);
+            settings.ForwardSpeed = 13;
+        }
     }
     void FixedUpdate()
     {
@@ -62,9 +79,9 @@ public class CharacterMove : MonoBehaviour
         {
             Move();
         }
-       
+
     }
-    
+
     void Move()
     {
         float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -5.5f, 5.5f);
@@ -72,10 +89,11 @@ public class CharacterMove : MonoBehaviour
         transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
 
     }
+
     private void MouseDown(Vector3 inputPos)
     {
         mousePos = ortho.ScreenToWorldPoint(inputPos);
-        firstPos = mousePos; 
+        firstPos = mousePos;
     }
 
     private void MouseHold(Vector3 inputPos)
@@ -89,7 +107,7 @@ public class CharacterMove : MonoBehaviour
     {
         animPlayer.SetBool(valueName, value);
     }
-    public void RunCharacterAnim(float woodCount,string valueName)
+    public void RunCharacterAnim(float woodCount, string valueName)
     {
         animPlayer.SetFloat(valueName, woodCount);
     }

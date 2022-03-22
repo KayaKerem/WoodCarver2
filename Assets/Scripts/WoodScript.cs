@@ -13,12 +13,14 @@ public class WoodScript : MonoBehaviour
     [SerializeField] GameObject destroyableTree;
     //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
-
+    RaycastHit hit;
     public Material[] mats;
     public ParticleSystem explosionEffect;
     public int tagIndex;
     public int WoodPuan;
     [SerializeField] GameObject particul;
+    public bool turn = true;
+    public bool upgradeIsDone;
 
     public WoodStack transporter
     {
@@ -52,7 +54,32 @@ public class WoodScript : MonoBehaviour
 
         mats = new Material[2];
     }
+    private void Update()
+    {
+        if (turn && tagIndex == 0)
+        {
+            if (Physics.Raycast(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            {
+                turn = false;
 
+                transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+            }
+
+            else if (Physics.Raycast(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            {
+                turn = false;
+
+                transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+            }
+
+            else if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward, 5f, LayerMask.NameToLayer(Layers.door)))
+            {
+                turn = false;
+
+                transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.wood))
@@ -106,8 +133,10 @@ public class WoodScript : MonoBehaviour
         MyCollider.enabled = true;
     }
 
-    public void UpGrade(string name, Material _material = null, Texture pattern = null, Texture patternMetal = null)
+    public void UpGrade(string name, Material _material = null)
     {
+        upgradeIsDone = false;
+       
         if (modeller == null) modeller = FindObjectOfType<Models>();
 
         if (!DoorsName.Contains(name))
@@ -117,7 +146,7 @@ public class WoodScript : MonoBehaviour
             {
                 case 0:
                     {
-                        CutTree();
+                        //CutTree();
                         break;
                     }
                 case 1:
@@ -130,16 +159,16 @@ public class WoodScript : MonoBehaviour
                         ChangeColor(_material);
                         break;
                     }
-                case 3:
-                    {
-                        Polish(_material);
-                        break;
-                    }
-                case 4:
-                    {
-                        Pattern(pattern, patternMetal);
-                        break;
-                    }
+                //case 3:
+                //    {
+                //        Polish(_material);
+                //        break;
+                //    }
+                //case 4:
+                //    {
+                //        Pattern(pattern, patternMetal);
+                //        break;
+                //    }
                 default:
                     {
                         Debug.LogError("tagIndex olmamasý gereken bir deðerde !!");
@@ -166,8 +195,12 @@ public class WoodScript : MonoBehaviour
             model.transform.localPosition = Vector3.zero;
             AnimationScaleWood();
             EventManager.Event_OnIncreaseScore(WoodPuan - tutucu);
+            
 
         }
+
+        upgradeIsDone = true;
+
     }
 
 
@@ -242,7 +275,7 @@ public class WoodScript : MonoBehaviour
             for (int i = 0; i < mat.Length; i++)
             {
                 mat[i] = mats[i];
-                
+
             }
             ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = mat;
         }
@@ -250,5 +283,9 @@ public class WoodScript : MonoBehaviour
     public Material getChildMat()
     {
         return ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+    }
+    void CanTurn()
+    {
+        turn = true;
     }
 }

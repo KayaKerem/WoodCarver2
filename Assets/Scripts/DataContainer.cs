@@ -8,6 +8,7 @@ public static class Layers
     public const string collectWood = "collectWood";
     public const string wood = "wood";
     public const string obstacle = "obstacle";
+    public const string door = "Door";
 }
 
 public static class Tags

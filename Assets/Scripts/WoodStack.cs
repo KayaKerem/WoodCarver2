@@ -185,6 +185,7 @@ public class WoodStack : MonoBehaviour
         }
         EventManager.Event_OnRestScore(newPuan);
     }
+
     private void OnEnable()
     {
         EventManager.OnWoodAdded += AddWoodList;

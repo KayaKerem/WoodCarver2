@@ -30,7 +30,7 @@ public class finishObject : MonoBehaviour
                     diveded = 9;
                     break;
                 case 3:
-                    diveded = 7;
+                    diveded = 5;
                     break;
                 case 4:
                     diveded = 6;
@@ -42,7 +42,7 @@ public class finishObject : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            if (ghost.localScale.x > buildObejct.localScale.x)
+            if (ghost.localScale.x >= buildObejct.localScale.x)
             {
                 buildObejct.DOScaleX(buildObejct.localScale.x + ghost.localScale.x / diveded, 0.1f);
                 if (ghost.localScale.x <= buildObejct.localScale.x)
@@ -57,7 +57,7 @@ public class finishObject : MonoBehaviour
                 }
             }
 
-            else if (ghost.localScale.y > buildObejct.localScale.y)
+            else if (ghost.localScale.y >= buildObejct.localScale.y)
             {
                 buildObejct.DOScaleY(buildObejct.localScale.y + ghost.localScale.y / diveded, 0.1f);
                 if (ghost.localScale.y <= buildObejct.localScale.y)
@@ -71,7 +71,7 @@ public class finishObject : MonoBehaviour
                 }
             }
 
-            else if (ghost.localScale.z > buildObejct.localScale.z)
+            else if (ghost.localScale.z >= buildObejct.localScale.z)
             {
                 buildObejct.DOScaleZ(buildObejct.localScale.z + ghost.localScale.z / diveded, 0.1f);
                 if (ghost.localScale.z <= buildObejct.localScale.z)
@@ -79,7 +79,7 @@ public class finishObject : MonoBehaviour
                     buildObejct.localScale = ghost.localScale;
                     toplanmaYeri.ObjectControl();
                 }
-                if (ghost.localScale.z > buildObejct.localScale.z)
+                else if (ghost.localScale.z > buildObejct.localScale.z)
                 {
                     toplanmaYeri.NotFinished(buildObejct.localScale.z, "z");
                 }

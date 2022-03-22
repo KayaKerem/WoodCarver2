@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Doors : MonoBehaviour
 {
@@ -27,16 +28,18 @@ public class Doors : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
+        if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
+            other.gameObject.transform.DORotate(Vector3.right * -90, 0.5f);
             WoodScript wood = other.GetComponent<WoodScript>();
-            if(modeller == null) material = modeller.modelParts[settings.index].material;
+            if (modeller == null) material = modeller.modelParts[settings.index].material;
 
             if ((wood.gameObject.tag == Tags.taglar[0] && doorNumber == 0))
             {
                 wood.UpGrade(transform.gameObject.name);
 
-            }else if(wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
+            }
+            else if (wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
                 ParticleEffect();

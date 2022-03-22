@@ -31,7 +31,7 @@ public class OyunSonu : MonoBehaviour
     }
     bool _startMove;
 
-   
+
     void Start()
     {
         //Invoke("StartSetup", 0.5f);
@@ -43,7 +43,7 @@ public class OyunSonu : MonoBehaviour
             models.modelParts[0].buildObje.transform.GetChild(1).GetChild(settings.howManyObjectsOpend - 1).gameObject.SetActive(true);
             models.modelParts[0].buildObje.transform.GetChild(0).GetChild(settings.howManyObjectsOpend - 1).gameObject.SetActive(false);
         }
-        
+
     }
 
 
@@ -71,7 +71,7 @@ public class OyunSonu : MonoBehaviour
         ObjectToBuild().transform.DOMove(firstPoint, 0.5f).OnComplete(ComplateObject);
         if (settings.index == 1)
         {
-            ObjectToBuild().transform.DORotate(Vector3.up *90, 0.5f);
+            ObjectToBuild().transform.DORotate(Vector3.up * 90, 0.5f);
 
         }
         ObjectToBuild().transform.DOScale(firstScale, 0.5f);
@@ -80,7 +80,7 @@ public class OyunSonu : MonoBehaviour
 
     void ComplateObject()
     {
-        if (settings.howManyObjectsOpend == 3)
+        if (settings.howManyObjectsOpend == 4)
         {
             ObjectToBuild().transform.DOPunchScale(ObjectToBuild().transform.localScale * 1.5f, 0.5f, 1).OnComplete(OnComplite);
             Instantiate(puff, ObjectToBuild().transform.position, Quaternion.identity);
@@ -90,7 +90,7 @@ public class OyunSonu : MonoBehaviour
 
     void OnComplite()
     {
-        
+
         InvokeFinish();
     }
 
@@ -106,63 +106,63 @@ public class OyunSonu : MonoBehaviour
 
     void StartSetup()
     {
-        
-            for (int i = 0; i <= settings.index; i++)
+
+        for (int i = 0; i <= settings.index; i++)
+        {
+            GameObject obje = models.modelParts[i].buildObje;
+            if (settings.index != i)
             {
-                GameObject obje = models.modelParts[i].buildObje;
-                if (settings.index != i)
+                for (int j = 0; j < obje.transform.GetChild(0).childCount; j++)
                 {
-                    for (int j = 0; j < obje.transform.GetChild(0).childCount; j++)
+                    // string name = i.ToString() + "." + j.ToString() + ".mat";
+                    obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
+                    obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
+                    //obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = Resources.Load<Material>("Assets/InGameMaterial/" + name);
+                }
+                obje.transform.GetChild(0).gameObject.SetActive(false);
+            }
+
+            else
+            {
+                for (int j = 0; j <= settings.howManyObjectsOpend; j++)
+                {
+                    if (j == settings.howManyObjectsOpend)
                     {
-                       // string name = i.ToString() + "." + j.ToString() + ".mat";
+                        Vector3 objeScale = obje.transform.GetChild(1).GetChild(j).localScale;
+
+                        if (settings.axis == "x")
+                        {
+                            objeScale = new Vector3(settings.scaleNumber, objeScale.y, objeScale.z);
+
+                        }
+
+                        else if (settings.axis == "y")
+                        {
+                            objeScale = new Vector3(objeScale.x, settings.scaleNumber, objeScale.z);
+
+                        }
+
+                        else if (settings.axis == "z")
+                        {
+                            objeScale = new Vector3(objeScale.x, objeScale.z, settings.scaleNumber);
+                        }
+                        obje.transform.GetChild(1).GetChild(j).localScale = objeScale;
+                        obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
+                        //obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
+
+                    }
+                    else if (j < settings.howManyObjectsOpend)
+                    {
                         obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
                         obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
-                        //obje.transform.GetChild(1).GetChild(j).GetComponent<Renderer>().material = Resources.Load<Material>("Assets/InGameMaterial/" + name);
-                }
-                    obje.transform.GetChild(0).gameObject.SetActive(false);
-                }
-
-                else
-                {
-                    for (int j = 0; j <= settings.howManyObjectsOpend; j++)
-                    {
-                        if (j == settings.howManyObjectsOpend )
-                        {
-                            Vector3 objeScale = obje.transform.GetChild(1).GetChild(j).localScale;
-
-                            if (settings.axis == "x")
-                            {
-                                objeScale = new Vector3(settings.scaleNumber, objeScale.y, objeScale.z);
-
-                            }
-
-                            else if (settings.axis == "y")
-                            {
-                                objeScale = new Vector3(objeScale.x, settings.scaleNumber, objeScale.z);
-
-                            }
-
-                            else if (settings.axis == "z")
-                            {
-                                objeScale = new Vector3(objeScale.x, objeScale.z, settings.scaleNumber);
-                            }
-
-                            obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
-                            //obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
-
-                        }
-                        else if (j < settings.howManyObjectsOpend)
-                        {
-                            obje.transform.GetChild(1).GetChild(j).localScale = obje.transform.GetChild(0).GetChild(j).localScale;
-                            obje.transform.GetChild(1).GetChild(j).gameObject.SetActive(true);
-                            obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
-                        }
-                        
+                        obje.transform.GetChild(0).GetChild(j).gameObject.SetActive(false);
                     }
+
                 }
-                
             }
-        
-        
+
+        }
+
+
     }
 }
