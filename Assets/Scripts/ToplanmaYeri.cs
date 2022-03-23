@@ -112,14 +112,26 @@ public class ToplanmaYeri : MonoBehaviour
         StartCoroutine(FinishMove());
     }
 
-    public void ObjectControl()
+    public void ObjectControl(Transform ghost, Transform build)
     {
-        start = true;
-        oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
-        positionToGo = GameObject.FindGameObjectWithTag("z").transform;
-        settings.scaleNumber = 0;
-        settings.axis = null;
-        settings.howManyObjectsOpend++;
+        hit++;
+        if (hit == 5)
+        {
+            build.localScale = ghost.localScale;
+            start = true;
+            oyunSonu.ObjectToBuild().transform.GetChild(0).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(false);
+            positionToGo = GameObject.FindGameObjectWithTag("z").transform;
+            settings.scaleNumber = 0;
+            settings.axis = null;
+            settings.howManyObjectsOpend++;
+            if (settings.howManyObjectsOpend == 3)
+            {
+                settings.howManyObjectsOpend = 0;
+                settings.index++;
+            }
+        }
+
+
 
         // kanka 5 tane obje yapýalcak sandalyaye gidince odunlar  canvastaki scora doðru gidiyor  ve sandalyenini geri dönme iþlemini baþlatýyoruz
     }
