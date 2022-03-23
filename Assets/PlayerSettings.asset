@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6416fcd67d868c4da2ec31df302b252, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  isPlaying: 0
+  isPlaying: 1
   isDeath: 0
-  ForwardSpeed: 9
-  sensitivity: 10
-  score: 155
+  ForwardSpeed: 15
+  sensitivity: 20
+  score: 245
   finishScore: 0
-  level: 4
-  howManyObjectsOpend: 2
+  level: 0
+  howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  TotalScore: 10080
+  TotalScore: 0
   scaleNumber: 0
   axis: 

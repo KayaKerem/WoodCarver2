@@ -112,24 +112,24 @@ public class WoodStack : MonoBehaviour
 
         for (int index = 0; index < woods.Count; index++)
         {
-            if (index == 0)
+            //Vector3 pos = woods[index].transform.localPosition;
+            //pos.x = woods[index - 1].transform.localPosition.x;
+            //woods[index].transform.DOLocalMove(pos, 0.2f);
+            // if(index == 0) woods[index].transform.localPosition = new Vector3(StartT.position.x, 0, radius + DistanceObject);
+            float distance;
+            if (index == 0) distance = StartT.position.x - woods[index].transform.position.x;
+            else distance = woods[index - 1].transform.position.x - woods[index].transform.position.x;
+
+            float direction = Mathf.Sign(distance);
+            float gidilenHiz = direction * Time.deltaTime * speed * Mathf.Abs(distance);
+
+            if (Mathf.Abs(distance) < Mathf.Abs(gidilenHiz))
             {
-                woods[index].transform.localPosition = new Vector3(StartT.position.x, 0, radius + DistanceObject);
+                gidilenHiz = distance;
             }
-            else
-            {
-                float distance = woods[index - 1].transform.position.x - woods[index].transform.position.x;
 
-                float direction = Mathf.Sign(distance);
-                float gidilenHiz = direction * Time.deltaTime * speed * Mathf.Abs(distance);
+            woods[index].transform.position += new Vector3(gidilenHiz, 0f, 0f);
 
-                if (Mathf.Abs(distance) < Mathf.Abs(gidilenHiz))
-                {
-                    gidilenHiz = distance;
-                }
-
-                woods[index].transform.localPosition += new Vector3(gidilenHiz, 0f, 0f);
-            }
         }
 
     }
@@ -139,7 +139,7 @@ public class WoodStack : MonoBehaviour
         EnableIsPlay(false);
         characterT.MousePosRest();
         characterT.mouseDif = Vector3.zero;
-        characterT.transform.DOMoveZ(characterT.transform.position.z - 5f, 0.7f, false).OnComplete(() => EnableIsPlay(true));
+        characterT.transform.DOMoveZ(characterT.transform.position.z - 8f, 0.9f, false).OnComplete(() => EnableIsPlay(true));
     }
     public void EnableIsPlay(bool value)
     {
