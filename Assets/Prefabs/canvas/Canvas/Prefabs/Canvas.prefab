@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: b7b56e5661eff0841981bf4f564af540, type: 3}
-    m_FontSize: 177
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -257,12 +257,12 @@ GameObject:
   - component: {fileID: 2061454065}
   - component: {fileID: 2061454064}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2061454063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7697243891081732306
 RectTransform:
   m_ObjectHideFlags: 0
@@ -777,7 +777,6 @@ GameObject:
   - component: {fileID: 309480081630356659}
   - component: {fileID: 309480081630356656}
   - component: {fileID: 309480081630356657}
-  - component: {fileID: 309480081630356661}
   - component: {fileID: 292568828}
   m_Layer: 5
   m_Name: Canvas
@@ -873,30 +872,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &309480081630356661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309480081630356662}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c926b4335ac779349809b3d23ecf08ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelText: {fileID: 0}
-  levelCompletePanel: {fileID: 0}
-  levelFailPanel: {fileID: 0}
-  tutorialPanel: {fileID: 0}
-  tapToStartPanel: {fileID: 834909596792292683}
-  confettiRain: {fileID: 0}
-  pauseButton: {fileID: 0}
-  levelIndicator: {fileID: 0}
-  progressIndicator: {fileID: 0}
-  levelFinished: 0
-  levelStarted: 0
-  settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
 --- !u!114 &292568828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,13 +888,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   settings: {fileID: 11400000, guid: d73f1a65c76225e498fc876a3a970ba3, type: 2}
   toplanma: {fileID: 0}
+  OyunSonu: {fileID: 0}
   startPanel: {fileID: 834909596792292683}
   inGamePanel: {fileID: 4807312446694776622}
   finishPanel: {fileID: 1948332166522226998}
   chestPanel: {fileID: 7579690242605095228}
-  button: {fileID: 0}
+  button: {fileID: 2061454062}
 --- !u!1 &701613814563485680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1111,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 309480081630356661}
+      - m_Target: {fileID: 309480081630356661, guid: 1dc7007f3f01d9246a6e12c678a100c6, type: 3}
         m_TargetAssemblyTypeName: 
         m_MethodName: StartLevel
         m_Mode: 1
@@ -1333,7 +1311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5613335104449548715
 RectTransform:
   m_ObjectHideFlags: 0

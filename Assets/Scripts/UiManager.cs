@@ -105,12 +105,6 @@ public class UiManager : MonoBehaviour
         {
             settings.level = 0;
         }
-        
-        if (settings.howManyObjectsOpend == 4)
-        {
-            settings.index++;
-            settings.howManyObjectsOpend = 0;
-        }
 
         if (settings.index > modeller.modelParts.Count-1)
         {

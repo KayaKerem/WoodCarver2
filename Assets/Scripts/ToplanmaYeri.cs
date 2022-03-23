@@ -127,7 +127,6 @@ public class ToplanmaYeri : MonoBehaviour
             if (settings.howManyObjectsOpend == 3)
             {
                 settings.howManyObjectsOpend = 0;
-                settings.index++;
             }
         }
 

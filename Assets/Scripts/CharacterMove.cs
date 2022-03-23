@@ -70,7 +70,7 @@ public class CharacterMove : MonoBehaviour
 
     void Move()
     {
-        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -6f, 6f);
+        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -7f, 7f);
 
         transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
 

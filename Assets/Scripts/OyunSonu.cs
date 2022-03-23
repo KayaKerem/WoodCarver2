@@ -80,10 +80,11 @@ public class OyunSonu : MonoBehaviour
 
     void ComplateObject()
     {
-        if (settings.howManyObjectsOpend == 4)
+        if (settings.howManyObjectsOpend == 3)
         {
             ObjectToBuild().transform.DOPunchScale(ObjectToBuild().transform.localScale * 1.5f, 0.5f, 1).OnComplete(OnComplite);
             Instantiate(puff, ObjectToBuild().transform.position, Quaternion.identity);
+            settings.index++;
         }
         else InvokeFinish();
     }
