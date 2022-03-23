@@ -29,6 +29,7 @@ public class ToplanmaYeri : MonoBehaviour
     void Start()
     {
         oyunSonu = GetComponent<OyunSonu>();
+
         for (int i = 0; i < Tags.taglar.Length - 1; i++)
         {
             oyunSonuObjectList.Add(new List<WoodScript>());
@@ -124,10 +125,6 @@ public class ToplanmaYeri : MonoBehaviour
             settings.scaleNumber = 0;
             settings.axis = null;
             settings.howManyObjectsOpend++;
-            if (settings.howManyObjectsOpend == 3)
-            {
-                settings.howManyObjectsOpend = 0;
-            }
         }
 
 

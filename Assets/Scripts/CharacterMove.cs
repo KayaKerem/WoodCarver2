@@ -37,6 +37,8 @@ public class CharacterMove : MonoBehaviour
 
         if (settings.isPlaying)
         {
+            Move();
+
             if (!GameManager.levelFinish)
             {
                 firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
@@ -57,16 +59,8 @@ public class CharacterMove : MonoBehaviour
             rundStart = true;
             EventManager.Event_OnStartLevel();
         }
-
     }
-    void FixedUpdate()
-    {
-        if (settings.isPlaying)
-        {
-            Move();
-        }
-
-    }
+   
 
     void Move()
     {

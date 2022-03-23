@@ -71,7 +71,7 @@ public class OyunSonu : MonoBehaviour
         ObjectToBuild().transform.DOMove(firstPoint, 0.5f).OnComplete(ComplateObject);
         if (settings.index == 1)
         {
-            ObjectToBuild().transform.DORotate(Vector3.up * 90, 0.5f);
+            ObjectToBuild().transform.DORotate(Vector3.up * 90, 0.5f).OnComplete(ComplateObject);
 
         }
         ObjectToBuild().transform.DOScale(firstScale, 0.5f);
@@ -83,7 +83,8 @@ public class OyunSonu : MonoBehaviour
         if (settings.howManyObjectsOpend == 3)
         {
             ObjectToBuild().transform.DOPunchScale(ObjectToBuild().transform.localScale * 1.5f, 0.5f, 1).OnComplete(OnComplite);
-            Instantiate(puff, ObjectToBuild().transform.position, Quaternion.identity);
+            //Instantiate(puff, ObjectToBuild().transform.position, Quaternion.identity);
+            settings.howManyObjectsOpend = 0;
             settings.index++;
         }
         else InvokeFinish();
@@ -91,14 +92,12 @@ public class OyunSonu : MonoBehaviour
 
     void OnComplite()
     {
-
         InvokeFinish();
     }
 
     void InvokeFinish()
     {
         Invoke("FinishScren", 1.5f);
-
     }
     void FinishScren()
     {
@@ -107,7 +106,6 @@ public class OyunSonu : MonoBehaviour
 
     void StartSetup()
     {
-
         for (int i = 0; i <= settings.index; i++)
         {
             GameObject obje = models.modelParts[i].buildObje;
@@ -163,7 +161,5 @@ public class OyunSonu : MonoBehaviour
             }
 
         }
-
-
     }
 }
