@@ -49,7 +49,6 @@ public class Doors : MonoBehaviour
             else if (wood.gameObject.tag == Tags.taglar[1] && doorNumber == 1)
             {
                 wood.UpGrade(transform.gameObject.name);
-                ParticleEffect();
             }
 
             else if ((wood.gameObject.tag == Tags.taglar[2]) && doorNumber == 2)
@@ -69,20 +68,6 @@ public class Doors : MonoBehaviour
         }
     }
 
-    private void ParticleEffect()
-    {
-        cutParticul.SetActive(true);
-        if (falseParticul == null)
-        {
-            falseParticul = StartCoroutine(FalseParticul());
-        }
-
-        else if (falseParticul != null)
-        {
-            StopCoroutine(FalseParticul());
-            falseParticul = null;
-        }
-    }
 
     IEnumerator FalseParticul()
     {

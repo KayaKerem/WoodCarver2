@@ -60,29 +60,23 @@ public class WoodScript : MonoBehaviour
     {
         if (turn && tagIndex == 0)
         {
-            if (Physics.Raycast(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward, 4f, mask))
+            if (Physics.Raycast(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward, 5f, mask))
             {
-                Debug.Log("1");
                 turn = false;
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
-                Debug.DrawRay(transform.position + new Vector3(0.6f, 0f, 0f), Vector3.forward*4f,Color.green);
             }
 
-            else if (Physics.Raycast(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward, 4f, mask))
+            else if (Physics.Raycast(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward, 5f, mask))
             {
                 turn = false;
-                Debug.Log("2");
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
-                Debug.DrawRay(transform.position + new Vector3(-0.6f, 0f, 0f), Vector3.forward * 4f, Color.green);
 
             }
 
-            else if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward, 4f, mask))
+            else if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward, 5f, mask))
             {
                 turn = false;
-                Debug.Log("3");
                 transform.DORotate(Vector3.right * -90, 0.5f).OnComplete(CanTurn);
-                Debug.DrawRay(transform.position + new Vector3(0f, 0f, 0f), Vector3.forward * 4f, Color.green);
 
             }
         }
