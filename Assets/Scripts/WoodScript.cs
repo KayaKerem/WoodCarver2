@@ -122,6 +122,10 @@ public class WoodScript : MonoBehaviour
     }
     public void DestRoyWood()
     {
+        if (stack.woods[0].gameObject == this.gameObject)
+        {
+            return;
+        }
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }

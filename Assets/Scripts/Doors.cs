@@ -77,8 +77,8 @@ public class Doors : MonoBehaviour
 
     IEnumerator SlowDown()
     {
-        settings.ForwardSpeed = 10;
-        yield return new WaitForSeconds(0.5f);
         settings.ForwardSpeed = 15;
+        yield return new WaitForSeconds(0.5f);
+        settings.ForwardSpeed = 25;
     }
 }

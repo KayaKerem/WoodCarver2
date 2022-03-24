@@ -149,28 +149,32 @@ public class WoodStack : MonoBehaviour
 
     public void DropWood(WoodScript wood)
     {
-        if (!GameManager.levelFinish)
+        if (woods[0].gameObject != wood.gameObject)
         {
-            AddforcePlayer();
+            if (!GameManager.levelFinish)
+            {
+                AddforcePlayer();
+            }
+
+            int id = wood.GetInstanceID();
+            int index = woods.FindIndex(woodS => woodS.GetInstanceID() == id);
+            woods.RemoveAt(index);
+            wood.DestRoyWood();
+            for (int i = woods.Count - 1; i >= index; i--)
+            {
+                woods[i].gameObject.layer = LayerMask.NameToLayer(Layers.wood);
+                woods[i].DropStackList();
+                woods[i].transporter = null;
+                woods[i].transform.parent = null;
+                woods.RemoveAt(i);
+            }
+            EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
+            if (!GameManager.levelFinish)
+            {
+                CollectScoreRest();
+            }
         }
-        
-        int id = wood.GetInstanceID();
-        int index = woods.FindIndex(woodS => woodS.GetInstanceID() == id);
-        woods.RemoveAt(index);
-        wood.DestRoyWood();
-        for (int i = woods.Count - 1; i >= index; i--)
-        {
-            woods[i].gameObject.layer = LayerMask.NameToLayer(Layers.wood);
-            woods[i].DropStackList();
-            woods[i].transporter = null;
-            woods[i].transform.parent = null;
-            woods.RemoveAt(i);
-        }
-        EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
-        if (!GameManager.levelFinish)
-        {
-            CollectScoreRest();
-        }
+       
     }
     public void CollectScoreRest()
     {
