@@ -14,6 +14,7 @@ public class WoodScript : MonoBehaviour
     [SerializeField] PlayerSettings settings;
     //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
+    [SerializeField] WoodStack stack;
     RaycastHit hit;
     public LayerMask mask;
     public Material[] mats;
@@ -49,6 +50,7 @@ public class WoodScript : MonoBehaviour
     {
         modeller = FindObjectOfType<Models>();
         MyCollider = GetComponent<Collider>();
+        stack = FindObjectOfType<WoodStack>();
         DoorsName = new List<string>();
 
         SpawnModel(tagIndex);
@@ -89,7 +91,10 @@ public class WoodScript : MonoBehaviour
         }
         if ((other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle)) && transporter != null)
         {
-            transporter.DropWood(this);
+            if (stack.woods.Count > 1)
+            {
+                transporter.DropWood(this);
+            }
         }
     }
 

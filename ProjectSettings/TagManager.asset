@@ -14,6 +14,7 @@ TagManager:
   - y
   - plank
   - z
+  - first
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ public class WoodStack : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle))
         {
-            if (woods.Count != 0) DropWood(woods[0]);
+            if (woods.Count > 1) DropWood(woods[0]);
             else { AddforcePlayer(); }
 
             return;
@@ -87,7 +87,7 @@ public class WoodStack : MonoBehaviour
             for (int index = woods.Count - 1; index > -1; index--)
             {
                 woods[index].ShakeProcessStart(waitTime);
-                waitTime += 0.09f;
+                waitTime += 0.05f;
             }
             sonOynatmaZaman = Time.time;
         }
@@ -153,7 +153,7 @@ public class WoodStack : MonoBehaviour
         {
             AddforcePlayer();
         }
-
+        
         int id = wood.GetInstanceID();
         int index = woods.FindIndex(woodS => woodS.GetInstanceID() == id);
         woods.RemoveAt(index);
