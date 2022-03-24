@@ -33,12 +33,12 @@ public class UiManager : MonoBehaviour
 
     void Awake()
     {
-        //settings.level = PlayerPrefs.GetInt("Level");
-        //settings.index = PlayerPrefs.GetInt("Index");
-        //settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
-        //settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
-        //settings.scaleNumber = PlayerPrefs.GetFloat("scale");
-        //settings.axis = PlayerPrefs.GetString("axis");
+        settings.level = PlayerPrefs.GetInt("Level");
+        settings.index = PlayerPrefs.GetInt("Index");
+        settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
+        settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
+        settings.scaleNumber = PlayerPrefs.GetFloat("scale");
+        settings.axis = PlayerPrefs.GetString("axis");
 
         modeller = GameObject.FindObjectOfType<Models>();
         leveltext = inGamePanel.transform.GetChild(2).GetComponent<TextMeshProUGUI>();

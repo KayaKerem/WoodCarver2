@@ -16,7 +16,7 @@ MonoBehaviour:
   isDeath: 0
   ForwardSpeed: 15
   sensitivity: 20
-  score: 245
+  score: 0
   finishScore: 0
   level: 0
   howManyObjectsOpend: 0
