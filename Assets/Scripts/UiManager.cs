@@ -14,9 +14,10 @@ public class UiManager : MonoBehaviour
     [SerializeField] PlayerSettings settings;
     [SerializeField] ToplanmaYeri toplanma;
     [SerializeField] OyunSonu OyunSonu;
-     int temp = 0;
+    int temp = 0;
     int tempReward = 0;
     int reward;
+    
 
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
@@ -30,6 +31,7 @@ public class UiManager : MonoBehaviour
     TextMeshProUGUI finishGameScore;
     TextMeshProUGUI finishGameRewardScore;
     Models modeller;
+
 
     void Awake()
     {
@@ -51,17 +53,19 @@ public class UiManager : MonoBehaviour
 
         StartLevel();
     }
-    
+
     private void Start()
     {
         settings.score = 0;
         leveltext.text = levels[settings.level].name;
         LoadScene();
         PlayerPrefs.SetInt("Level", settings.level);
+       
     }
     void Update()
     {
         inGameScore.text = settings.TotalScore.ToString();
+        
     }
 
     public void StartPanelEnable(bool value)
@@ -106,7 +110,7 @@ public class UiManager : MonoBehaviour
             settings.level = 0;
         }
 
-        if (settings.index > modeller.modelParts.Count-1)
+        if (settings.index > modeller.modelParts.Count - 1)
         {
             settings.index = 0;
         }
@@ -125,7 +129,7 @@ public class UiManager : MonoBehaviour
 
     public void LevelFinished()
     {
-        finishLeveltext.text =levels[settings.level].name;
+        finishLeveltext.text = levels[settings.level].name;
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
         StartCoroutine(LevelFinishDelay());
@@ -170,7 +174,7 @@ public class UiManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.7f);
         button.SetActive(true);
-        button.GetComponent<RectTransform>().DOScale(new Vector3(2,6,2), 1f).SetEase(Ease.OutBack);
+        button.GetComponent<RectTransform>().DOScale(new Vector3(2, 6, 2), 1f).SetEase(Ease.OutBack);
 
     }
 
@@ -183,4 +187,7 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetString("axis", settings.axis);
         PlayerPrefs.SetFloat("scale", settings.scaleNumber);
     }
+
+
+   
 }

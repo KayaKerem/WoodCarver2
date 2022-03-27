@@ -10,6 +10,8 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] WoodStack stack;
     public LayerMask mask;
     public Vector3 mouseDif;
+    Camera cam;
+    public LayerMask maskGround;
 
     private Vector3 mousePos;
     private Vector3 firstPos;
@@ -18,6 +20,7 @@ public class CharacterMove : MonoBehaviour
     private void Start()
     {
         rundStart = settings.isPlaying;
+        cam = Camera.main;
         //myRB.centerOfMass = Vector3.zero; //Devrilmemesi için
 
 
@@ -39,19 +42,20 @@ public class CharacterMove : MonoBehaviour
         {
             Move();
 
-            if (!GameManager.levelFinish)
-            {
-                firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
 
-                if (Input.GetMouseButtonDown(0))
-                    MouseDown(Input.mousePosition);
-                else if (Input.GetMouseButton(0))
-                    MouseHold(Input.mousePosition);
-                else
-                {
-                    mouseDif = Vector3.zero;
-                }
-            }
+            //if (!GameManager.levelFinish)
+            //{
+            //    firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
+
+            //    if (Input.GetMouseButtonDown(0))
+            //        MouseDown(Input.mousePosition);
+            //    else if (Input.GetMouseButton(0))
+            //        MouseHold(Input.mousePosition);
+            //    else
+            //    {
+            //        mouseDif = Vector3.zero;
+            //    }
+            //}
         }
 
         if (Input.GetMouseButtonDown(0) && !rundStart)
@@ -60,47 +64,51 @@ public class CharacterMove : MonoBehaviour
             EventManager.Event_OnStartLevel();
         }
     }
-   
 
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButton(0) && settings.isPlaying)
+        {
+            Move2();
+
+        }
+    }
     void Move()
     {
-        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -7f, 7f);
-
-        transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
-
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
     }
 
-    private void MouseDown(Vector3 inputPos)
+    private void Move2()
     {
-        mousePos = ortho.ScreenToWorldPoint(inputPos);
-        firstPos = mousePos;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = cam.transform.localPosition.z;
+        Ray ray = cam.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 50, maskGround))
+        {
+            Vector3 hitVec = hit.point;
+            float xPos = Mathf.Clamp(hitVec.x, -7f, 7f);
+            hitVec.x = xPos;
+            hitVec.y = transform.localPosition.y;
+            hitVec.z = transform.localPosition.z;
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, hitVec, Time.deltaTime * settings.sensitivity);
+        }
+        //GameObject firstCube = ATMRUS..instance.cubes[0];
+
     }
 
-    private void MouseHold(Vector3 inputPos)
-    {
-        mousePos = ortho.ScreenToWorldPoint(inputPos);
-        mouseDif = mousePos - firstPos;
-        mouseDif *= settings.sensitivity * Time.deltaTime;
-    }
+    //private void MouseDown(Vector3 inputPos)
+    //{
+    //    mousePos = ortho.ScreenToWorldPoint(inputPos);
+    //    firstPos = mousePos;
+    //}
 
-    public void AnimControl(bool value, string valueName)
-    {
-        animPlayer.SetBool(valueName, value);
-    }
-    public void RunCharacterAnim(float woodCount, string valueName)
-    {
-        animPlayer.SetFloat(valueName, woodCount);
-    }
-    private void OnEnable()
-    {
-        EventManager.OnCharacterAnimControl += AnimControl;
-        EventManager.OnCharacterRunAnim += RunCharacterAnim;
-    }
+    //private void MouseHold(Vector3 inputPos)
+    //{
+    //    mousePos = ortho.ScreenToWorldPoint(inputPos);
+    //    mouseDif = mousePos - firstPos;
+    //    mouseDif *= settings.sensitivity * Time.deltaTime;
+    //}
 
-    private void OnDisable()
-    {
-        EventManager.OnCharacterAnimControl -= AnimControl;
-        EventManager.OnCharacterRunAnim -= RunCharacterAnim;
-    }
 
 }

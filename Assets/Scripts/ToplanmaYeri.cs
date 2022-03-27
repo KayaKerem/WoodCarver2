@@ -80,7 +80,6 @@ public class ToplanmaYeri : MonoBehaviour
         else if (other.gameObject.CompareTag("Player"))
         {
             settings.isPlaying = false;
-            EventManager.Event_OnCharacterAnimControl(false, AnimName.CharacterRunnig);  //Karakter Aniamsyon kapanmasý
             if (odenGeldimi)
             {
                 StartCoroutine(ObjectCreate());

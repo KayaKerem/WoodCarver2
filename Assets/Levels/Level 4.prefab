@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5733347355732466787}
   - component: {fileID: 7526647761174472873}
   - component: {fileID: 9202424018053161588}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -35,8 +35,6 @@ public class GameManager : MonoBehaviour
         UImanager.StartPanelEnable(true);
         startCam.SetActive(true);
         UImanager = FindObjectOfType<UiManager>();
-        EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterRunnig);
-        EventManager.Event_OnCharacterAnimControl(false,AnimName.CharacterObstacleHit);
         levelFinish = false;
         //finishScore.gameObject.GetComponent<Animation>();
     }
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         settings.isPlaying = true;
-        EventManager.Event_OnCharacterAnimControl(true, AnimName.CharacterRunnig);
     }
     public void LevelFinish()
     {

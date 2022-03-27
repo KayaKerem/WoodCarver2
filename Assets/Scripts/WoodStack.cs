@@ -69,7 +69,6 @@ public class WoodStack : MonoBehaviour
             wood.transform.localPosition = new Vector3(lastPos.x, 0, woods.Count * (radius + DistanceObject));
         }
 
-        EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
         OnShake.Invoke();
         EventManager.Event_OnIncreaseScore(wood.GetComponent<WoodScript>().WoodPuan);
 
@@ -99,7 +98,7 @@ public class WoodStack : MonoBehaviour
     //    yield return new WaitForSeconds(time);
     //    woods[index].GetComponent<WoodScript>().AnimationScaleWood();
     //}
-    [SerializeField] float speed;
+    [SerializeField] public float speed;
 
     Vector3 takipT; //Odunlarýn Parentenin takip ettiði nokta
 
@@ -123,10 +122,10 @@ public class WoodStack : MonoBehaviour
             float direction = Mathf.Sign(distance);
             float gidilenHiz = direction * Time.deltaTime * speed * Mathf.Abs(distance);
 
-            if (Mathf.Abs(distance) < Mathf.Abs(gidilenHiz))
-            {
-                gidilenHiz = distance;
-            }
+            //if (Mathf.Abs(distance) < Mathf.Abs(gidilenHiz))
+            //{
+            //    gidilenHiz = distance;
+            //}
 
             woods[index].transform.position += new Vector3(gidilenHiz, 0f, 0f);
 
@@ -143,7 +142,6 @@ public class WoodStack : MonoBehaviour
     }
     public void EnableIsPlay(bool value)
     {
-        EventManager.Event_OnCharacterAnimControl(!value, AnimName.CharacterObstacleHit);
         settings.isPlaying = value;
     }
 
@@ -168,7 +166,6 @@ public class WoodStack : MonoBehaviour
                 woods[i].transform.parent = null;
                 woods.RemoveAt(i);
             }
-            EventManager.Event_OnCharacterRunAnim(woods.Count, AnimName.Woodcount);
             if (!GameManager.levelFinish)
             {
                 CollectScoreRest();
