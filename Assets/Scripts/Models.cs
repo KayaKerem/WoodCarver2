@@ -35,6 +35,7 @@ public class ModelParts
     public GameObject buildObje;
     public Material material;
     public List<GameObject> models = new List<GameObject>();
+    public List<Sprite> sprites = new List<Sprite>();
 
 }
 

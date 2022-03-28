@@ -16,12 +16,12 @@ MonoBehaviour:
   isDeath: 0
   ForwardSpeed: 10
   sensitivity: 19
-  score: 0
+  score: 5
   finishScore: 0
   level: 0
   howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  TotalScore: 0
+  TotalScore: 9555
   scaleNumber: 0
   axis: 

@@ -17,6 +17,7 @@ public class UiManager : MonoBehaviour
     int temp = 0;
     int tempReward = 0;
     int reward;
+    [SerializeField] Image objective;
     
 
     [SerializeField] GameObject startPanel;
@@ -60,12 +61,17 @@ public class UiManager : MonoBehaviour
         leveltext.text = levels[settings.level].name;
         LoadScene();
         PlayerPrefs.SetInt("Level", settings.level);
+        objective.transform.GetChild(settings.index).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
+        objective.GetComponent<RectTransform>().DOScale(new Vector3(2.45393729f, 4.03254318f, 1.9574759f), 0.5f).SetEase(Ease.OutBack);
        
     }
     void Update()
     {
         inGameScore.text = settings.TotalScore.ToString();
-        
+        if (Input.GetMouseButtonDown(0) && !settings.isPlaying)
+        {
+            CornerMove();
+        }
     }
 
     public void StartPanelEnable(bool value)
@@ -186,6 +192,12 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt("Level", settings.level);
         PlayerPrefs.SetString("axis", settings.axis);
         PlayerPrefs.SetFloat("scale", settings.scaleNumber);
+    }
+
+    private void CornerMove()
+    {
+        objective.GetComponent<RectTransform>().DOAnchorPos3D(new Vector3(1463, 3194, 0), 0.2f);
+        objective.GetComponent<RectTransform>().DOScale(new Vector3(0.784401059f, 1.28900242f, 0.62570715f), 0.2f);
     }
 
 
