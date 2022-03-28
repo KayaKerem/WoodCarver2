@@ -13,6 +13,7 @@ public class WoodStack : MonoBehaviour
     [SerializeField] string woodTag;
     [SerializeField] Transform StartT;
     [SerializeField] float DistanceObject;
+    public float movementDelay = 0.25f;
 
     public List<WoodScript> woods;
     public UnityEvent OnShake;
@@ -30,6 +31,7 @@ public class WoodStack : MonoBehaviour
     private void Update()
     {
         WoodTakip();
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,7 +42,7 @@ public class WoodStack : MonoBehaviour
 
             return;
         }
-        if(other.gameObject.layer == LayerMask.NameToLayer(Layers.wood))
+        if (other.gameObject.layer == LayerMask.NameToLayer(Layers.wood))
         {
             EventManager.Event_OnWoodAdded(other.GetComponent<WoodScript>());
         }
@@ -58,7 +60,7 @@ public class WoodStack : MonoBehaviour
         wood.IdleAnimPlay(false);
         woods.Add(wood);
         wood.gameObject.layer = LayerMask.NameToLayer(Layers.collectWood);
-        wood.transform.SetParent(TwoodTakip,true);      //Dünya pozisyonu açýk korunsun
+        wood.transform.SetParent(TwoodTakip, true);      //Dünya pozisyonu açýk korunsun
         if (woods.Count == 0)
         {
             wood.transform.localPosition = new Vector3(StartT.position.x, 0, woods.Count * (radius + DistanceObject));
@@ -90,7 +92,7 @@ public class WoodStack : MonoBehaviour
             }
             sonOynatmaZaman = Time.time;
         }
-        
+
     }
 
     //IEnumerator waitSeconds(float time, int index)
@@ -115,19 +117,23 @@ public class WoodStack : MonoBehaviour
             //pos.x = woods[index - 1].transform.localPosition.x;
             //woods[index].transform.DOLocalMove(pos, 0.2f);
             // if(index == 0) woods[index].transform.localPosition = new Vector3(StartT.position.x, 0, radius + DistanceObject);
-            float distance;
-            if (index == 0) distance = StartT.position.x - woods[index].transform.position.x;
-            else distance = woods[index - 1].transform.position.x - woods[index].transform.position.x;
+            //float distance;
+            //if (index == 0) distance = StartT.position.x - woods[index].transform.position.x;
+            //if (index == 0) woods[index].transform.DOMoveX(StartT.position.x, movementDelay*Time.deltaTime);
+            if (index == 0) woods[index].transform.position = new Vector3(Mathf.Lerp(woods[index].transform.position.x, StartT.position.x, 0.65f), woods[index].transform.position.y, woods[index].transform.position.z);
+            // else distance = woods[index - 1].transform.position.x - woods[index].transform.position.x;
+            // else woods[index].transform.DOMoveX(woods[index - 1].transform.position.x, movementDelay * Time.deltaTime);
+            else woods[index].transform.position = new Vector3(Mathf.Lerp(woods[index].transform.position.x, woods[index - 1].transform.position.x, 0.65f), woods[index].transform.position.y, woods[index].transform.position.z);
 
-            float direction = Mathf.Sign(distance);
-            float gidilenHiz = direction * Time.deltaTime * speed * Mathf.Abs(distance);
+            //float direction = Mathf.Sign(distance);
+            //float gidilenHiz = direction * Time.deltaTime * speed * Mathf.Abs(distance);
 
             //if (Mathf.Abs(distance) < Mathf.Abs(gidilenHiz))
             //{
             //    gidilenHiz = distance;
             //}
 
-            woods[index].transform.position += new Vector3(gidilenHiz, 0f, 0f);
+            //woods[index].transform.position += new Vector3(gidilenHiz, 0f, 0f);
 
         }
 
@@ -135,10 +141,10 @@ public class WoodStack : MonoBehaviour
 
     private void AddforcePlayer()
     {
-        EnableIsPlay(false);
+        //EnableIsPlay(false);
         characterT.MousePosRest();
         characterT.mouseDif = Vector3.zero;
-        characterT.transform.DOMoveZ(characterT.transform.position.z - 8f, 0.9f, false).OnComplete(() => EnableIsPlay(true));
+        characterT.transform.DOMoveZ(characterT.transform.position.z - 12f, 0.9f, false);
     }
     public void EnableIsPlay(bool value)
     {
@@ -171,7 +177,7 @@ public class WoodStack : MonoBehaviour
                 CollectScoreRest();
             }
         }
-       
+
     }
     public void CollectScoreRest()
     {
@@ -179,11 +185,33 @@ public class WoodStack : MonoBehaviour
 
         foreach (WoodScript wood in woods)
         {
-            
+
             newPuan += wood.WoodPuan;
         }
         EventManager.Event_OnRestScore(newPuan);
     }
+
+
+    // void MoveListElements()
+    // {
+    //    woods[0].transform.DOMove(gameObject.transform.position, movementDelay);
+    //    for (int i = 1; i < woods.Count; i++)
+    //    {
+    //        Vector3 pos = woods[i].transform.position;
+    //        pos.x = woods[i - 1].transform.position.x;
+    //        woods[i].transform.DOMove(pos, movementDelay);
+    //    }
+    // }
+
+    //private void MoveOrigin()
+    //{
+    //    for (int i = 1; i < woods.Count; i++)
+    //    {
+    //        Vector3 pos = woods[i].transform.localPosition;
+    //        pos.x = woods[0].transform.localPosition.x;
+    //        woods[i].transform.DOLocalMove(pos, movementDelay);
+    //    }
+    //}
 
     private void OnEnable()
     {

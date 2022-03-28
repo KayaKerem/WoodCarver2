@@ -196,7 +196,7 @@ public class WoodScript : MonoBehaviour
             }
             if (transform.childCount != 0)
             {
-                Destroy(transform.GetChild(1).GetChild(0).gameObject);
+                Destroy(transform.GetChild(0).GetChild(0).gameObject);
             }
             int tutucu = WoodPuan;
             WoodPuan = (tagIndex * 5) + WoodPuan;

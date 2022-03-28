@@ -1043,6 +1043,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8339675553849602834, guid: 1eb94e016d775b847925b1a1704fa371, type: 3}
+      propertyPath: tagIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8339675553849602846, guid: 1eb94e016d775b847925b1a1704fa371, type: 3}
       propertyPath: m_Name
       value: Wood (1)

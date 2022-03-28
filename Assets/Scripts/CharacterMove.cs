@@ -43,19 +43,19 @@ public class CharacterMove : MonoBehaviour
             Move();
 
 
-            //if (!GameManager.levelFinish)
-            //{
-            //    firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
+            if (!GameManager.levelFinish)
+            {
+                firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
 
-            //    if (Input.GetMouseButtonDown(0))
-            //        MouseDown(Input.mousePosition);
-            //    else if (Input.GetMouseButton(0))
-            //        MouseHold(Input.mousePosition);
-            //    else
-            //    {
-            //        mouseDif = Vector3.zero;
-            //    }
-            //}
+                if (Input.GetMouseButtonDown(0))
+                    MouseDown(Input.mousePosition);
+                else if (Input.GetMouseButton(0))
+                    MouseHold(Input.mousePosition);
+                else
+                {
+                    mouseDif = Vector3.zero;
+                }
+            }
         }
 
         if (Input.GetMouseButtonDown(0) && !rundStart)
@@ -67,15 +67,17 @@ public class CharacterMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetMouseButton(0) && settings.isPlaying)
+        if ( settings.isPlaying)
         {
-            Move2();
-
+            //Move2();
         }
     }
     void Move()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
+        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -7f, 7f);
+
+        transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
     }
 
     private void Move2()
@@ -97,18 +99,18 @@ public class CharacterMove : MonoBehaviour
 
     }
 
-    //private void MouseDown(Vector3 inputPos)
-    //{
-    //    mousePos = ortho.ScreenToWorldPoint(inputPos);
-    //    firstPos = mousePos;
-    //}
+    private void MouseDown(Vector3 inputPos)
+    {
+        mousePos = ortho.ScreenToWorldPoint(inputPos);
+        firstPos = mousePos;
+    }
 
-    //private void MouseHold(Vector3 inputPos)
-    //{
-    //    mousePos = ortho.ScreenToWorldPoint(inputPos);
-    //    mouseDif = mousePos - firstPos;
-    //    mouseDif *= settings.sensitivity * Time.deltaTime;
-    //}
+    private void MouseHold(Vector3 inputPos)
+    {
+        mousePos = ortho.ScreenToWorldPoint(inputPos);
+        mouseDif = mousePos - firstPos;
+        mouseDif *= settings.sensitivity * Time.deltaTime;
+    }
 
 
 }

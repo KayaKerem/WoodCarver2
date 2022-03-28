@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlaying: 0
   isDeath: 0
-  ForwardSpeed: 25
-  sensitivity: 25
+  ForwardSpeed: 10
+  sensitivity: 19
   score: 0
   finishScore: 0
   level: 0

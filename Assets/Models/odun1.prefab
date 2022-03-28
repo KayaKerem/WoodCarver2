@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2190236336642007505}
   - component: {fileID: 4143803215812744475}
   m_Layer: 0
-  m_Name: odun
+  m_Name: odun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

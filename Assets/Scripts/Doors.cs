@@ -21,7 +21,6 @@ public class Doors : MonoBehaviour
     private void Start()
     {
         modeller = GameObject.FindObjectOfType<Models>();
-
     }
 
 
@@ -77,8 +76,8 @@ public class Doors : MonoBehaviour
 
     IEnumerator SlowDown()
     {
-        settings.ForwardSpeed = 15;
+        settings.ForwardSpeed = 7;
         yield return new WaitForSeconds(0.5f);
-        settings.ForwardSpeed = 25;
+        settings.ForwardSpeed = 10;
     }
 }
