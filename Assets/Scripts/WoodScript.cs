@@ -89,6 +89,7 @@ public class WoodScript : MonoBehaviour
         {
             EventManager.Event_OnWoodAdded(other.GetComponent<WoodScript>());
         }
+
         if ((other.gameObject.layer == LayerMask.NameToLayer(Layers.obstacle)) && transporter != null)
         {
             if (stack.woods.Count > 1)
@@ -120,6 +121,7 @@ public class WoodScript : MonoBehaviour
             ModelContainerT.localPosition = Vector3.zero;
         }
     }
+    
     public void DestRoyWood()
     {
         if (stack.woods[0].gameObject == this.gameObject)
@@ -250,7 +252,7 @@ public class WoodScript : MonoBehaviour
     {
         Material mat = ModelContainerT.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
         _material.color = mat.color;
-        StartCoroutine(changeMat(0.2f, _material));
+        StartCoroutine(changeMat(0.01f, _material));
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
@@ -263,14 +265,14 @@ public class WoodScript : MonoBehaviour
         {
             item.SetTexture("_MainTex", pattern);
         }
-        StartCoroutine(changeMat(0.2f, null));
+        StartCoroutine(changeMat(0.01f, null));
     }
 
     public void ChangeColor(Material _material)
     {
         mats[0] = _material;
         mats[1] = mats[0];
-        StartCoroutine(changeMat(0.2f, _material));
+        StartCoroutine(changeMat(0.01f, _material));
     }
 
     IEnumerator changeMat(float time, Material changeMat = null)
