@@ -120,7 +120,7 @@ public class WoodStack : MonoBehaviour
             //float distance;
             //if (index == 0) distance = StartT.position.x - woods[index].transform.position.x;
             //if (index == 0) woods[index].transform.DOMoveX(StartT.position.x, movementDelay*Time.deltaTime);
-            if (index == 0) woods[index].transform.position = new Vector3(Mathf.Lerp(woods[index].transform.position.x, StartT.position.x, 0.65f), woods[index].transform.position.y, woods[index].transform.position.z);
+            if (index == 0) woods[index].transform.position = new Vector3(Mathf.Lerp(woods[index].transform.position.x, StartT.position.x, 10f *Time.deltaTime), woods[index].transform.position.y, woods[index].transform.position.z);
             // else distance = woods[index - 1].transform.position.x - woods[index].transform.position.x;
             // else woods[index].transform.DOMoveX(woods[index - 1].transform.position.x, movementDelay * Time.deltaTime);
             else woods[index].transform.position = new Vector3(Mathf.Lerp(woods[index].transform.position.x, woods[index - 1].transform.position.x, 0.65f), woods[index].transform.position.y, woods[index].transform.position.z);
@@ -144,7 +144,8 @@ public class WoodStack : MonoBehaviour
         //EnableIsPlay(false);
         characterT.MousePosRest();
         characterT.mouseDif = Vector3.zero;
-        characterT.transform.DOMoveZ(characterT.transform.position.z - 12f, 0.9f, false);
+        settings.canMove = false;
+        characterT.transform.DOMoveZ(characterT.transform.position.z - 12f, 0.9f, false).OnComplete(canMove);
     }
     public void EnableIsPlay(bool value)
     {
@@ -220,6 +221,11 @@ public class WoodStack : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnWoodAdded -= AddWoodList;
+    }
+
+    private void canMove()
+    {
+        settings.canMove = true;
     }
 
 }

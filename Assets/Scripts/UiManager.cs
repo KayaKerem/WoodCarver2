@@ -62,7 +62,7 @@ public class UiManager : MonoBehaviour
         LoadScene();
         PlayerPrefs.SetInt("Level", settings.level);
         objective.transform.GetChild(settings.index).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
-        objective.GetComponent<RectTransform>().DOScale(new Vector3(2.45393729f, 4.03254318f, 1.9574759f), 0.5f).SetEase(Ease.OutBack);
+        objective.GetComponent<RectTransform>().DOScale(new Vector3(1.0816226f, 1.77742517f, 0.862797141f), 0.5f).SetEase(Ease.OutBack);
        
     }
     void Update()
@@ -196,7 +196,7 @@ public class UiManager : MonoBehaviour
 
     private void CornerMove()
     {
-        objective.GetComponent<RectTransform>().DOAnchorPos3D(new Vector3(1463, 3194, 0), 0.2f);
+        objective.GetComponent<RectTransform>().DOAnchorPos3D(new Vector3(1251, 3194, 0), 0.2f);
         objective.GetComponent<RectTransform>().DOScale(new Vector3(0.784401059f, 1.28900242f, 0.62570715f), 0.2f);
     }
 

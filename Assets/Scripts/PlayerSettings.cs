@@ -7,6 +7,7 @@ public class PlayerSettings : ScriptableObject
 {
     public bool isPlaying;
     public bool isDeath;
+    public bool canMove;
     public float ForwardSpeed;
     public float sensitivity;
     public int score;

@@ -21,6 +21,7 @@ public class CharacterMove : MonoBehaviour
     {
         rundStart = settings.isPlaying;
         cam = Camera.main;
+        settings.canMove = true;
         //myRB.centerOfMass = Vector3.zero; //Devrilmemesi için
 
 
@@ -32,16 +33,10 @@ public class CharacterMove : MonoBehaviour
     }
     private void Update()
     {
-
-        if (GameManager.levelFinish)
-        {
-            transform.position = new Vector3(0, transform.position.y, transform.position.z);
-        }
-
         if (settings.isPlaying)
         {
-            Move();
 
+            Move();
 
             if (!GameManager.levelFinish)
             {
@@ -58,6 +53,13 @@ public class CharacterMove : MonoBehaviour
             }
         }
 
+        if (GameManager.levelFinish)
+        {
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
+        }
+
+        
+
         if (Input.GetMouseButtonDown(0) && !rundStart)
         {
             rundStart = true;
@@ -67,17 +69,20 @@ public class CharacterMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ( settings.isPlaying)
+        if (settings.isPlaying)
         {
-            //Move2();
+            float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -7f, 7f);
+
+            transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
         }
     }
     void Move()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
-        float xPos = Mathf.Clamp(transform.position.x + mouseDif.x, -7f, 7f);
-
-        transform.position = new Vector3(xPos, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
+        
+        if (settings.canMove)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + settings.ForwardSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void Move2()
