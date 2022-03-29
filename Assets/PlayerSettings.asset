@@ -16,7 +16,7 @@ MonoBehaviour:
   isDeath: 0
   canMove: 1
   ForwardSpeed: 20
-  sensitivity: 19
+  sensitivity: 100
   score: 5
   finishScore: 0
   level: 1

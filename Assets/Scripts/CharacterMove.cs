@@ -40,7 +40,7 @@ public class CharacterMove : MonoBehaviour
 
             if (!GameManager.levelFinish)
             {
-                firstPos = Vector3.Lerp(firstPos, mousePos, 0.1f);
+                firstPos = Vector3.Lerp(firstPos, mousePos, 0.9f);
 
                 if (Input.GetMouseButtonDown(0))
                     MouseDown(Input.mousePosition);
