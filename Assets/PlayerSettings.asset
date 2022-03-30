@@ -17,12 +17,12 @@ MonoBehaviour:
   canMove: 1
   ForwardSpeed: 20
   sensitivity: 100
-  score: 5
+  score: 0
   finishScore: 0
-  level: 1
-  howManyObjectsOpend: 2
+  level: 0
+  howManyObjectsOpend: 0
   index: 0
   levelcount: 0
-  TotalScore: 9555
+  TotalScore: 0
   scaleNumber: 0
   axis: 

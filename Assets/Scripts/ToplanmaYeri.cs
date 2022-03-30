@@ -9,6 +9,7 @@ using UnityEditor;
 public class ToplanmaYeri : MonoBehaviour
 {
     OyunSonu oyunSonu;
+    [SerializeField] UiManager ui;
     [SerializeField] List<Transform> stackTransform = new List<Transform>(); // Kanka buraya parçalarýn stackleneceði tranformlarý atacaz sýralamasý önemli olur düzgün gözükmesi için
     public Transform positionToGo;
     bool start = false;
@@ -53,6 +54,7 @@ public class ToplanmaYeri : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(Layers.collectWood))
         {
+            ui.objective.transform.parent.gameObject.SetActive(false);
             WoodScript collectWood = other.gameObject.GetComponent<WoodScript>();
             switch (collectWood.tagIndex)
             {

@@ -1219,26 +1219,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutTree
       objectReference: {fileID: 0}
-    - target: {fileID: 3638276290886766738, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2ac2209fb88aa5445b0b17aab169701e, type: 2}
-    - target: {fileID: 3658654119615947900, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2ac2209fb88aa5445b0b17aab169701e, type: 2}
-    - target: {fileID: 8601731280361252179, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8601731280361252179, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 8601731280361252179, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.09
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64d701f1aeca9049a01960b4eb27fdb, type: 3}
 --- !u!4 &6867656649407006547 stripped
