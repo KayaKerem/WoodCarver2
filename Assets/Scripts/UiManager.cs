@@ -40,6 +40,7 @@ public class UiManager : MonoBehaviour
         settings.index = PlayerPrefs.GetInt("Index");
         settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");
         settings.TotalScore = PlayerPrefs.GetInt("TotalScore");
+        settings.playingCountLevel = PlayerPrefs.GetInt("playingCountLevel");
         settings.scaleNumber = PlayerPrefs.GetFloat("scale");
         settings.axis = PlayerPrefs.GetString("axis");
 
@@ -57,8 +58,10 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
+        
         settings.score = 0;
-        leveltext.text = levels[settings.level].name;
+        //leveltext.text = levels[settings.level].name;
+        leveltext.text = "Level. "+(settings.playingCountLevel+1).ToString();
         LoadScene();
         PlayerPrefs.SetInt("Level", settings.level);
         objective.transform.GetChild(settings.index).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
@@ -110,6 +113,7 @@ public class UiManager : MonoBehaviour
     {
         settings.score = 0;
         settings.level++;
+        settings.playingCountLevel++;
         //settings.howManyObjectsOpend++;
         if (settings.level >= levels.Count)
         {
@@ -190,6 +194,7 @@ public class UiManager : MonoBehaviour
         PlayerPrefs.SetInt("Index", settings.index);
         PlayerPrefs.SetInt("howManyObjectsOpend", settings.howManyObjectsOpend);
         PlayerPrefs.SetInt("Level", settings.level);
+        PlayerPrefs.SetInt("playingCountLevel", settings.playingCountLevel);
         PlayerPrefs.SetString("axis", settings.axis);
         PlayerPrefs.SetFloat("scale", settings.scaleNumber);
     }
