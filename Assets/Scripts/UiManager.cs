@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
     int tempReward = 0;
     int reward;
     [SerializeField] public Image objective;
-    
+
 
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject inGamePanel;
@@ -58,15 +58,15 @@ public class UiManager : MonoBehaviour
 
     private void Start()
     {
-        
+
         settings.score = 0;
         //leveltext.text = levels[settings.level].name;
-        leveltext.text = "Level. "+(settings.playingCountLevel+1).ToString();
-        LoadScene();
+        leveltext.text = "Level " + (settings.playingCountLevel + 1).ToString();
+        //LoadScene();
         PlayerPrefs.SetInt("Level", settings.level);
         objective.transform.GetChild(settings.index).GetChild(settings.howManyObjectsOpend).gameObject.SetActive(true);
         objective.transform.parent.GetComponent<RectTransform>().DOScale(new Vector3(0.285723031f, 0.1314011f, 0.285723031f), 0.5f).SetEase(Ease.OutBack);
-       
+
     }
     void Update()
     {
@@ -83,13 +83,12 @@ public class UiManager : MonoBehaviour
     }
     private void LoadScene()
     {
-        if (settings.level > 0)
+        if (settings.level > 0 && settings.level < 5)
         {
             levels[settings.level].SetActive(true);
             //if (!currentLevelObject)
             //{
             //    Destroy(currentLevelObject);
-
             //}
             //currentLevelObject = Instantiate(levels[settings.level], new Vector3(4.19999981f, -20.1800003f, 123.699997f), Quaternion.identity);
             levels[settings.level - 1].SetActive(false);
@@ -98,13 +97,29 @@ public class UiManager : MonoBehaviour
 
     private void StartLevel()
     {
-        levels[settings.level].SetActive(true);
-
-        foreach (var item in levels)
+        if (settings.level < 5)
         {
-            if (settings.level != levels.IndexOf(item))
+            levels[settings.level].SetActive(true);
+
+            foreach (var item in levels)
             {
-                item.SetActive(false);
+                if (settings.level != levels.IndexOf(item))
+                {
+                    item.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            int randomLevel = Random.Range(0, 4);
+            levels[randomLevel].SetActive(true);
+
+            foreach (var item in levels)
+            {
+                if (randomLevel != levels.IndexOf(item))
+                {
+                    item.SetActive(false);
+                }
             }
         }
     }
@@ -115,10 +130,10 @@ public class UiManager : MonoBehaviour
         settings.level++;
         settings.playingCountLevel++;
         //settings.howManyObjectsOpend++;
-        if (settings.level >= levels.Count)
-        {
-            settings.level = 0;
-        }
+        //if (settings.level >= levels.Count)
+        //{
+        //    settings.level = 0;
+        //}
 
         if (settings.index > modeller.modelParts.Count - 1)
         {
@@ -139,7 +154,7 @@ public class UiManager : MonoBehaviour
 
     public void LevelFinished()
     {
-        finishLeveltext.text = levels[settings.level].name;
+        finishLeveltext.text = "Level " + (settings.playingCountLevel + 1).ToString();
         startPanel.SetActive(false);
         finishPanel.SetActive(true);
         StartCoroutine(LevelFinishDelay());
@@ -206,5 +221,5 @@ public class UiManager : MonoBehaviour
     }
 
 
-   
+
 }
