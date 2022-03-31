@@ -6,7 +6,7 @@ using DG.Tweening;
 public class finishObject : MonoBehaviour
 {
     [SerializeField] ToplanmaYeri toplanmaYeri;
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     Transform ghost;
     Transform buildObejct;
     float diveded;

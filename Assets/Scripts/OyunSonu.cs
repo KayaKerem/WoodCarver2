@@ -7,7 +7,7 @@ using UnityEditor;
 public class OyunSonu : MonoBehaviour
 {
     Models models;
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     List<GameObject> ghosts = new List<GameObject>();
     [SerializeField] List<List<ModelParts>> oyunSonu = new List<List<ModelParts>>();
     Vector3 firstPoint;

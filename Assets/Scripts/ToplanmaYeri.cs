@@ -21,7 +21,7 @@ public class ToplanmaYeri : MonoBehaviour
     bool objectFinished;
 
     private GameManager manager;
-    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private PlayerSetting settings;
     private WoodStack woodStack;
     private bool allowCorutine = false;
     int hit;

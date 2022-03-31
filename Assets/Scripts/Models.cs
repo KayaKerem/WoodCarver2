@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Models : MonoBehaviour
 {
-	[SerializeField] PlayerSettings settings;
+	[SerializeField] PlayerSetting settings;
 
     public List<ModelParts> modelParts = new List<ModelParts>();
 

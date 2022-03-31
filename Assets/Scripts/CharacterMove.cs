@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
-    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private PlayerSetting settings;
     [SerializeField] Animator animPlayer;
     [SerializeField] Camera ortho;
     [SerializeField] WoodStack stack;

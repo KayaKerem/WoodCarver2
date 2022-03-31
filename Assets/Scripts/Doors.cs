@@ -9,7 +9,7 @@ public class Doors : MonoBehaviour
     //public UnityEvent<string> UpgradeModel;
     //public UnityEvent<int> IncreaseScore;
     [SerializeField] int doorNumber;
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     [SerializeField] Material material;
     [SerializeField] GameObject cutParticul;
     [SerializeField] Texture patterm;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SceneManagment : MonoBehaviour
 {
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     [SerializeField] GameObject level1;
     [SerializeField] GameObject level2;
     [SerializeField] GameObject level3;

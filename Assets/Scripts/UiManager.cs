@@ -11,7 +11,7 @@ using UnityEditor;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> levels = new List<GameObject>();
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     [SerializeField] ToplanmaYeri toplanma;
     [SerializeField] OyunSonu OyunSonu;
     int temp = 0;
@@ -36,6 +36,7 @@ public class UiManager : MonoBehaviour
 
     void Awake()
     {
+        //PlayerPrefs.DeleteAll();
         settings.level = PlayerPrefs.GetInt("Level");
         settings.index = PlayerPrefs.GetInt("Index");
         settings.howManyObjectsOpend = PlayerPrefs.GetInt("howManyObjectsOpend");

@@ -18,7 +18,7 @@ public class InGameUI : MonoBehaviour
     public GameObject progressIndicator;
     [HideInInspector] public bool levelFinished;
     [HideInInspector] public bool levelStarted;
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
 
     // Start is called before the first frame update
     void Start()

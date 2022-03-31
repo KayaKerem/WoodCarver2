@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerSettings", menuName = "ScriptableObjects/PlayerSettings")]
-public class PlayerSettings : ScriptableObject
+public class PlayerSetting : ScriptableObject
 {
     public bool isPlaying;
     public bool isDeath;

@@ -7,7 +7,7 @@ using System.Linq;
 
 public class WoodStack : MonoBehaviour
 {
-    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private PlayerSetting settings;
     [SerializeField] Transform ToplanacakOdunlar;
     [SerializeField] Transform TwoodTakip;
     [SerializeField] string woodTag;
