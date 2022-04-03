@@ -11,7 +11,7 @@ public class WoodScript : MonoBehaviour
     //[SerializeField] ObjectifPool objectPool;
     [SerializeField] Transform ModelContainerT;
     [SerializeField] GameObject destroyableTree;
-    [SerializeField] PlayerSettings settings;
+    [SerializeField] PlayerSetting settings;
     //[SerializeField] GameObject Cila;
     [SerializeField] Animator Animator;
     [SerializeField] WoodStack stack;
